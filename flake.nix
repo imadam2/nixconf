@@ -5,6 +5,7 @@
     flake-file.url = "github:vic/flake-file";
     import-tree.url = "github:vic/import-tree";
     hyprland.url = "github:hyprwm/Hyprland";
+    catppuccin.url = "github:catppuccin/nix";
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -54,7 +55,5 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = inputs: inputs.flake-parts.lib.mkFlake 
-    { inherit inputs; }
-    ( inputs.import-tree ./modules );
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 }

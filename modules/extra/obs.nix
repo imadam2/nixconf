@@ -1,8 +1,14 @@
-{ ... }:
+{ inputs, ... }:
 {
-  flake.nixosModules.obs =
+  flake.homeModules.obs =
     { pkgs, ... }:
     {
+      catppuccin.obs.enable = true;
+
+      imports = [
+        inputs.catppuccin.homeModules.catppuccin
+      ];
+
       programs = {
         obs-studio = {
           enable = true;

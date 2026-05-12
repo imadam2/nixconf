@@ -6,7 +6,6 @@
       base
       desktop
       gaming
-      obs
       git
       nfs
       services
@@ -21,12 +20,13 @@
       {
         home-manager.users.ye.imports = with self.homeModules; [
           browser
-          media
-          packages
-          gaming
           desktop
+          gaming
+          media
           neovim
           noctalia
+          obs
+          packages
           shell
         ];
       }
