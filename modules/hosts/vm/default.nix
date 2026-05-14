@@ -32,6 +32,7 @@
     { ... }:
     {
       networking.hostName = "vm";
+
       hardware.graphics.enable = true;
       services.qemuGuest.enable = true;
       services.openssh.enable = true;

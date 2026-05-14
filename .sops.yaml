@@ -7,6 +7,7 @@ keys:
   - &beast_host age14002ye36h029nh99wqwv8j7kacydsscplf6mkl6mmfgm6lyxlsys88jhvt
   - &vm_host age1jufye77tt63gpjuuurmuzd3vzvmfj4gve25d9dnnfum5zncas37qftkhfh
   - &chell_host age1szzurdrppevemlyc5zaydewskwhfcmndf7g0jmd7an3gds8qtvwq9p2q6t
+  - &unit-00_host age14r4q0ucn96jhq6j3ykpntwgrzxwvzn3ak2wrmsxeesuuf99ut3ase3ktke
 
 creation_rules:
   - path_regex: secrets/[^/]+\.yaml$
@@ -20,3 +21,4 @@ creation_rules:
             - *beast_host
             - *vm_host
             - *chell_host
+            - *unit-00_host

@@ -30,14 +30,14 @@
   flake.nixosModules.chellConfiguration =
     { pkgs, ... }:
     {
+      networking.hostName = "chell";
+      services.openssh.enable = true;
+
       boot.kernelParams = [
         "i915.enable_rc6=1"
         "i915.enable_fbc=1"
         "mitigations=off"
       ];
-
-      networking.hostName = "chell";
-      services.openssh.enable = true;
 
       powerManagement = {
         enable = true;
