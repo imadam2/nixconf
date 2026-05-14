@@ -67,7 +67,6 @@
           efi.canTouchEfiVariables = lib.mkDefault true;
         };
       };
-
       services = {
         resolved = {
           enable = true;
@@ -79,6 +78,7 @@
           };
         };
       };
+
       networking.networkmanager = {
         enable = true;
         dns = "systemd-resolved";

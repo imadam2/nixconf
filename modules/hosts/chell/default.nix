@@ -1,4 +1,9 @@
-{ self, inputs, ... }:
+{
+  lib,
+  self,
+  inputs,
+  ...
+}:
 {
   flake.nixosConfigurations.chell = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
@@ -31,7 +36,12 @@
     { pkgs, ... }:
     {
       networking.hostName = "chell";
-      services.openssh.enable = true;
+      services = {
+        openssh.enable = true;
+        resolved.settings.Resolve = lib.mkForce {
+          DNSStubListener = false;
+        };
+      };
 
       boot.kernelParams = [
         "i915.enable_rc6=1"
