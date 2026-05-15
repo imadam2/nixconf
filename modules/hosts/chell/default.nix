@@ -9,6 +9,7 @@
     modules = with self.nixosModules; [
       dns
       homeassistant
+      homepage
       unifi
       vaultwarden
       servicesConfig

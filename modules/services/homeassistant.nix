@@ -1,30 +1,14 @@
 { config, ... }:
 let
   service = "homeassistant";
-  hl = config.homelab;
 in
 {
   flake.nixosModules.${service} =
-    { ... }:
+    { config, ... }:
+    let
+      hl = config.homelab;
+    in
     {
-      services.caddy.virtualHosts."${service}.${hl.domain}".extraConfig = ''
-        reverse_proxy "localhost:8080"
-      '';
-
-      homepage.cfg = [
-        {
-          "Cloud" = [
-            {
-              "Home Assistant" = {
-                description = "Home Automation";
-                href = "https://${service}.${hl.domain}";
-                icon = "sh-${service}.svg";
-              };
-            }
-          ];
-        }
-      ];
-
       networking.firewall = {
         allowedUDPPorts = [ 8080 ];
         allowedTCPPorts = [ 8080 ];
@@ -42,5 +26,25 @@ in
           ];
         };
       };
+
+      services.caddy.virtualHosts = {
+        "${service}.${hl.domain}".extraConfig = ''
+          reverse_proxy "localhost:8080"
+        '';
+      };
+
+      homepage.cfg = [
+        {
+          "Cloud" = [
+            {
+              "Home Assistant" = {
+                description = "Home Automation";
+                href = "https://${service}.${hl.domain}";
+                icon = "sh-${service}.svg";
+              };
+            }
+          ];
+        }
+      ];
     };
 }

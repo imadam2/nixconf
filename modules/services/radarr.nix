@@ -1,12 +1,31 @@
-{ config, ... }:
+{ ... }:
 let
   service = "radarr";
-  hl = config.homelab;
 in
 {
-  flake.nixosModules.arr =
-    { ... }:
+  flake.nixosModules.${service} =
+    { config, ... }:
+    let
+      hl = config.homelab;
+    in
     {
+      networking.firewall = {
+        allowedUDPPorts = [
+          7878
+        ];
+        allowedTCPPorts = [
+          7878
+        ];
+      };
+      services = {
+        ${service} = {
+          enable = true;
+          user = hl.user;
+          group = hl.group;
+          dataDir = "${hl.appdataDir}/${service}";
+        };
+      };
+
       services.caddy.virtualHosts = {
         "${service}.${hl.domain}".extraConfig = ''
           reverse_proxy "localhost:7878"
@@ -27,21 +46,5 @@ in
         }
       ];
 
-      networking.firewall = {
-        allowedUDPPorts = [
-          7878
-        ];
-        allowedTCPPorts = [
-          7878
-        ];
-      };
-      services = {
-        ${service} = {
-          enable = true;
-          user = hl.user;
-          group = hl.group;
-          dataDir = "${hl.appdataDir}/${service}";
-        };
-      };
     };
 }

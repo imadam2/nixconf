@@ -1,15 +1,23 @@
-{ config, ... }:
+{ ... }:
 let
   service = "vaultwarden";
-  hl = config.homelab;
 in
 {
   flake.nixosModules.${service} =
-    { ... }:
+    { config, ... }:
+    let
+      hl = config.homelab;
+    in
     {
-      services.caddy.virtualHosts."${service}.${hl.domain}".extraConfig = ''
-        reverse_proxy "localhost:8000"
-      '';
+      services = {
+        ${service} = {
+          enable = true;
+          dbBackend = "sqlite";
+          config = {
+            DOMAIN = "https://${service}.${hl.domain}";
+          };
+        };
+      };
 
       homepage.cfg = [
         {
@@ -25,14 +33,10 @@ in
         }
       ];
 
-      services = {
-        ${service} = {
-          enable = true;
-          dbBackend = "sqlite";
-          config = {
-            DOMAIN = "https://${service}.${hl.domain}";
-          };
-        };
+      services.caddy.virtualHosts = {
+        "${service}.${hl.domain}".extraConfig = ''
+          reverse_proxy "localhost:8000"
+        '';
       };
     };
 }

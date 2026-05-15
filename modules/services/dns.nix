@@ -3,10 +3,6 @@
   flake.nixosModules.dns =
     { config, ... }:
     {
-      services.caddy.virtualHosts."adguard.${config.homelab.domain}".extraConfig = ''
-        reverse_proxy "localhost:3000"
-      '';
-
       networking.firewall = {
         allowedUDPPorts = [
           5335
@@ -54,7 +50,7 @@
         adguardhome = {
           enable = true;
           openFirewall = true;
-          port = 3000;
+          port = 3001;
           settings = {
             dns = {
               bind_hosts = [ "0.0.0.0" ];
@@ -142,6 +138,11 @@
             ];
           };
         };
+      };
+      services.caddy.virtualHosts = {
+        "adguard.${config.homelab.domain}".extraConfig = ''
+          reverse_proxy "localhost:3001"
+        '';
       };
     };
 }

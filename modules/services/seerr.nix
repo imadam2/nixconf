@@ -1,6 +1,6 @@
 { ... }:
 let
-  service = "unifi";
+  service = "seerr";
 in
 {
   flake.nixosModules.${service} =
@@ -10,28 +10,33 @@ in
     in
     {
       networking.firewall = {
-        allowedUDPPorts = [ 8443 ];
-        allowedTCPPorts = [ 8443 ];
+        allowedUDPPorts = [
+          5055
+        ];
+        allowedTCPPorts = [
+          5055
+        ];
       };
+
       services = {
         ${service} = {
           enable = true;
-          openFirewall = true;
+          configDir = "${hl.appdataDir}/${service}";
         };
       };
 
       services.caddy.virtualHosts = {
         "${service}.${hl.domain}".extraConfig = ''
-          reverse_proxy "localhost:8443"
+          reverse_proxy "localhost:5055"
         '';
       };
 
       homepage.cfg = [
         {
-          "Cloud" = [
+          "Media" = [
             {
-              "Unifi" = {
-                description = "Ubiuqiti Controller";
+              "Seerr" = {
+                description = "Easy *arr UI";
                 href = "https://${service}.${hl.domain}";
                 icon = "sh-${service}.svg";
               };

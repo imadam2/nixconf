@@ -1,14 +1,24 @@
-{ config, ... }:
+{ ... }:
 let
-  hl = config.homelab;
   service = "caddy";
 in
 {
   flake.nixosModules.${service} =
     { config, lib, ... }:
+    let
+      hl = config.homelab;
+    in
     {
       systemd.services.${service}.serviceConfig.EnvironmentFile =
         config.sops.secrets.cloudflare_email.path;
+
+      services = {
+        ${service} = {
+          enable = true;
+          user = "hl.caddy.user";
+          group = "hl.caddy.group";
+        };
+      };
 
       security.acme = {
         acceptTerms = true;
@@ -21,14 +31,6 @@ in
           dnsResolver = "1.1.1.1:53";
           dnsPropagationCheck = true;
           environmentFile = config.sops.secrets.cloudflare_api.path;
-        };
-      };
-
-      services = {
-        ${service} = {
-          enable = true;
-          user = "hl.caddy.user";
-          group = "hl.caddy.group";
         };
       };
     };

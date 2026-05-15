@@ -1,34 +1,19 @@
-{ config, ... }:
+{ ... }:
 let
   service = "jellyfin";
-  hl = config.homelab;
 in
 {
   flake.nixosModules.${service} =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
+    let
+      hl = config.homelab;
+    in
     {
-      services.caddy.virtualHosts."${service}.${hl.domain}".extraConfig = ''
-        reverse_proxy "localhost:8096"
-      '';
-
-      homepage.cfg = [
-        {
-          "Media" = [
-            {
-              "Jellyfin" = {
-                description = "Media Player";
-                href = "https://${service}.${hl.domain}";
-                icon = "sh-${service}.svg";
-              };
-            }
-          ];
-        }
-      ];
-
       networking.firewall = {
         allowedUDPPorts = [ 8096 ];
         allowedTCPPorts = [ 8096 ];
       };
+
       services = {
         ${service} = {
           enable = true;
@@ -40,6 +25,7 @@ in
           group = hl.group;
         };
       };
+
       hardware.graphics = {
         enable = true;
         extraPackages = with pkgs; [
@@ -50,6 +36,7 @@ in
           intel-ocl
         ];
       };
+
       systemd = {
         services.${service}.environment.LIBVA_DRIVER_NAME = "iHD";
         tmpfiles.rules = [
@@ -58,9 +45,11 @@ in
           "d ${hl.mediaDir}/shows 0775 ${hl.user} ${hl.group} -"
         ];
       };
+
       environment.sessionVariables = {
         LIBVA_DRIVER_NAME = "iHD";
       };
+
       nixpkgs.overlays = with pkgs; [
         (final: prev: {
           jellyfin-web = prev.jellyfin-web.overrideAttrs (
@@ -79,5 +68,26 @@ in
           );
         })
       ];
+
+      services.caddy.virtualHosts = {
+        "${service}.${hl.domain}".extraConfig = ''
+          reverse_proxy "localhost:8096"
+        '';
+      };
+
+      homepage.cfg = [
+        {
+          "Media" = [
+            {
+              "Jellyfin" = {
+                description = "Media Player";
+                href = "https://${service}.${hl.domain}";
+                icon = "sh-${service}.svg";
+              };
+            }
+          ];
+        }
+      ];
+
     };
 }

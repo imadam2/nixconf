@@ -4,11 +4,15 @@ let
 in
 {
   flake.nixosModules.${service} =
-    { ... }:
+    { config, ... }:
+    let
+      hl = config.homelab;
+    in
     {
-      services.${service} = {
+      services.homepage-dashboard = {
         enable = true;
         allowedHosts = "*";
+        services = config.homepage.cfg;
         settings = {
           color = "gray";
           title = "Homepage";
@@ -482,6 +486,11 @@ in
                           color: var(--catppuccin-text);
                   }
           ";
+      };
+      services.caddy.virtualHosts = {
+        "${service}.${hl.domain}".extraConfig = ''
+          reverse_proxy "localhost:8080"
+        '';
       };
     };
 }

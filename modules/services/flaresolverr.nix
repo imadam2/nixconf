@@ -1,6 +1,6 @@
 { ... }:
 {
-  flake.nixosModules.arr =
+  flake.nixosModules.prowlarr =
     { ... }:
     {
       networking.firewall = {
