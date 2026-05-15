@@ -57,6 +57,7 @@
         secrets.cloudflare_api = { };
         secrets.cloudflare_email = { };
         secrets.qbittorrent_password = { };
+        secrets.slskd = { };
         secrets.password.neededForUsers = true;
       };
 

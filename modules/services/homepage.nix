@@ -12,7 +12,7 @@ in
       services.homepage-dashboard = {
         enable = true;
         allowedHosts = "*";
-        services = config.homepage.cfg;
+        services = hl.cfg;
         settings = {
           color = "gray";
           title = "Homepage";

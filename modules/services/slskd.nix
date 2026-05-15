@@ -1,6 +1,6 @@
 { ... }:
 let
-  service = "radarr";
+  service = "slskd";
 in
 {
   flake.nixosModules.${service} =
@@ -11,24 +11,44 @@ in
     {
       networking.firewall = {
         allowedUDPPorts = [
-          7878
+          5030
+          5031
         ];
         allowedTCPPorts = [
-          7878
+          5030
+          5031
         ];
       };
+
       services = {
         ${service} = {
           enable = true;
+          domain = "${service}.${hl.domain}";
           user = hl.user;
           group = hl.group;
-          dataDir = "${hl.appdataDir}/${service}";
+          settings = {
+            shares.directories = [
+              "${hl.mediaDir}/Music/share"
+            ];
+            directories.downloads = "${hl.mediaDir}/Music/downloads";
+          };
+          nginx.listen = [
+            {
+              addr = "10.1.10.3";
+              port = 4343;
+              ssl = true;
+            }
+            {
+              addr = "10.1.10.3";
+              port = 1488;
+            }
+          ];
         };
       };
 
       services.caddy.virtualHosts = {
         "${service}.${hl.domain}".extraConfig = ''
-          reverse_proxy "localhost:7878"
+          reverse_proxy "localhost:5030"
         '';
       };
 
@@ -36,8 +56,8 @@ in
         {
           "Media" = [
             {
-              "Radarr" = {
-                description = "Movie Torrent Indexer";
+              "Slskd" = {
+                description = "SoulSeek WebUI";
                 href = "https://${service}.${hl.domain}";
                 icon = "sh-${service}.svg";
               };

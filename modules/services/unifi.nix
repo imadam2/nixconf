@@ -26,7 +26,7 @@ in
         '';
       };
 
-      homepage.cfg = [
+      hl.homepage.cfg = [
         {
           "Cloud" = [
             {

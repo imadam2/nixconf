@@ -3,10 +3,6 @@
   flake.nixosModules.servicesConfig =
     { config, lib, ... }:
     {
-      options.homepage.cfg = lib.mkOption {
-        type = lib.types.listOf lib.types.attrs;
-        default = [ ];
-      };
       options.homelab = {
         mounts.slow = lib.mkOption {
           default = "/mnt/mergerfs_slow";
@@ -55,6 +51,10 @@
         caddy.group = lib.mkOption {
           type = lib.types.str;
           default = "caddy";
+        };
+        homepage.cfg = lib.mkOption {
+          type = lib.types.listOf lib.types.attrs;
+          default = [ ];
         };
       };
     };

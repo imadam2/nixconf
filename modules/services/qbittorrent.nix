@@ -43,7 +43,7 @@ in
         '';
       };
 
-      homepage.cfg = [
+      hl.homepage.cfg = [
         {
           "Media" = [
             {
