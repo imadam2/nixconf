@@ -14,7 +14,7 @@ in
         allowedTCPPorts = [ 2283 ];
       };
 
-      systemd.tmpfiles.rules = [ "d ${hl.mediaDir}/${service}/photos 0775 immich ${hl.group} - -" ];
+      systemd.tmpfiles.rules = [ "d ${hl.mediaDir}/${service} 0775 immich ${hl.group} - -" ];
       users.users."${service}".extraGroups = [
         "video"
         "render"
