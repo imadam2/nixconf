@@ -24,7 +24,11 @@ in
         "${service}.${hl.domain}" = {
           useACMEHost = "${hl.domain}";
           extraConfig = ''
-            reverse_proxy "localhost:8443"
+            reverse_proxy https://localhost:8443 {
+              transport http {
+                tls_insecure_skip_verify
+              }
+            }
           '';
         };
       };

@@ -14,6 +14,7 @@
       homepage
       unifi
       vaultwarden
+      #zigbee
       servicesConfig
 
       base

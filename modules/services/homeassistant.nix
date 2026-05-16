@@ -11,8 +11,8 @@ in
     in
     {
       networking.firewall = {
-        allowedUDPPorts = [ 8080 ];
-        allowedTCPPorts = [ 8080 ];
+        allowedUDPPorts = [ 8123 ];
+        allowedTCPPorts = [ 8123 ];
       };
 
       virtualisation.oci-containers = {
@@ -23,15 +23,18 @@ in
           image = "ghcr.io/${serviceAlt}/${serviceAlt}:stable";
           extraOptions = [
             "--network=host"
-            # "--device=/dev/ttyACM0:/dev/ttyACM0" ### it *needs* the /dev/ttyACM0 device plugged in or else it will fail to start homeassistant
+            "--device=/dev/ttyUSB0:/dev/ttyUSB0" # ## it *needs* the /dev/ttyACM0 device plugged in or else it will fail to start homeassistant
           ];
         };
       };
 
       services.caddy.virtualHosts = {
-        "${service}.${hl.domain}".extraConfig = ''
-          reverse_proxy "localhost:8080"
-        '';
+        "${service}.${hl.domain}" = {
+          useACMEHost = "${hl.domain}";
+          extraConfig = ''
+            reverse_proxy "localhost:8123"
+          '';
+        };
       };
 
       homelab.homepage.cfg.Cloud = [

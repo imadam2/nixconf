@@ -9,6 +9,14 @@ in
       hl = config.homelab;
     in
     {
+      networking.firewall = {
+        allowedUDPPorts = [
+          8000
+        ];
+        allowedTCPPorts = [
+          8000
+        ];
+      };
       services = {
         ${service} = {
           enable = true;

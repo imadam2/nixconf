@@ -4,13 +4,20 @@ let
 in
 {
   flake.nixosModules.${service} =
-    { config, lib, ... }:
+    { config, ... }:
     let
       hl = config.homelab;
     in
     {
-      systemd.services.${service}.serviceConfig.EnvironmentFile =
-        config.sops.secrets.cloudflare_email.path;
+      networking.firewall.allowedTCPPorts = [
+        80
+        443
+      ];
+
+      networking.firewall.allowedUDPPorts = [
+        80
+        443
+      ];
 
       services = {
         ${service} = {
@@ -22,7 +29,7 @@ in
 
       security.acme = {
         acceptTerms = true;
-        defaults.email = lib.mkDefault "";
+        defaults.email = "cf@adamlucas.co.uk"; # :)
         certs."${hl.domain}" = {
           group = "${hl.acme.group}";
           domain = "${hl.domain}";
