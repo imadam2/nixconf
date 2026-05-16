@@ -24,6 +24,7 @@ in
           enable = true;
           user = "${hl.acme.user}";
           group = "${hl.acme.group}";
+          virtualHosts = hl.caddy.virtualHosts;
         };
       };
 

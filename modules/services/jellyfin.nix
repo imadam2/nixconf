@@ -69,8 +69,9 @@ in
         })
       ];
 
-      services.caddy.virtualHosts = {
+      hl.caddy.virtualHosts = {
         "${service}.${hl.domain}".extraConfig = ''
+          useACMEHost = "${hl.domain}"
           reverse_proxy "localhost:8096"
         '';
       };

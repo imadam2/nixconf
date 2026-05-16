@@ -56,6 +56,10 @@
           type = lib.types.attrsOf (lib.types.listOf lib.types.attrs);
           default = { };
         };
+        caddy.virtualHosts = lib.mkOption {
+          type = lib.types.attrsOf lib.types.attrs;
+          default = { };
+        };
       };
     };
 }
