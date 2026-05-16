@@ -16,6 +16,7 @@
       vaultwarden
       #zigbee
       servicesConfig
+      shareUser
 
       base
       git
