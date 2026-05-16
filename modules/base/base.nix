@@ -56,7 +56,9 @@
         secrets.password = { };
         secrets.cloudflare_api = { };
         secrets.cloudflare_email = { };
-        secrets.qbittorrent_password = { };
+        secrets.qbittorrent_password = {
+          owner = config.homelab.user;
+        };
         secrets.slskd = { };
         secrets.password.neededForUsers = true;
       };
