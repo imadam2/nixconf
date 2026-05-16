@@ -15,6 +15,9 @@
       unifi
       vaultwarden
       #zigbee
+
+      gladosHomepage
+      gladosVhosts
       servicesConfig
       shareUser
 
