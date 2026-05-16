@@ -21,7 +21,6 @@ in
       services = {
         ${service} = {
           enable = true;
-          configDir = "${hl.appdataDir}/${service}";
         };
       };
 

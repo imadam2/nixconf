@@ -26,6 +26,7 @@ in
           domain = "${service}.${hl.domain}";
           user = hl.user;
           group = hl.group;
+          environmentFile = "${config.sops.secrets.slskd.path}";
           settings = {
             shares.directories = [
               "${hl.mediaDir}/Music/share"

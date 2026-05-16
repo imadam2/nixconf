@@ -14,10 +14,15 @@ in
         allowedTCPPorts = [ 2283 ];
       };
 
+      systemd.tmpfiles.rules = [ "d ${hl.mediaDir}/${service}/photos 0775 immich ${hl.group} - -" ];
+      users.users."${service}".extraGroups = [
+        "video"
+        "render"
+      ];
+
       services = {
         ${service} = {
           enable = true;
-          user = hl.user;
           group = hl.group;
           mediaLocation = "${hl.mediaDir}/${service}/photos";
           accelerationDevices = null;
@@ -32,9 +37,12 @@ in
       };
 
       services.caddy.virtualHosts = {
-        "${service}.${hl.domain}".extraConfig = ''
-          reverse_proxy "localhost:2283"
-        '';
+        "${service}.${hl.domain}" = {
+          useACMEHost = "${hl.domain}";
+          extraConfig = ''
+            reverse_proxy "localhost:2283"
+          '';
+        };
       };
 
       homelab.homepage.cfg.Cloud = [

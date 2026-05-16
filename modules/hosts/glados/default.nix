@@ -7,10 +7,13 @@
   flake.nixosConfigurations.glados = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
       flaresolverr
+      immich
       jellyfin
       prowlarr
       qbittorrent
       radarr
+      seerr
+      slskd
       sonarr
 
       gladosDrives
