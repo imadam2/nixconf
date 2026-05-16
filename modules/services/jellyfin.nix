@@ -69,7 +69,7 @@ in
         })
       ];
 
-      hl.caddy.virtualHosts = {
+      homelab.caddy.virtualHosts = {
         "${service}.${hl.domain}".extraConfig = ''
           useACMEHost = "${hl.domain}"
           reverse_proxy "localhost:8096"
