@@ -24,6 +24,8 @@ in
         ${service} = {
           enable = true;
           group = hl.group;
+          host = "0.0.0.0";
+          openFirewall = true;
           mediaLocation = "${hl.mediaDir}/${service}/photos";
           accelerationDevices = null;
         };
