@@ -1,22 +1,26 @@
-{ config, ... }:
-let
-  hl = config.homelab;
-in
+{ ... }:
 {
   flake.nixosModules.share =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
+    let
+      hl = config.homelab;
+    in
     {
-
       networking.firewall = {
         allowedUDPPorts = [
-          2283
+          139
+          445
+          2049
         ];
         allowedTCPPorts = [
-          2283
+          139
+          445
+          2049
         ];
       };
       fileSystems."/export/share" = {
         device = "/mnt/user";
+        fsType = "none";
         options = [ "bind" ];
       };
       services = {
@@ -24,8 +28,8 @@ in
           server = {
             enable = true;
             exports = ''
-              	          /export/share 10.1.10.0/24(rw,sync,nohide,insecure,fsid=0,no_subtree_check)
-              	        '';
+              /export/share 10.1.10.0/24(rw,sync,nohide,insecure,fsid=0,no_subtree_check)
+            '';
           };
         };
         samba = {
@@ -35,7 +39,7 @@ in
             global = {
               workgroup = "WORKGROUP";
               security = "user";
-              interfaces = "lo enp3s0";
+              interfaces = "lo enp4s0";
               "browseable" = "yes";
               "client min protocol" = "core";
               "server min protocol" = "core";
@@ -49,12 +53,14 @@ in
             storage = {
               path = "${hl.storageDir}";
               writeable = "true";
+              browseable = "yes";
               "read only" = "no";
               "guest ok" = "yes";
               "guest account" = "ye";
             };
           };
         };
+        samba-wsdd.enable = true;
         avahi = {
           enable = true;
           publish = {
@@ -62,7 +68,6 @@ in
             userServices = true;
           };
         };
-        samba-wsdd.enable = true;
       };
     };
 }

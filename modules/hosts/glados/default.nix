@@ -13,6 +13,7 @@
       qbittorrent
       radarr
       seerr
+      share
       slskd
       sonarr
 
