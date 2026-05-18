@@ -22,6 +22,18 @@ in
           profileDir = "${hl.appdataDir}/${service}";
           serverConfig = {
             LegalNotice.Accepted = true;
+            BitTorrent = {
+              Session = {
+                GlobalUPSpeedLimit = "9000";
+                MaxActiveDownloads = "10";
+                MaxActiveTorrents = "20";
+                MaxActiveUploads = "20";
+                MaxConnections = "800";
+                MaxConnectionsPerTorrent = "200";
+                MaxUploadsPerTorrent = "30";
+                uTPRateLimited = false;
+              };
+            };
             Preferences = {
               General.Locale = "en";
               User = hl.user;
