@@ -33,7 +33,7 @@ in
         };
       };
 
-      homelab.homepage.cfg.Cloud = [
+      homelab.homepage.cfg.Network = [
         {
           "Unifi" = {
             description = "Unifi Controller";

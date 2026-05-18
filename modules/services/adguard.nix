@@ -125,7 +125,7 @@ in
         };
       };
 
-      homelab.homepage.cfg.Cloud = [
+      homelab.homepage.cfg.Network = [
         {
           "AdGuard Home" = {
             description = "DNS Ad Blocker";

@@ -4,7 +4,7 @@ let
 in
 {
   flake.nixosModules.${service} =
-    { config, ... }:
+    { ... }:
     {
       networking.firewall = {
         allowedUDPPorts = [

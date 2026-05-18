@@ -16,8 +16,8 @@
       vaultwarden
       #zigbee
 
-      gladosHomepage
-      gladosVhosts
+      homepageServices
+      caddyVhosts
       servicesConfig
       shareUser
 

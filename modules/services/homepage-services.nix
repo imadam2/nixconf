@@ -1,6 +1,6 @@
 { ... }:
 {
-  flake.nixosModules.gladosHomepage =
+  flake.nixosModules.homepageServices =
     { config, ... }:
     let
       hl = config.homelab;
@@ -16,24 +16,10 @@
             };
           }
           {
-            "Prowlarr" = {
-              description = "Torrent Site Indexer";
-              href = "https://prowlarr.${hl.domain}";
-              icon = "sh-prowlarr.svg";
-            };
-          }
-          {
             "qBittorrent" = {
               description = "Torrent Client";
               href = "https://qbittorrent.${hl.domain}";
               icon = "sh-qbittorrent.svg";
-            };
-          }
-          {
-            "Radarr" = {
-              description = "Movie Torrent Indexer";
-              href = "https://radarr.${hl.domain}";
-              icon = "sh-radarr.svg";
             };
           }
           {
@@ -51,10 +37,24 @@
             };
           }
           {
+            "Radarr" = {
+              description = "Movie Torrent Indexer";
+              href = "https://radarr.${hl.domain}";
+              icon = "sh-radarr.svg";
+            };
+          }
+          {
             "Sonarr" = {
               description = "TV Show Torrent Indexer";
               href = "https://sonarr.${hl.domain}";
               icon = "sh-sonarr.svg";
+            };
+          }
+          {
+            "Prowlarr" = {
+              description = "Torrent Site Indexer";
+              href = "https://prowlarr.${hl.domain}";
+              icon = "sh-prowlarr.svg";
             };
           }
         ];
@@ -64,6 +64,22 @@
               description = "Photo Library";
               href = "https://immich.${hl.domain}";
               icon = "sh-immich.svg";
+            };
+          }
+        ];
+        Network = [
+          {
+            "Proxmox" = {
+              description = "Proxmox";
+              href = "https://proxmox.${hl.domain}";
+              icon = "sh-proxmox.svg";
+            };
+          }
+          {
+            "Proxmox 2" = {
+              description = "Proxmox on the R730";
+              href = "https://proxmox2.${hl.domain}";
+              icon = "sh-proxmox.svg";
             };
           }
         ];
