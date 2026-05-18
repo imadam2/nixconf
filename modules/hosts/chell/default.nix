@@ -9,10 +9,11 @@
     modules = with self.nixosModules; [
       adguardhome
       caddy
-      unbound
       homeassistant
       homepage
+      unbound
       unifi
+      uptime-kuma
       vaultwarden
       #zigbee
 

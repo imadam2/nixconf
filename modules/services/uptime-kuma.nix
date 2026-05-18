@@ -1,6 +1,6 @@
 { ... }:
 let
-  service = "unifi";
+  service = "uptime-kuma";
 in
 {
   flake.nixosModules.${service} =
@@ -10,13 +10,17 @@ in
     in
     {
       networking.firewall = {
-        allowedUDPPorts = [ 8443 ];
-        allowedTCPPorts = [ 8443 ];
+        allowedUDPPorts = [
+          3001
+        ];
+        allowedTCPPorts = [
+          3001
+        ];
       };
+
       services = {
         ${service} = {
           enable = true;
-          openFirewall = true;
         };
       };
 
@@ -24,23 +28,17 @@ in
         "${service}.${hl.domain}" = {
           useACMEHost = "${hl.domain}";
           extraConfig = ''
-            reverse_proxy https://localhost:8443 {
-              transport http {
-                tls_insecure_skip_verify
-              }
-              header_up Host {host}
-              header_up X-Forwarded-Host {host}
-            }
+            reverse_proxy http://localhost:3001
           '';
         };
       };
 
       homelab.homepage.cfg.Network = [
         {
-          "Unifi" = {
+          "Uptime Kuma" = {
             description = "Unifi Controller";
             href = "https://${service}.${hl.domain}";
-            icon = "sh-ubiquiti-${service}.svg";
+            icon = "sh-${service}.svg";
           };
         }
       ];
