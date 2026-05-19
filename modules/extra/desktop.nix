@@ -38,7 +38,35 @@
 
   flake.homeModules.desktop =
     { config, pkgs, ... }:
+    let
+      screenshot = pkgs.writeShellApplication {
+        name = "screenshot";
+        runtimeInputs = with pkgs; [
+          grim
+          slurp
+          satty
+          wl-clipboard
+          jq
+        ];
+        text = ''
+          NAS=/media/NAS/storage/Pictures/Screenshots/$(date +%Y)/$(date +%m)
+          mkdir -p "$NAS" 2>/dev/null && DIR=$NAS || DIR=$HOME/Pictures/Screenshots
+          FILE="$DIR/$(date +%Y%m%d_%H%M%S).png"
+
+          case "$1" in
+            area)      grim -g "$(slurp)" - | tee "$FILE" | wl-copy ;;
+            display)   grim -o "$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name')" - | tee "$FILE" | wl-copy ;;
+            window)    grim -g "$(hyprctl activewindow -j | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"')" - | tee "$FILE" | wl-copy ;;
+            area-s)    grim -g "$(slurp)" - | satty --filename - --output-filename "$FILE" --copy-command wl-copy ;;
+            display-s) grim -o "$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name')" - | satty --filename - --output-filename "$FILE" --copy-command wl-copy ;;
+            window-s)  grim -g "$(hyprctl activewindow -j | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"')" - | satty --filename - --output-filename "$FILE" --copy-command wl-copy ;;
+          esac
+        '';
+      };
+    in
     {
+      home.packages = [ screenshot ];
+
       programs = {
         foot = {
           enable = true;
@@ -89,8 +117,6 @@
         };
       };
 
-      # Use the HM module only for package/plugin wiring.
-      # The actual config is managed as a Lua file below.
       stylix.targets.hyprland.enable = false;
       wayland.windowManager.hyprland = {
         enable = true;
@@ -100,16 +126,10 @@
         plugins = [
           inputs.split-monitor-workspaces.packages.${pkgs.stdenv.hostPlatform.system}.split-monitor-workspaces
         ];
-        settings = {
-
-        };
-        # Disable HM's own config generation — we manage hyprland.lua ourselves.
+        settings = { };
         systemd.enable = true;
       };
 
-      # Hyprland 0.55+ uses hyprland.lua instead of hyprland.conf.
-      # HM's wayland.windowManager.hyprland.settings / extraConfig only generate
-      # the old hyprlang format, so we write the Lua config directly.
       xdg.configFile."hypr/hyprland.lua".text = ''
         -- ==================
         -- MONITORS
@@ -240,6 +260,14 @@
         hl.bind(mainMod .. " + D",           hl.dsp.exec_cmd("noctalia-shell ipc call launcher toggle"))
         hl.bind(mainMod .. " + V",           hl.dsp.exec_cmd("noctalia-shell ipc call launcher clipboard"))
         hl.bind(mainMod .. " + M",           hl.dsp.exec_cmd("foot -e jellyfin-tui"))
+
+        -- Screenshots
+        hl.bind("Print",                hl.dsp.exec_cmd("${screenshot}/bin/screenshot area"))
+        hl.bind("SUPER + Print",        hl.dsp.exec_cmd("${screenshot}/bin/screenshot display"))
+        hl.bind("SHIFT + Print",        hl.dsp.exec_cmd("${screenshot}/bin/screenshot window"))
+        hl.bind("CTRL + Print",         hl.dsp.exec_cmd("${screenshot}/bin/screenshot area-s"))
+        hl.bind("CTRL + SUPER + Print", hl.dsp.exec_cmd("${screenshot}/bin/screenshot display-s"))
+        hl.bind("CTRL + SHIFT + Print", hl.dsp.exec_cmd("${screenshot}/bin/screenshot window-s"))
 
         -- Workspace switching + moving (split-monitor-workspaces)
         for i = 1, 9 do
