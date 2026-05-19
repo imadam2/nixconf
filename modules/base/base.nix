@@ -77,6 +77,7 @@
           efi.canTouchEfiVariables = lib.mkDefault true;
         };
       };
+
       services = {
         resolved = {
           enable = true;
@@ -98,6 +99,7 @@
       i18n.defaultLocale = config.my.locale;
 
       environment.systemPackages = with pkgs; [
+        bc
         curl
         dust
         fastfetch
