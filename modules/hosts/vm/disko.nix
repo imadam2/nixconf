@@ -1,6 +1,7 @@
-{ inputs, ... }: {
-  imports = [ inputs.disko.flakeModules.default ];
+{ inputs, ... }:
+{
   flake.nixosModules.vmDisko = {
+    imports = [ inputs.disko.flakeModules.default ];
     disko.devices = {
       disk = {
         vda = {
@@ -31,19 +32,31 @@
                   subvolumes = {
                     "root" = {
                       mountpoint = "/";
-                      mountOptions = [ "compress=zstd" "noatime" ];
+                      mountOptions = [
+                        "compress=zstd"
+                        "noatime"
+                      ];
                     };
                     "home" = {
                       mountpoint = "/home";
-                      mountOptions = [ "compress=zstd" "noatime" ];
+                      mountOptions = [
+                        "compress=zstd"
+                        "noatime"
+                      ];
                     };
                     "nix" = {
                       mountpoint = "/nix";
-                      mountOptions = [ "compress=zstd" "noatime" ];
+                      mountOptions = [
+                        "compress=zstd"
+                        "noatime"
+                      ];
                     };
                     "snapshots" = {
                       mountpoint = "/.snapshots";
-                      mountOptions = [ "compress=zstd" "noatime" ];
+                      mountOptions = [
+                        "compress=zstd"
+                        "noatime"
+                      ];
                     };
                   };
                 };

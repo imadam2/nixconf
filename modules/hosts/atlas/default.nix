@@ -19,7 +19,6 @@
       atlasConfiguration
       atlasHardware
       atlasDisko
-      inputs.disko.nixosModules.disko
       homeManager
       {
         home-manager.users.ye.imports = with self.homeModules; [

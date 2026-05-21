@@ -50,21 +50,5 @@ in
           };
         };
       };
-
-      services.caddy.virtualHosts = {
-        "${service}.${hl.domain}".extraConfig = ''
-          reverse_proxy "localhost:8080"
-        '';
-      };
-
-      homelab.homepage.cfg.Media = [
-        {
-          "qBittorrent" = {
-            description = "Torrent Client";
-            href = "https://${service}.${hl.domain}";
-            icon = "sh-${service}.svg";
-          };
-        }
-      ];
     };
 }

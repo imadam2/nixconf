@@ -1,7 +1,7 @@
 { inputs, ... }:
 {
   flake.homeModules.noctalia =
-    { lib, ... }:
+    { config, lib, ... }:
     {
       imports = [
         inputs.noctalia.homeModules.default
@@ -105,7 +105,7 @@
             enabled = false;
           };
           wallpaper = {
-            directory = "/home/ye/nixconf/assets/wallpapers";
+            directory = "${config.home.homeDirectory}/nixconf/assets/wallpapers";
           };
           appLauncher = {
             terminalCommand = "foot -e";

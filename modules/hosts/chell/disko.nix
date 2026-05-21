@@ -1,6 +1,7 @@
-{ ... }:
+{ inputs, ... }:
 {
   flake.nixosModules.chellDisko = {
+    imports = [ inputs.disko.nixosModules.disko ];
     disko.devices = {
       disk = {
         main = {

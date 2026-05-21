@@ -26,21 +26,5 @@ in
           dataDir = "${hl.appdataDir}/${service}";
         };
       };
-
-      services.caddy.virtualHosts = {
-        "${service}.${hl.domain}".extraConfig = ''
-          reverse_proxy "localhost:8989"
-        '';
-      };
-
-      homelab.homepage.cfg.Media = [
-        {
-          "Sonarr" = {
-            description = "TV Show Torrent Indexer";
-            href = "https://${service}.${hl.domain}";
-            icon = "sh-${service}.svg";
-          };
-        }
-      ];
     };
 }

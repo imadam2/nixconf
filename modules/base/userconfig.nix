@@ -4,10 +4,13 @@
     username = mkOption { type = types.str; };
     gitEmail = mkOption { type = types.str; };
     gitName = mkOption { type = types.str; };
-    homeDir = mkOption { type = types.str; };
     timezone = mkOption { type = types.str; };
     locale = mkOption { type = types.str; };
     stateVersion = mkOption { type = types.str; };
+    homeDir = mkOption {
+      type = types.str;
+      default = "/home/${config.my.username}";
+    };
     wallpaper = mkOption {
       type = types.path;
       default = ../../assets/wallpapers/nix-black-4k.png;

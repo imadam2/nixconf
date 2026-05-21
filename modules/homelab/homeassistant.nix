@@ -2,6 +2,7 @@
 let
   service = "homeassistant";
   serviceAlt = "home-assistant";
+  port = 8123;
 in
 {
   flake.nixosModules.${service} =
@@ -11,8 +12,12 @@ in
     in
     {
       networking.firewall = {
-        allowedUDPPorts = [ 8123 ];
-        allowedTCPPorts = [ 8123 ];
+        allowedUDPPorts = [
+          "${port}"
+        ];
+        allowedTCPPorts = [
+          "${port}"
+        ];
       };
 
       virtualisation.oci-containers = {
@@ -32,7 +37,7 @@ in
         "${service}.${hl.domain}" = {
           useACMEHost = "${hl.domain}";
           extraConfig = ''
-            reverse_proxy "localhost:8123"
+            reverse_proxy "localhost:"${port}""
           '';
         };
       };

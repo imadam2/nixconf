@@ -2,6 +2,7 @@
 let
   service = "adguardhome";
   serviceAlt = "adguard-home";
+  port = 3000;
 in
 {
   flake.nixosModules.${service} =
@@ -10,23 +11,14 @@ in
       hl = config.homelab;
     in
     {
-      networking.firewall = {
-        allowedUDPPorts = [
-          53
-        ];
-        allowedTCPPorts = [
-          53
-        ];
-      };
-
       services = {
         ${service} = {
           enable = true;
           openFirewall = true;
-          port = 3000;
+          port = port;
           settings = {
             http = {
-              address = "0.0.0.0:3000";
+              address = "0.0.0.0:${toString port}";
             };
             dns = {
               bind_hosts = [ "0.0.0.0" ];
@@ -120,7 +112,7 @@ in
         "${service}.${hl.domain}" = {
           useACMEHost = "${hl.domain}";
           extraConfig = ''
-            reverse_proxy "localhost:3000"
+            reverse_proxy "localhost:${toString port}"
           '';
         };
       };

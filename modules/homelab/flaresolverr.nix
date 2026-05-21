@@ -1,10 +1,13 @@
 { ... }:
+let
+  service = "flaresolverr";
+in
 {
-  flake.nixosModules.kdeconnect =
+  flake.nixosModules.${service} =
     { ... }:
     {
       services = {
-        kdeconnect = {
+        ${service} = {
           enable = true;
           openFirewall = true;
         };

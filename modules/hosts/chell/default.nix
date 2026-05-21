@@ -19,13 +19,11 @@
 
       homepageServices
       caddyVhosts
-      servicesConfig
       shareUser
 
-      base
+      homelabConfig
       git
       nfs
-      shell
       stylix
       chellConfiguration
       chellHardware
@@ -55,7 +53,6 @@
       boot.kernelParams = [
         "i915.enable_rc6=1"
         "i915.enable_fbc=1"
-        "mitigations=off"
       ];
 
       powerManagement = {

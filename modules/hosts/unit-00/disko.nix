@@ -1,7 +1,7 @@
 { inputs, ... }:
 {
-  imports = [ inputs.disko.flakeModules.default ];
   flake.nixosModules.unit-00Disko = {
+    imports = [ inputs.disko.flakeModules.default ];
     disko.devices = {
       disk = {
         main = {

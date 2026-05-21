@@ -34,6 +34,11 @@
         enable = true;
         extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
       };
+      environment.etc."libinput/local-overrides.quirks".text = pkgs.lib.mkForce ''
+        [Debounce]
+        MatchUdevType=mouse
+        ModelBouncingKeys=1
+      '';
     };
 
   flake.homeModules.desktop =

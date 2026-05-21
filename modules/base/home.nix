@@ -19,15 +19,4 @@
           home.stateVersion = config.my.stateVersion;
         };
     };
-  flake.homeModules.${config.my.username} =
-    { ... }:
-    {
-      programs.home-manager.enable = true;
-
-      home = {
-        username = config.my.username;
-        homeDirectory = config.my.homeDir;
-        stateVersion = config.my.stateVersion;
-      };
-    };
 }

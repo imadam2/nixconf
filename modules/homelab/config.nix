@@ -1,6 +1,6 @@
 { ... }:
 {
-  flake.nixosModules.servicesConfig =
+  flake.nixosModules.homelabConfig =
     { config, lib, ... }:
     {
       options.homelab = {

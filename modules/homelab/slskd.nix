@@ -46,21 +46,5 @@ in
           ];
         };
       };
-
-      services.caddy.virtualHosts = {
-        "${service}.${hl.domain}".extraConfig = ''
-          reverse_proxy "localhost:5030"
-        '';
-      };
-
-      homelab.homepage.cfg.Media = [
-        {
-          "Slskd" = {
-            description = "SoulSeek WebUI";
-            href = "https://${service}.${hl.domain}";
-            icon = "sh-${service}.svg";
-          };
-        }
-      ];
     };
 }

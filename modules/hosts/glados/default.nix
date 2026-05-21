@@ -19,11 +19,9 @@
 
       gladosDrives
       shareUser
-      servicesConfig
 
-      base
+      homelabConfig
       git
-      shell
       stylix
       gladosConfiguration
       gladosHardware
@@ -62,7 +60,7 @@
 
       powerManagement = {
         enable = true;
-        cpuFreqGovernor = "performance";
+        cpuFreqGovernor = "schedutil";
       };
 
       hardware.enableRedistributableFirmware = true;

@@ -68,22 +68,5 @@ in
           );
         })
       ];
-
-      homelab.caddy.virtualHosts = {
-        useACMEHost = "${hl.domain}";
-        "${service}.${hl.domain}".extraConfig = ''
-          reverse_proxy "${hl.gladosIP}:8096"
-        '';
-      };
-
-      homelab.homepage.cfg.Media = [
-        {
-          "Jellyfin" = {
-            description = "Media Player";
-            href = "https://${service}.${hl.domain}";
-            icon = "sh-${service}.svg";
-          };
-        }
-      ];
     };
 }
