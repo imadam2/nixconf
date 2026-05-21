@@ -43,6 +43,15 @@
     { pkgs, ... }:
     {
       networking.hostName = "glados";
+
+      environment.systemPackages = with pkgs; [
+        hddtemp
+        hdparm
+        intel-gpu-tools
+        powertop
+        smartmontools
+      ];
+
       services = {
         openssh.enable = true;
       };
