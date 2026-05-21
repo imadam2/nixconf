@@ -20,7 +20,7 @@
       gladosDrives
       shareUser
 
-      homelabConfig
+      homelabBase
       git
       stylix
       gladosConfiguration

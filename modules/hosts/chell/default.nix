@@ -21,7 +21,7 @@
       caddyVhosts
       shareUser
 
-      homelabConfig
+      homelabBase
       git
       nfs
       stylix

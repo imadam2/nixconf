@@ -40,7 +40,7 @@
       boot.loader.efi.canTouchEfiVariables = false;
       boot.loader.grub = {
         enable = true;
-        device = "/dev/vda";
+        devices = "/dev/vda";
       };
     };
 }
