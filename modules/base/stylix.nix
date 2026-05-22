@@ -12,6 +12,7 @@
         image = config.my.wallpaper;
         base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
         polarity = "dark";
+        opacity.terminal = 0.9;
         #cursor = {
         #  package = pkgs.catppuccin-cursors.mochaBlue;
         #  name = "catppuccin-mocha-blue-cursors";
@@ -19,6 +20,7 @@
         #};
         #### Commented because it pulls in inkscape, which compiles from source for whatever reason
         fonts = {
+          sizes.terminal = 11.25;
           monospace = {
             package = pkgs.nerd-fonts.jetbrains-mono;
             name = "JetBrainsMono Nerd Font";

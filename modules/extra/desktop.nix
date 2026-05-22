@@ -170,16 +170,24 @@
           },
           general = {
             layout = "dwindle";
-            gaps_in   = 0,
-            gaps_out  = 0,
+            gaps_in   = 5,
+            gaps_out  = 10,
             border_size = 3,
-            ["col.active_border"]   = "rgb(${config.lib.stylix.colors.base09})",
-            ["col.inactive_border"] = "rgb(${config.lib.stylix.colors.base04})",
+            ["col.active_border"]   = "rgb(${config.lib.stylix.colors.base0D})",
+            ["col.inactive_border"] = "rgb(${config.lib.stylix.colors.base01})",
           },
           animations = {
             enabled = false,
           },
           decoration = {
+            rounding = 3,
+            blur = {
+              enabled = true,
+              xray = true,
+              size = 3,
+              passes = 4,
+              ignore_opacity = true,
+            },
             shadow = {
               enabled = true,
               offset  = "5 5",
