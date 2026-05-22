@@ -54,9 +54,9 @@
         openssh.enable = true;
       };
 
-      boot.kernelParams = [
-        "i915.enable_guc=3"
-      ];
+      #boot.kernelParams = [
+      #  "i915.enable_guc=2"
+      #];
 
       powerManagement = {
         enable = true;
