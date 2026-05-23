@@ -95,7 +95,7 @@
         enable = true;
         settings = {
           general = {
-            lock_cmd = "pidof noctalia || noctalia-shell ipc call lockScreen lock";
+            lock_cmd = "pidof noctalia || noctalia msg screen-lock";
             before_sleep_cmd = "loginctl lock-session";
             after_sleep_cmd = "hyprctl dispatch dpms on";
           };
@@ -236,7 +236,7 @@
         -- AUTOSTART
         -- ==================
         hl.on("hyprland.start", function ()
-          hl.exec_cmd("noctalia-shell")
+          hl.exec_cmd("noctalia")
         end)
 
         -- ==================
@@ -263,17 +263,17 @@
         hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
         -- Media / volume / brightness (repeat-on-hold)
-        hl.bind("XF86AudioRaiseVolume",    hl.dsp.exec_cmd("noctalia-shell ipc call volume increase"), { locked = true, repeating = true })
-        hl.bind("XF86AudioLowerVolume",    hl.dsp.exec_cmd("noctalia-shell ipc call volume decrease"), { locked = true, repeating = true })
-        hl.bind("XF86MonBrightnessUp",     hl.dsp.exec_cmd("noctalia-shell ipc call brightness increase"), { locked = true, repeating = true })
-        hl.bind("XF86MonBrightnessDown",   hl.dsp.exec_cmd("noctalia-shell ipc call brightness decrease"), { locked = true, repeating = true })
+        hl.bind("XF86AudioRaiseVolume",    hl.dsp.exec_cmd("noctalia msg volume-up"), { locked = true, repeating = true })
+        hl.bind("XF86AudioLowerVolume",    hl.dsp.exec_cmd("noctalia msg volume-down"), { locked = true, repeating = true })
+        hl.bind("XF86MonBrightnessUp",     hl.dsp.exec_cmd("noctalia msg brightness-up"), { locked = true, repeating = true })
+        hl.bind("XF86MonBrightnessDown",   hl.dsp.exec_cmd("noctalia msg brightness-down"), { locked = true, repeating = true })
 
         -- Media keys (locked / works on lockscreen)
-        hl.bind("XF86AudioMute",  hl.dsp.exec_cmd("noctalia-shell ipc call volume muteOutput"), { locked = true })
-        hl.bind("XF86AudioNext",  hl.dsp.exec_cmd("noctalia-shell ipc call media next"), { locked = true })
-        hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("noctalia-shell ipc call media previous"), { locked = true })
-        hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("noctalia-shell ipc call media play"), { locked = true })
-        hl.bind("XF86AudioPause", hl.dsp.exec_cmd("noctalia-shell ipc call media pause"), { locked = true })
+        hl.bind("XF86AudioMute",  hl.dsp.exec_cmd("noctalia msg volume-mute"), { locked = true })
+        hl.bind("XF86AudioNext",  hl.dsp.exec_cmd("noctalia msg media next"), { locked = true })
+        hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("noctalia msg media previous"), { locked = true })
+        hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("noctalia msg media toggle"), { locked = true })
+        hl.bind("XF86AudioPause", hl.dsp.exec_cmd("noctalia msg media stop"), { locked = true })
 
         -- Window management
         hl.bind(mainMod .. " + Q",           hl.dsp.window.close())
@@ -293,13 +293,13 @@
 
         -- App launchers
         hl.bind(mainMod .. " + Return",      hl.dsp.exec_cmd("foot"))
-        hl.bind(mainMod .. " + Backspace",   hl.dsp.exec_cmd("noctalia-shell ipc call lockScreen lock"))
+        hl.bind(mainMod .. " + Backspace",   hl.dsp.exec_cmd("noctalia msg screen-lock"))
         hl.bind(mainMod .. " + W",           hl.dsp.exec_cmd("zen-beta"))
-        hl.bind(mainMod .. " + E",           hl.dsp.exec_cmd("noctalia-shell ipc call launcher emoji"))
+        hl.bind(mainMod .. " + E",           hl.dsp.exec_cmd("noctalia msg panel-toggle launcher /emo"))
         hl.bind(mainMod .. " + R",           hl.dsp.exec_cmd("foot -e yazi"))
-        hl.bind(mainMod .. " + A",           hl.dsp.exec_cmd("noctalia-shell ipc call bar toggle"))
-        hl.bind(mainMod .. " + D",           hl.dsp.exec_cmd("noctalia-shell ipc call launcher toggle"))
-        hl.bind(mainMod .. " + V",           hl.dsp.exec_cmd("noctalia-shell ipc call launcher clipboard"))
+        hl.bind(mainMod .. " + A",           hl.dsp.exec_cmd("noctalia msg bar-toggle"))
+        hl.bind(mainMod .. " + D",           hl.dsp.exec_cmd("noctalia msg panel-toggle launcher"))
+        hl.bind(mainMod .. " + V",           hl.dsp.exec_cmd("noctalia msg panel-toggle clipboard"))
         hl.bind(mainMod .. " + M",           hl.dsp.exec_cmd("foot -e jellyfin-tui"))
 
         -- Screenshots
