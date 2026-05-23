@@ -21,6 +21,8 @@
           extraGroups = [
             "wheel"
             "networkmanager"
+            "input"
+            "plugdev"
           ];
           shell = pkgs.fish;
           hashedPasswordFile = config.sops.secrets.password.path;

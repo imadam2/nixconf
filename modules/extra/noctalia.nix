@@ -12,6 +12,10 @@
       programs.noctalia = {
         enable = true;
         settings = {
+          theme = {
+            colorScheme = "catppuccin";
+            builtin = "Catppuccin";
+          };
           shell = {
             font_family = "JetBrainsMono NF";
           };
@@ -22,6 +26,19 @@
           appLauncher = {
             enableClipboardHistory = true;
             terminalCommand = "foot -e";
+          };
+          widget = {
+            bongocat = {
+              script = "scripts/bongocat.lua";
+              type = "scripted";
+              input_device = "/dev/input/event0";
+            };
+            workspaces = {
+              empty_color = "primary";
+              focused_color = "hover";
+              occupied_color = "primary";
+              minimal = true;
+            };
           };
           nightLight = {
             autoSchedule = true;
