@@ -289,7 +289,7 @@
         hl.window_rule({ match = { title = "File Upload"     }, float = true })
 
         hl.window_rule({ match = { class = "^(steam)$" },         workspace = "3" })
-        hl.window_rule({ match = { class = "^(PrismLauncher)$" }, workspace = "3" })
+        hl.window_rule({ match = { class = "^(org.prismlauncher.PrismLauncher)$" }, workspace = "3" })
         hl.window_rule({ match = { class = "^(OrcaSlicer)$" },    workspace = "4" })
 
         hl.layer_rule({
