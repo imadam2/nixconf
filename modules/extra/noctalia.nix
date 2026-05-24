@@ -43,9 +43,9 @@
           nightLight = {
             autoSchedule = true;
             enabled = true;
-            manualSUnrise = "08:00";
+            manualSunrise = "08:00";
             manualSunset = "23:00";
-            ngihtTemp = "3500";
+            nightTemp = "3500";
           };
           wallpaper = {
             directory = "${wallpaperDir}";

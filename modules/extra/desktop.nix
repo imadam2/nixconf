@@ -27,7 +27,6 @@
       };
       programs.hyprland = {
         enable = true;
-        withUWSM = true;
         xwayland.enable = true;
       };
       xdg.portal = {
@@ -70,8 +69,19 @@
       };
     in
     {
-      home.packages = [ screenshot ];
+      home = {
+        packages = [ screenshot ];
+        pointerCursor = {
+          package = pkgs.bibata-cursors-translucent;
+          name = "Bibata Tinted";
+          size = 24;
+        };
+      };
 
+      gtk.iconTheme = {
+        name = "Papirus-Dark";
+        package = pkgs.catppuccin-papirus-folders;
+      };
       programs = {
         foot = {
           enable = true;
@@ -209,16 +219,17 @@
           },
           decoration = {
             rounding = 3,
+            rounding_power = 2,
             blur = {
               enabled = true,
-              xray = true,
               size = 3,
-              passes = 4,
-              ignore_opacity = true,
+              passes = 2,
+              vibrancy = 0.1696,
             },
             shadow = {
               enabled = true,
-              offset  = "5 5",
+              range = 4,
+              render_power = 3,
               color   = "rgba(${config.lib.stylix.colors.base00}ff)",
             },
           },
@@ -237,6 +248,31 @@
         -- ==================
         hl.on("hyprland.start", function ()
           hl.exec_cmd("noctalia")
+
+          -- Workspace 1: Terminal
+          hl.exec_cmd("foot", { workspace = "1" })
+
+          -- Workspace 2: Browser
+          hl.exec_cmd("zen-beta", { workspace = "2" })
+
+          -- Workspace 3: Gaming
+          hl.exec_cmd("prismlauncher", { workspace = "3" })
+          hl.exec_cmd("steam", { workspace = "3" })
+
+          -- Workspace 4: OrcaSlicer
+          hl.exec_cmd("orca-slicer", { workspace = "4" })
+
+          -- Workspace 10: Browser (second instance)
+          hl.exec_cmd("zen-beta", { workspace = "10" })
+
+          -- Workspace 11: OBS
+          hl.exec_cmd("obs", { workspace = "11" })
+
+          -- Workspace 20: Browser (third instance)
+          hl.exec_cmd("zen-beta", { workspace = "20" })
+
+          -- Workspace 21: Jellyfin TUI
+          hl.exec_cmd("foot -e jellyfin-tui", { workspace = "21" })
         end)
 
         -- ==================
@@ -252,28 +288,43 @@
         hl.window_rule({ match = { title = "Library"         }, float = true })
         hl.window_rule({ match = { title = "File Upload"     }, float = true })
 
+        hl.window_rule({ match = { class = "^(steam)$" },         workspace = "3" })
+        hl.window_rule({ match = { class = "^(PrismLauncher)$" }, workspace = "3" })
+        hl.window_rule({ match = { class = "^(OrcaSlicer)$" },    workspace = "4" })
+
+        hl.layer_rule({
+          name = "noctalia",
+          match = {
+            namespace = "^noctalia-(bar-.+|notification|dock|panel)$",
+          },
+          ignore_alpha = 0.5,
+          blur = true,
+          blur_popups = true,
+        })
+
         -- ==================
         -- KEYBINDS
         -- ==================
         local mainMod = "SUPER"
         local smw     = hl.plugin.split_monitor_workspaces
+        local ipc     = "noctalia msg"
 
         -- Mouse binds
         hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
         hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
         -- Media / volume / brightness (repeat-on-hold)
-        hl.bind("XF86AudioRaiseVolume",    hl.dsp.exec_cmd("noctalia msg volume-up"), { locked = true, repeating = true })
-        hl.bind("XF86AudioLowerVolume",    hl.dsp.exec_cmd("noctalia msg volume-down"), { locked = true, repeating = true })
-        hl.bind("XF86MonBrightnessUp",     hl.dsp.exec_cmd("noctalia msg brightness-up"), { locked = true, repeating = true })
-        hl.bind("XF86MonBrightnessDown",   hl.dsp.exec_cmd("noctalia msg brightness-down"), { locked = true, repeating = true })
+        hl.bind("XF86AudioRaiseVolume",    hl.dsp.exec_cmd(ipc .. " volume-up"), { locked = true, repeating = true })
+        hl.bind("XF86AudioLowerVolume",    hl.dsp.exec_cmd(ipc .. " volume-down"), { locked = true, repeating = true })
+        hl.bind("XF86MonBrightnessUp",     hl.dsp.exec_cmd(ipc .. " brightness-up"), { locked = true, repeating = true })
+        hl.bind("XF86MonBrightnessDown",   hl.dsp.exec_cmd(ipc .. " brightness-down"), { locked = true, repeating = true })
 
         -- Media keys (locked / works on lockscreen)
-        hl.bind("XF86AudioMute",  hl.dsp.exec_cmd("noctalia msg volume-mute"), { locked = true })
-        hl.bind("XF86AudioNext",  hl.dsp.exec_cmd("noctalia msg media next"), { locked = true })
-        hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("noctalia msg media previous"), { locked = true })
-        hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("noctalia msg media toggle"), { locked = true })
-        hl.bind("XF86AudioPause", hl.dsp.exec_cmd("noctalia msg media stop"), { locked = true })
+        hl.bind("XF86AudioMute",  hl.dsp.exec_cmd(ipc .. " volume-mute"), { locked = true })
+        hl.bind("XF86AudioNext",  hl.dsp.exec_cmd(ipc .. " media next"), { locked = true })
+        hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd(ipc .. " media previous"), { locked = true })
+        hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd(ipc .. " media toggle"), { locked = true })
+        hl.bind("XF86AudioPause", hl.dsp.exec_cmd(ipc .. " media stop"), { locked = true })
 
         -- Window management
         hl.bind(mainMod .. " + Q",           hl.dsp.window.close())
@@ -293,13 +344,13 @@
 
         -- App launchers
         hl.bind(mainMod .. " + Return",      hl.dsp.exec_cmd("foot"))
-        hl.bind(mainMod .. " + Backspace",   hl.dsp.exec_cmd("noctalia msg screen-lock"))
+        hl.bind(mainMod .. " + Backspace",   hl.dsp.exec_cmd(ipc .. " screen-lock"))
         hl.bind(mainMod .. " + W",           hl.dsp.exec_cmd("zen-beta"))
-        hl.bind(mainMod .. " + E",           hl.dsp.exec_cmd("noctalia msg panel-toggle launcher /emo"))
+        hl.bind(mainMod .. " + E",           hl.dsp.exec_cmd(ipc .. " panel-toggle launcher /emo"))
         hl.bind(mainMod .. " + R",           hl.dsp.exec_cmd("foot -e yazi"))
-        hl.bind(mainMod .. " + A",           hl.dsp.exec_cmd("noctalia msg bar-toggle"))
-        hl.bind(mainMod .. " + D",           hl.dsp.exec_cmd("noctalia msg panel-toggle launcher"))
-        hl.bind(mainMod .. " + V",           hl.dsp.exec_cmd("noctalia msg panel-toggle clipboard"))
+        hl.bind(mainMod .. " + A",           hl.dsp.exec_cmd(ipc .. " bar-toggle"))
+        hl.bind(mainMod .. " + D",           hl.dsp.exec_cmd(ipc .. " panel-toggle launcher"))
+        hl.bind(mainMod .. " + V",           hl.dsp.exec_cmd(ipc .. " panel-toggle clipboard"))
         hl.bind(mainMod .. " + M",           hl.dsp.exec_cmd("foot -e jellyfin-tui"))
 
         -- Screenshots

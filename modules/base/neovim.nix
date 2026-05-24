@@ -436,7 +436,6 @@
             enable = true;
             inlayHints = true;
             servers = {
-              nixd.enable = true;
               lua_ls.enable = true;
               ts_ls.enable = true;
               bashls.enable = true;
@@ -444,6 +443,14 @@
               html.enable = true;
               jsonls.enable = true;
               pyright.enable = true;
+              nixd = {
+                enable = true;
+                settings.nixd = {
+                  nixpkgs.expr = "import (builtins.getFlake \"/home/ye/nixconf\").inputs.nixpkgs {}";
+                  options.nixos.expr = "(builtins.getFlake \"/home/ye/nixconf\").nixosConfigurations.unit-01.options";
+                  options.home-manager.expr = "(builtins.getFlake \"/home/ye/nixconf\").homeConfigurations.\"ye@unit-0";
+                };
+              };
             };
           };
 

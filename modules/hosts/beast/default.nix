@@ -2,28 +2,13 @@
 {
   flake.nixosConfigurations.beast = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
-      audio
-      base
-      desktop
-      git
-      nfs
-      services
-      shell
-      stylix
+      profileDesktop
       virtualization
       beastConfiguration
       beastHardware
       homeManager
       {
-        home-manager.users.ye.imports = with self.homeModules; [
-          browser
-          media
-          packages
-          desktop
-          neovim
-          noctalia
-          shell
-        ];
+        home-manager.users.ye.imports = [ self.homeModules.profileDesktop ];
       }
     ];
   };
@@ -32,7 +17,6 @@
     { config, ... }:
     {
       networking.hostName = "beast";
-
       hardware.graphics.enable = true;
       services.xserver.videoDrivers = [ "nvidia" ];
       hardware.nvidia = {

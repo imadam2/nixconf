@@ -6,15 +6,8 @@
 {
   flake.nixosConfigurations.atlas = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
-      audio
-      base
-      desktop
+      profileDesktop
       gaming
-      git
-      nfs
-      services
-      shell
-      stylix
       virtualization
       atlasConfiguration
       atlasHardware
@@ -22,15 +15,9 @@
       homeManager
       {
         home-manager.users.ye.imports = with self.homeModules; [
-          browser
-          desktop
+          profileDesktop
           gaming
-          media
-          neovim
-          noctalia
           obs
-          packages
-          shell
         ];
       }
     ];

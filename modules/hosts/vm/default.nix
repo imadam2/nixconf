@@ -2,14 +2,7 @@
 {
   flake.nixosConfigurations.vm = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
-      audio
-      base
-      desktop
-      git
-      nfs
-      services
-      shell
-      stylix
+      profileDesktop
       vmConfiguration
       vmHardware
       vmDisko
@@ -17,12 +10,7 @@
       homeManager
       {
         home-manager.users.ye.imports = with self.homeModules; [
-          browser
-          packages
-          desktop
-          neovim
-          noctalia
-          shell
+          profileDesktop
         ];
       }
     ];
@@ -32,7 +20,6 @@
     { ... }:
     {
       networking.hostName = "vm";
-
       hardware.graphics.enable = true;
       services.qemuGuest.enable = true;
       services.openssh.enable = true;

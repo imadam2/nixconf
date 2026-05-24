@@ -15,20 +15,16 @@
       unifi
       uptime-kuma
       vaultwarden
-      #zigbee
-
       homepageServices
       caddyVhosts
       shareUser
 
-      homelabBase
-      git
+      profileServer
       nfs
       stylix
       chellConfiguration
       chellHardware
       chellDisko
-      inputs.disko.nixosModules.disko
       homeManager
       {
         home-manager.users.ye.imports = with self.homeModules; [

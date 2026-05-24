@@ -20,13 +20,11 @@
       gladosDrives
       shareUser
 
-      homelabBase
-      git
+      profileServer
       stylix
       gladosConfiguration
       gladosHardware
       gladosDisko
-      inputs.disko.nixosModules.disko
       homeManager
       {
         home-manager.users.ye.imports = with self.homeModules; [
