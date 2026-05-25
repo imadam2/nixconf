@@ -7,6 +7,7 @@ in
     { config, ... }:
     let
       hl = config.homelab;
+      port = 80;
     in
     {
       networking.firewall = {
@@ -21,8 +22,25 @@ in
       services = {
         ${service} = {
           enable = true;
-          domain = "${service}.${hl.domain}";
         };
       };
+      services.caddy.virtualHosts = {
+        "${service}.${hl.domain}" = {
+          useACMEHost = "${hl.domain}";
+          extraConfig = ''
+            reverse_proxy "localhost:${toString port}"
+          '';
+        };
+      };
+
+      homelab.homepage.cfg.Network = [
+        {
+          "Speedtest Tracker" = {
+            description = "Speedtest Tracker";
+            href = "https://${service}.${hl.domain}";
+            icon = "sh-${service}.svg";
+          };
+        }
+      ];
     };
 }
