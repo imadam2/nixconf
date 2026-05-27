@@ -12,6 +12,7 @@
         services
         shell
         stylix
+        syncthing-client
       ];
     };
 

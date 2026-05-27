@@ -16,6 +16,7 @@
       share
       slskd
       sonarr
+      syncthing
 
       gladosDrives
       shareUser
