@@ -79,7 +79,7 @@
         secrets.slskd = {
           sopsFile = ../../secrets/homelab.yaml;
         };
-        secrets.immich = {
+        secrets.immich_api = {
           sopsFile = ../../secrets/homelab.yaml;
         };
         secrets.password.neededForUsers = true;

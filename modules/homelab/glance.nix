@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, ... }:
 let
   service = "glance";
 in
@@ -258,24 +258,19 @@ in
                           icon = "sh:home-assistant";
                         }
                         {
-                          title = "Zigbee2MQTT";
-                          url = "https://zigbee2mqtt.${hl.domain}";
-                          icon = "sh:zigbee";
-                        }
-                        {
                           title = "Vaultwarden";
                           url = "https://vaultwarden.${hl.domain}";
                           icon = "sh:vaultwarden";
                         }
                         {
+                          title = "Zigbee2MQTT";
+                          url = "https://zigbee2mqtt.${hl.domain}";
+                          icon = "sh:zigbee";
+                        }
+                        {
                           title = "Homepage";
                           url = "https://homepage.${hl.domain}";
                           icon = "sh:homepage";
-                        }
-                        {
-                          title = "Uptime Kuma";
-                          url = "https://uptime-kuma.${hl.domain}";
-                          icon = "sh:uptime-kuma";
                         }
                       ];
                     }
@@ -294,6 +289,11 @@ in
                           icon = "sh:ubiquiti-unifi";
                         }
                         {
+                          title = "Uptime Kuma";
+                          url = "https://uptime-kuma.${hl.domain}";
+                          icon = "sh:uptime-kuma";
+                        }
+                        {
                           title = "OPNSense";
                           url = "https://opnsense.${hl.domain}";
                           icon = "sh:opnsense";
@@ -307,7 +307,6 @@ in
                           title = "Proxmox 2";
                           url = "https://proxmox2.${hl.domain}";
                           icon = "sh:proxmox";
-
                         }
                       ];
                     }
@@ -323,36 +322,19 @@ in
                         "nixos/nixpkgs"
                         "jellyfin/jellyfin"
                         "immich-app/immich"
+                        "seerr-team/seerr"
+                        "hadarr/radarr"
+                        "sonarr/sonarr"
+                        "prowlarr/prowlarr"
+                        "qbittorrent/qbittorrent"
+                        "flaresolverr/flaresolverr"
                         "slskd/slskd"
                         "home-assistant/core"
+                        "dani-garcia/vaultwarden"
+                        "louislam/uptime-kuma"
+                        "adguardteam/adguardhome"
                         "glanceapp/glance"
                       ];
-                    }
-                    {
-                      type = "custom-api";
-                      title = "Immich Stats";
-                      cache = "1d";
-                      url = "https://immich.${hl.domain}";
-                      headers = {
-                        x-api-key = "placeholder";
-                        Accept = "application/json";
-                      };
-                      template = ''
-                        <div class="flex justify-between text-center">
-                          <div>
-                              <div class="color-highlight size-h3">{{ .JSON.Int "photos" | formatNumber }}</div>
-                              <div class="size-h6">PHOTOS</div>
-                          </div>
-                          <div>
-                              <div class="color-highlight size-h3">{{ .JSON.Int "videos" | formatNumber }}</div>
-                              <div class="size-h6">VIDEOS</div>
-                          </div>
-                          <div>
-                              <div class="color-highlight size-h3">{{ div (.JSON.Int "usage" | toFloat) 1073741824 | toInt | formatNumber }}GB</div>
-                              <div class="size-h6">USAGE</div>
-                          </div>
-                        </div>
-                      '';
                     }
                   ];
                 }
