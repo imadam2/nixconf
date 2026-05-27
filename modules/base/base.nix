@@ -65,6 +65,8 @@
         age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
         secrets.password = {
         };
+        secrets.password_plaintext = {
+        };
         secrets.cloudflare_api = {
           sopsFile = ../../secrets/homelab.yaml;
         };
