@@ -263,6 +263,11 @@ in
                           icon = "sh:vaultwarden";
                         }
                         {
+                          title = "Syncthing";
+                          url = "https://syncthing.${hl.domain}";
+                          icon = "sh:syncthing";
+                        }
+                        {
                           title = "Zigbee2MQTT";
                           url = "https://zigbee2mqtt.${hl.domain}";
                           icon = "sh:zigbee";

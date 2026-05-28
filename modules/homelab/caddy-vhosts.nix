@@ -50,6 +50,12 @@
             reverse_proxy "${glados}:5030"
           '';
         };
+        "syncthing.${hl.domain}" = {
+          useACMEHost = hl.domain;
+          extraConfig = ''
+            reverse_proxy "${glados}:8384"
+          '';
+        };
         "sonarr.${hl.domain}" = {
           useACMEHost = hl.domain;
           extraConfig = ''
