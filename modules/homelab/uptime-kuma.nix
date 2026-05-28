@@ -1,6 +1,7 @@
 { ... }:
 let
   service = "uptime-kuma";
+  port = 3001;
 in
 {
   flake.nixosModules.${service} =
@@ -11,10 +12,10 @@ in
     {
       networking.firewall = {
         allowedUDPPorts = [
-          3001
+          port
         ];
         allowedTCPPorts = [
-          3001
+          port
         ];
       };
 
@@ -28,7 +29,7 @@ in
         "${service}.${hl.domain}" = {
           useACMEHost = "${hl.domain}";
           extraConfig = ''
-            reverse_proxy http://localhost:3001
+            reverse_proxy http://localhost:${toString port}
           '';
         };
       };

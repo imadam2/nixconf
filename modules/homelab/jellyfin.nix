@@ -1,6 +1,7 @@
 { ... }:
 let
   service = "jellyfin";
+  port = 8096;
 in
 {
   flake.nixosModules.${service} =
@@ -10,8 +11,12 @@ in
     in
     {
       networking.firewall = {
-        allowedUDPPorts = [ 8096 ];
-        allowedTCPPorts = [ 8096 ];
+        allowedUDPPorts = [
+          port
+        ];
+        allowedTCPPorts = [
+          port
+        ];
       };
 
       services = {

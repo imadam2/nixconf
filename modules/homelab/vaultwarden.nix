@@ -1,6 +1,7 @@
 { ... }:
 let
   service = "vaultwarden";
+  port = 8000;
 in
 {
   flake.nixosModules.${service} =
@@ -11,10 +12,10 @@ in
     {
       networking.firewall = {
         allowedUDPPorts = [
-          8000
+          port
         ];
         allowedTCPPorts = [
-          8000
+          port
         ];
       };
       services = {
@@ -31,7 +32,7 @@ in
         "${service}.${hl.domain}" = {
           useACMEHost = "${hl.domain}";
           extraConfig = ''
-            reverse_proxy "localhost:8000"
+            reverse_proxy "localhost:${toString port}"
           '';
         };
       };

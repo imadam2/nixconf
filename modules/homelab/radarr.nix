@@ -1,6 +1,7 @@
 { ... }:
 let
   service = "radarr";
+  port = 7878;
 in
 {
   flake.nixosModules.${service} =
@@ -11,10 +12,10 @@ in
     {
       networking.firewall = {
         allowedUDPPorts = [
-          7878
+          port
         ];
         allowedTCPPorts = [
-          7878
+          port
         ];
       };
       services = {

@@ -4,6 +4,10 @@
     { config, lib, ... }:
     {
       options.homelab = {
+        domain = lib.mkOption {
+          type = lib.types.str;
+          default = "tjd.lol";
+        };
         gladosIP = lib.mkOption {
           type = lib.types.str;
           default = "10.1.10.3";
@@ -19,10 +23,6 @@
         mounts.merged = lib.mkOption {
           default = "/mnt/user";
           type = lib.types.path;
-        };
-        domain = lib.mkOption {
-          type = lib.types.str;
-          default = "tjd.lol";
         };
         rootDir = lib.mkOption {
           type = lib.types.str;

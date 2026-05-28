@@ -1,20 +1,18 @@
 { ... }:
 let
   service = "seerr";
+  port = 5055;
 in
 {
   flake.nixosModules.${service} =
-    { config, ... }:
-    let
-      hl = config.homelab;
-    in
+    { ... }:
     {
       networking.firewall = {
         allowedUDPPorts = [
-          5055
+          port
         ];
         allowedTCPPorts = [
-          5055
+          port
         ];
       };
 

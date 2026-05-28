@@ -1,6 +1,7 @@
 { ... }:
 let
   service = "qbittorrent";
+  port = 8080;
 in
 {
   flake.nixosModules.${service} =
@@ -10,8 +11,12 @@ in
     in
     {
       networking.firewall = {
-        allowedUDPPorts = [ 8080 ];
-        allowedTCPPorts = [ 8080 ];
+        allowedUDPPorts = [
+          port
+        ];
+        allowedTCPPorts = [
+          port
+        ];
       };
 
       services = {

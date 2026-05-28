@@ -18,6 +18,7 @@
           2049
         ];
       };
+
       fileSystems."/export/share" = {
         device = "/mnt/user";
         fsType = "none";
@@ -32,6 +33,7 @@
             '';
           };
         };
+
         samba = {
           enable = true;
           package = pkgs.samba4Full;
@@ -60,7 +62,9 @@
             };
           };
         };
+
         samba-wsdd.enable = true;
+
         avahi = {
           enable = true;
           publish = {

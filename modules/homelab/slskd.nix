@@ -1,6 +1,8 @@
 { ... }:
 let
   service = "slskd";
+  port = 5030;
+  ports = 5031;
 in
 {
   flake.nixosModules.${service} =
@@ -11,12 +13,12 @@ in
     {
       networking.firewall = {
         allowedUDPPorts = [
-          5030
-          5031
+          port
+          ports
         ];
         allowedTCPPorts = [
-          5030
-          5031
+          port
+          ports
         ];
       };
 

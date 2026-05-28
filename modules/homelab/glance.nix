@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ ... }:
 let
   service = "glance";
 in

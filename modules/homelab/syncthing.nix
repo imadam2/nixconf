@@ -1,6 +1,7 @@
 { ... }:
 let
   service = "syncthing";
+  port = 8384;
 in
 {
   flake.nixosModules.${service} =
@@ -15,10 +16,10 @@ in
 
       networking.firewall = {
         allowedUDPPorts = [
-          8384
+          port
         ];
         allowedTCPPorts = [
-          8384
+          port
         ];
       };
 
@@ -27,7 +28,7 @@ in
         user = hl.user;
         dataDir = "${hl.storageDir}/Notes";
         configDir = "${hl.appdataDir}/${service}";
-        guiAddress = "10.1.10.3:8384";
+        guiAddress = "10.1.10.3:${toString port}";
         openDefaultPorts = true;
 
         settings = {

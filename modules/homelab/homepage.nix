@@ -1,6 +1,7 @@
 { ... }:
 let
   service = "homepage";
+  port = 8082;
 in
 {
   flake.nixosModules.${service} =
@@ -11,16 +12,16 @@ in
     {
       networking.firewall = {
         allowedUDPPorts = [
-          8082
+          port
         ];
         allowedTCPPorts = [
-          8082
+          port
         ];
       };
 
       services.homepage-dashboard = {
         enable = true;
-        allowedHosts = "*,${service}.${hl.domain},10.1.10.54:8082";
+        allowedHosts = "*,${service}.${hl.domain},10.1.10.54:${toString port}";
         services = lib.mapAttrsToList (name: entries: { ${name} = entries; }) hl.homepage.cfg;
         settings = {
           color = "gray";
@@ -500,7 +501,7 @@ in
         "${service}.${hl.domain}" = {
           useACMEHost = "${hl.domain}";
           extraConfig = ''
-            reverse_proxy "localhost:8082"
+            reverse_proxy "localhost:${toString port}"
           '';
         };
       };

@@ -1,6 +1,7 @@
 { ... }:
 let
   service = "sonarr";
+  port = 8989;
 in
 {
   flake.nixosModules.${service} =
@@ -11,10 +12,10 @@ in
     {
       networking.firewall = {
         allowedUDPPorts = [
-          8989
+          port
         ];
         allowedTCPPorts = [
-          8989
+          port
         ];
       };
 

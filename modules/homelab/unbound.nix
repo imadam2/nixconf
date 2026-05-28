@@ -1,4 +1,7 @@
 { ... }:
+let
+  port = 5335;
+in
 {
   flake.nixosModules.unbound =
     { config, ... }:
@@ -8,10 +11,10 @@
     {
       networking.firewall = {
         allowedUDPPorts = [
-          5335
+          port
         ];
         allowedTCPPorts = [
-          5335
+          port
         ];
       };
 
@@ -24,7 +27,7 @@
                 "127.0.0.1"
                 "::1"
               ];
-              port = 5335;
+              port = port;
               access-control = [
                 "127.0.0.0/8 allow"
                 "::1/128 allow"

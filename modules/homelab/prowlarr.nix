@@ -1,20 +1,18 @@
 { ... }:
 let
   service = "prowlarr";
+  port = 9696;
 in
 {
   flake.nixosModules.${service} =
-    { config, ... }:
-    let
-      hl = config.homelab;
-    in
+    { ... }:
     {
       networking.firewall = {
         allowedUDPPorts = [
-          9696
+          port
         ];
         allowedTCPPorts = [
-          9696
+          port
         ];
       };
 
