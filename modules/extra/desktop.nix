@@ -67,10 +67,42 @@
           esac
         '';
       };
+
+      toggle-monitor-mode = pkgs.writeShellApplication {
+        name = "toggle-monitor-mode";
+        runtimeInputs = with pkgs; [
+          hyprland
+          libnotify
+        ];
+        text = ''
+          STATE_FILE="''${XDG_RUNTIME_DIR:-/tmp}/monitor-mode.state"
+
+          if [[ -f "$STATE_FILE" ]]; then
+            CURRENT=$(cat "$STATE_FILE")
+          else
+            CURRENT="4k"
+          fi
+
+          if [[ "$CURRENT" == "4k" ]]; then
+            hyprctl eval 'hl.monitor({ output = "DP-1", mode = "1920x1080@320.0", position = "960x1440",  scale = 1.0, bitdepth = 10 })'
+            hyprctl eval 'hl.monitor({ output = "DP-2", mode = "3440x1440@165.0", position = "200x0",   scale = 1.0, })'
+            echo "1080p" > "$STATE_FILE"
+            notify-send "Monitor" "DP-1 → 1080p @ 320hz"
+          else
+            hyprctl eval 'hl.monitor({ output = "DP-1", mode = "3840x2160@160.0", position = "0x1440",  scale = 1.0, bitdepth = 10 })'
+            hyprctl eval 'hl.monitor({ output = "DP-2", mode = "3440x1440@165.0", position = "200x0",   scale = 1.0, })'
+            echo "4k" > "$STATE_FILE"
+            notify-send "Monitor" "DP-1 → 4K @ 160hz"
+          fi
+        '';
+      };
     in
     {
       home = {
-        packages = [ screenshot ];
+        packages = [
+          screenshot
+          toggle-monitor-mode
+        ];
         pointerCursor = {
           package = pkgs.bibata-cursors-translucent;
           name = "Bibata Tinted";
@@ -150,9 +182,8 @@
         -- ==================
         -- MONITORS
         -- ==================
-        hl.monitor({ output = "DP-1", mode = "3440x1440@165.0", position = "1270x1080", scale = 1.0 })
-        hl.monitor({ output = "DP-2", mode = "1920x1080@120.0", position = "1963x0",   scale = 1.0 })
-        hl.monitor({ output = "DP-3", mode = "1920x1200@60.0",  position = "70x787",   scale = 1.0, transform = 3 })
+        hl.monitor({ output = "DP-1", mode = "3840x2160@160.0",  position = "0x1440",   scale = 1.0, bitdepth = 10 })
+        hl.monitor({ output = "DP-2", mode = "3440x1440@165.0", position = "200x0", scale = 1.0 })
         hl.monitor({ output = "LVDS-1", mode = "1920x1080@60.0",  position = "0x0",   scale = 1.0 })
         hl.monitor({ output = "",     mode = "preferred",        position = "auto",     scale = "auto" })
 
@@ -161,7 +192,7 @@
           hl.workspace_rule({
             workspace = tostring(i),
             monitor   = "DP-1",
-            layout    = "master",
+            layout    = "dwindle",
             persistent = true,
             default   = (i == 1),
           })
@@ -172,20 +203,12 @@
           hl.workspace_rule({
             workspace  = tostring(i),
             monitor    = "DP-2",
+            layout     = "master",
             persistent = true,
             default    = (i == 10),
           })
         end
 
-        -- Pin workspaces 20-29 to your second monitor
-        for i = 20, 29 do
-          hl.workspace_rule({
-            workspace  = tostring(i),
-            monitor    = "DP-3",
-            persistent = true,
-            default    = (i == 20),
-          })
-        end
 
         -- ==================
         -- GENERAL SETTINGS
@@ -331,16 +354,16 @@
         hl.bind(mainMod .. " + F",           hl.dsp.window.fullscreen())
         hl.bind(mainMod .. " + SHIFT + Space",     hl.dsp.window.float({ action = "toggle" }))
         hl.bind(mainMod .. " + S",           hl.dsp.window.pin())
-        hl.bind(mainMod .. " + h",           hl.dsp.window.resize({ x = -100, y = 0, relative=true }))
-        hl.bind(mainMod .. " + l",           hl.dsp.window.resize({ x = 100, y = 0, relative=true }))
-        hl.bind(mainMod .. " + j",           hl.dsp.focus({ direction = "left" }))
-        hl.bind(mainMod .. " + k",           hl.dsp.focus({ direction = "right" }))
-        hl.bind(mainMod .. " + CTRL + j",      hl.dsp.focus({ direction = "down" }))
-        hl.bind(mainMod .. " + CTRL + k",      hl.dsp.focus({ direction = "up" }))
-        hl.bind(mainMod .. " + SHIFT + h",     hl.dsp.window.move({ direction = "left" }))
-        hl.bind(mainMod .. " + SHIFT + j",     hl.dsp.window.move({ direction = "down" }))
-        hl.bind(mainMod .. " + SHIFT + k",     hl.dsp.window.move({ direction = "up" }))
-        hl.bind(mainMod .. " + SHIFT + l",     hl.dsp.window.move({ direction = "right" }))
+        hl.bind(mainMod .. " + H",           hl.dsp.window.resize({ x = -100, y = 0, relative=true }))
+        hl.bind(mainMod .. " + J",           hl.dsp.focus({ direction = "left" }))
+        hl.bind(mainMod .. " + K",           hl.dsp.focus({ direction = "right" }))
+        hl.bind(mainMod .. " + L",           hl.dsp.window.resize({ x = 100, y = 0, relative=true }))
+        hl.bind(mainMod .. " + SHIFT + H",     hl.dsp.window.move({ direction = "left" }))
+        hl.bind(mainMod .. " + SHIFT + J",     hl.dsp.window.move({ direction = "down" }))
+        hl.bind(mainMod .. " + SHIFT + K",     hl.dsp.window.move({ direction = "up" }))
+        hl.bind(mainMod .. " + SHIFT + L",     hl.dsp.window.move({ direction = "right" }))
+        hl.bind(mainMod .. " + CTRL + J",      hl.dsp.focus({ direction = "down" }))
+        hl.bind(mainMod .. " + CTRL + K",      hl.dsp.focus({ direction = "up" }))
 
         -- App launchers
         hl.bind(mainMod .. " + Return",      hl.dsp.exec_cmd("foot"))
@@ -352,6 +375,9 @@
         hl.bind(mainMod .. " + D",           hl.dsp.exec_cmd(ipc .. " panel-toggle launcher"))
         hl.bind(mainMod .. " + V",           hl.dsp.exec_cmd(ipc .. " panel-toggle clipboard"))
         hl.bind(mainMod .. " + M",           hl.dsp.exec_cmd("foot -e jellyfin-tui"))
+
+        -- Monitor mode toggle
+        hl.bind(mainMod .. " + SHIFT + M",          hl.dsp.exec_cmd("${toggle-monitor-mode}/bin/toggle-monitor-mode"))
 
         -- Screenshots
         hl.bind("Print",                hl.dsp.exec_cmd("${screenshot}/bin/screenshot area"))
