@@ -23,11 +23,15 @@
       hardware.graphics.enable = true;
       services.qemuGuest.enable = true;
       services.openssh.enable = true;
-      boot.loader.systemd-boot.enable = false;
-      boot.loader.efi.canTouchEfiVariables = false;
-      boot.loader.grub = {
-        enable = true;
-        devices = "/dev/vda";
+      boot = {
+        loader = {
+          systemd-boot.enable = false;
+          efi.canTouchEfiVariables = false;
+          grub = {
+            enable = true;
+            devices = "/dev/vda";
+          };
+        };
       };
     };
 }

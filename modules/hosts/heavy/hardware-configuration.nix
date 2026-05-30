@@ -11,53 +11,59 @@
         (modulesPath + "/installer/scan/not-detected.nix")
       ];
 
-      boot.initrd.availableKernelModules = [
-        "ata_generic"
-        "ehci_pci"
-        "ahci"
-        "isci"
-        "xhci_pci"
-        "firewire_ohci"
-        "usb_storage"
-        "usbhid"
-        "sd_mod"
-        "sr_mod"
-      ];
-      boot.initrd.kernelModules = [ ];
-      boot.kernelModules = [ "kvm-intel" ];
-      boot.extraModulePackages = [ ];
-
-      fileSystems."/" = {
-        device = "/dev/disk/by-uuid/261b7b72-5359-4405-ac9b-5821722e7ebe";
-        fsType = "btrfs";
-        options = [ "subvol=@" ];
+      boot = {
+        kernelModules = [ "kvm-intel" ];
+        extraModulePackages = [ ];
+        initrd = {
+          kernelModules = [ ];
+          availableKernelModules = [
+            "ata_generic"
+            "ehci_pci"
+            "ahci"
+            "isci"
+            "xhci_pci"
+            "firewire_ohci"
+            "usb_storage"
+            "usbhid"
+            "sd_mod"
+            "sr_mod"
+          ];
+        };
       };
 
-      fileSystems."/nix" = {
-        device = "/dev/disk/by-uuid/261b7b72-5359-4405-ac9b-5821722e7ebe";
-        fsType = "btrfs";
-        options = [ "subvol=@nix" ];
-      };
+      fileSystems = {
+        "/" = {
+          device = "/dev/disk/by-uuid/261b7b72-5359-4405-ac9b-5821722e7ebe";
+          fsType = "btrfs";
+          options = [ "subvol=@" ];
+        };
 
-      fileSystems."/.snapshots" = {
-        device = "/dev/disk/by-uuid/261b7b72-5359-4405-ac9b-5821722e7ebe";
-        fsType = "btrfs";
-        options = [ "subvol=@.snapshots" ];
-      };
+        "/nix" = {
+          device = "/dev/disk/by-uuid/261b7b72-5359-4405-ac9b-5821722e7ebe";
+          fsType = "btrfs";
+          options = [ "subvol=@nix" ];
+        };
 
-      fileSystems."/home" = {
-        device = "/dev/disk/by-uuid/261b7b72-5359-4405-ac9b-5821722e7ebe";
-        fsType = "btrfs";
-        options = [ "subvol=@home" ];
-      };
+        "/.snapshots" = {
+          device = "/dev/disk/by-uuid/261b7b72-5359-4405-ac9b-5821722e7ebe";
+          fsType = "btrfs";
+          options = [ "subvol=@.snapshots" ];
+        };
 
-      fileSystems."/boot" = {
-        device = "/dev/disk/by-uuid/5EE9-01AF";
-        fsType = "vfat";
-        options = [
-          "fmask=0177"
-          "dmask=0077"
-        ];
+        "/home" = {
+          device = "/dev/disk/by-uuid/261b7b72-5359-4405-ac9b-5821722e7ebe";
+          fsType = "btrfs";
+          options = [ "subvol=@home" ];
+        };
+
+        "/boot" = {
+          device = "/dev/disk/by-uuid/5EE9-01AF";
+          fsType = "vfat";
+          options = [
+            "fmask=0177"
+            "dmask=0077"
+          ];
+        };
       };
 
       swapDevices = [ ];

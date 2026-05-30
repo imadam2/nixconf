@@ -12,18 +12,6 @@
           type = lib.types.str;
           default = "10.1.10.3";
         };
-        mounts.slow = lib.mkOption {
-          default = "/mnt/mergerfs_slow";
-          type = lib.types.path;
-        };
-        mounts.cache = lib.mkOption {
-          default = "/mnt/cache";
-          type = lib.types.path;
-        };
-        mounts.merged = lib.mkOption {
-          default = "/mnt/user";
-          type = lib.types.path;
-        };
         rootDir = lib.mkOption {
           type = lib.types.str;
           default = "/mnt/user";
@@ -63,6 +51,20 @@
         caddy.virtualHosts = lib.mkOption {
           type = lib.types.attrsOf lib.types.attrs;
           default = { };
+        };
+        mounts = {
+          slow = lib.mkOption {
+            default = "/mnt/mergerfs_slow";
+            type = lib.types.path;
+          };
+          cache = lib.mkOption {
+            default = "/mnt/cache";
+            type = lib.types.path;
+          };
+          merged = lib.mkOption {
+            default = "/mnt/user";
+            type = lib.types.path;
+          };
         };
       };
     };

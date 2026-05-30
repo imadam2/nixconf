@@ -10,6 +10,7 @@
     {
       imports = [
         inputs.sops-nix.nixosModules.sops
+        inputs.nix-index-database.nixosModules.default
         ./userconfig.nix
       ];
 
@@ -30,6 +31,7 @@
       };
 
       nixpkgs.config.allowUnfree = true;
+      programs.nix-index-database.comma.enable = true;
       nix = {
         gc = {
           automatic = true;
@@ -63,26 +65,28 @@
       sops = {
         defaultSopsFile = ../../secrets/secrets.yaml;
         age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-        secrets.password = {
+        secrets = {
+          password = {
+          };
+          password_plaintext = {
+          };
+          cloudflare_api = {
+            sopsFile = ../../secrets/homelab.yaml;
+          };
+          cloudflare_email = {
+            sopsFile = ../../secrets/homelab.yaml;
+          };
+          qbittorrent_password = {
+            sopsFile = ../../secrets/homelab.yaml;
+          };
+          slskd = {
+            sopsFile = ../../secrets/homelab.yaml;
+          };
+          immich_api = {
+            sopsFile = ../../secrets/homelab.yaml;
+          };
+          password.neededForUsers = true;
         };
-        secrets.password_plaintext = {
-        };
-        secrets.cloudflare_api = {
-          sopsFile = ../../secrets/homelab.yaml;
-        };
-        secrets.cloudflare_email = {
-          sopsFile = ../../secrets/homelab.yaml;
-        };
-        secrets.qbittorrent_password = {
-          sopsFile = ../../secrets/homelab.yaml;
-        };
-        secrets.slskd = {
-          sopsFile = ../../secrets/homelab.yaml;
-        };
-        secrets.immich_api = {
-          sopsFile = ../../secrets/homelab.yaml;
-        };
-        secrets.password.neededForUsers = true;
       };
 
       boot = {

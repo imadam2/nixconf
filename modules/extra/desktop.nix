@@ -47,10 +47,11 @@
         name = "screenshot";
         runtimeInputs = with pkgs; [
           grim
-          slurp
-          satty
-          wl-clipboard
           jq
+          libnotify
+          satty
+          slurp
+          wl-clipboard
         ];
         text = ''
           NAS=/media/NAS/storage/Pictures/Screenshots/$(date +%Y)/$(date +%m)
@@ -58,12 +59,18 @@
           FILE="$DIR/$(date +%Y%m%d_%H%M%S).png"
 
           case "$1" in
-            area)      grim -g "$(slurp)" - | tee "$FILE" | wl-copy ;;
-            display)   grim -o "$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name')" - | tee "$FILE" | wl-copy ;;
-            window)    grim -g "$(hyprctl activewindow -j | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"')" - | tee "$FILE" | wl-copy ;;
-            area-s)    grim -g "$(slurp)" - | satty --filename - --output-filename "$FILE" --copy-command wl-copy ;;
-            display-s) grim -o "$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name')" - | satty --filename - --output-filename "$FILE" --copy-command wl-copy ;;
-            window-s)  grim -g "$(hyprctl activewindow -j | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"')" - | satty --filename - --output-filename "$FILE" --copy-command wl-copy ;;
+            area)      grim -g "$(slurp)" - | tee "$FILE" | wl-copy
+                       notify-send "Screenshot" "Area → $FILE" ;;
+            display)   grim -o "$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name')" - | tee "$FILE" | wl-copy
+                       notify-send "Screenshot" "Display → $FILE" ;;
+            window)    grim -g "$(hyprctl activewindow -j | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"')" - | tee "$FILE" | wl-copy
+                       notify-send "Screenshot" "Window → $FILE" ;;
+            area-s)    grim -g "$(slurp)" - | satty --filename - --output-filename "$FILE" --copy-command wl-copy
+                       notify-send "Screenshot" "Area (annotated) → $FILE" ;;
+            display-s) grim -o "$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name')" - | satty --filename - --output-filename "$FILE" --copy-command wl-copy
+                       notify-send "Screenshot" "Display (annotated) → $FILE" ;;
+            window-s)  grim -g "$(hyprctl activewindow -j | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"')" - | satty --filename - --output-filename "$FILE" --copy-command wl-copy
+                       notify-send "Screenshot" "Window (annotated) → $FILE" ;;
           esac
         '';
       };
@@ -273,29 +280,17 @@
           hl.exec_cmd("noctalia")
 
           -- Workspace 1: Terminal
-          hl.exec_cmd("foot", { workspace = "1" })
+          hl.exec_cmd("foot",          { workspace = "1" })
 
           -- Workspace 2: Browser
-          hl.exec_cmd("zen-beta", { workspace = "2" })
+          hl.exec_cmd("zen-beta",      { workspace = "2" })
 
           -- Workspace 3: Gaming
           hl.exec_cmd("prismlauncher", { workspace = "3" })
-          hl.exec_cmd("steam", { workspace = "3" })
+          hl.exec_cmd("steam",         { workspace = "3" })
 
           -- Workspace 4: OrcaSlicer
-          hl.exec_cmd("orca-slicer", { workspace = "4" })
-
-          -- Workspace 10: Browser (second instance)
-          hl.exec_cmd("zen-beta", { workspace = "10" })
-
-          -- Workspace 11: OBS
-          hl.exec_cmd("obs", { workspace = "11" })
-
-          -- Workspace 20: Browser (third instance)
-          hl.exec_cmd("zen-beta", { workspace = "20" })
-
-          -- Workspace 21: Jellyfin TUI
-          hl.exec_cmd("foot -e jellyfin-tui", { workspace = "21" })
+          hl.exec_cmd("orca-slicer",   { workspace = "4" })
         end)
 
         -- ==================
@@ -352,7 +347,7 @@
         -- Window management
         hl.bind(mainMod .. " + Q",           hl.dsp.window.close())
         hl.bind(mainMod .. " + F",           hl.dsp.window.fullscreen())
-        hl.bind(mainMod .. " + SHIFT + Space",     hl.dsp.window.float({ action = "toggle" }))
+        hl.bind(mainMod .. " + SHIFT + Space", hl.dsp.window.float({ action = "toggle" }))
         hl.bind(mainMod .. " + S",           hl.dsp.window.pin())
         hl.bind(mainMod .. " + H",           hl.dsp.window.resize({ x = -100, y = 0, relative=true }))
         hl.bind(mainMod .. " + J",           hl.dsp.focus({ direction = "left" }))
@@ -377,7 +372,7 @@
         hl.bind(mainMod .. " + M",           hl.dsp.exec_cmd("foot -e jellyfin-tui"))
 
         -- Monitor mode toggle
-        hl.bind(mainMod .. " + SHIFT + M",          hl.dsp.exec_cmd("${toggle-monitor-mode}/bin/toggle-monitor-mode"))
+        hl.bind(mainMod .. " + SHIFT + M",   hl.dsp.exec_cmd("${toggle-monitor-mode}/bin/toggle-monitor-mode"))
 
         -- Screenshots
         hl.bind("Print",                hl.dsp.exec_cmd("${screenshot}/bin/screenshot area"))

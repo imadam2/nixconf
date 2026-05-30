@@ -52,14 +52,16 @@
             default = {
               path = "${wallpaperDir}";
             };
-            monitors.DP-1 = {
-              path = "${wallpaperDir}/nerv_catppuccin_uw.png";
-            };
-            monitors.DP-2 = {
-              path = "${wallpaperDir}/angel.jpg";
-            };
-            monitors.LVDS-1 = {
-              path = "${wallpaperDir}/rei-ii.jpg";
+            monitors = {
+              DP-1 = {
+                path = "${wallpaperDir}/nerv_catppuccin_uw.png";
+              };
+              DP-2 = {
+                path = "${wallpaperDir}/angel.jpg";
+              };
+              LVDS-1 = {
+                path = "${wallpaperDir}/rei-ii.jpg";
+              };
             };
           };
           bar = {

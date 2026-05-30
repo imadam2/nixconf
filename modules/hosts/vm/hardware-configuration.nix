@@ -2,16 +2,20 @@
   flake.nixosModules.vmHardware =
     { lib, ... }:
     {
-      boot.initrd.availableKernelModules = [
-        "ahci"
-        "xhci_pci"
-        "virtio_pci"
-        "sr_mod"
-        "virtio_blk"
-      ];
-      boot.initrd.kernelModules = [ ];
-      boot.kernelModules = [ "kvm-amd" ];
-      boot.extraModulePackages = [ ];
+      boot = {
+        kernelModules = [ "kvm-amd" ];
+        extraModulePackages = [ ];
+        initrd = {
+          kernelModules = [ ];
+          availableKernelModules = [
+            "ahci"
+            "xhci_pci"
+            "virtio_pci"
+            "sr_mod"
+            "virtio_blk"
+          ];
+        };
+      };
 
       nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
     };
