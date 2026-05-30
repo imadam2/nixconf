@@ -6,6 +6,9 @@
       imports = [
         inputs.zen-browser.homeModules.beta
       ];
+
+      stylix.targets.zen-browser.profileNames = [ "default" ];
+
       programs.zen-browser = {
         enable = true;
         nativeMessagingHosts = [ pkgs.firefoxpwa ];
@@ -48,6 +51,26 @@
             "zen.welcome-screen.seen" = true;
             "extensions.autoDisableScopes" = false;
           };
+          pins = {
+            "Glance" = {
+              url = "https://glance.tjd.lol";
+              id = "9d8a8f91-7e29-4688-ae2e-da4e49d4a179";
+              position = 101;
+              isEssential = true;
+            };
+            "X" = {
+              url = "https://x.com";
+              id = "9d8a8f91-7e29-4688-ae2e-da4e49d4a179";
+              position = 102;
+              isEssential = true;
+            };
+            "YouTube" = {
+              url = "https://youtube.com";
+              id = "9d8a8f91-7e29-4688-ae2e-da4e49d4a179";
+              position = 103;
+              isEssential = true;
+            };
+          };
 
           extensions = {
             packages = with inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system}; [
@@ -76,6 +99,5 @@
           };
         };
       };
-      stylix.targets.zen-browser.profileNames = [ "default" ];
     };
 }
