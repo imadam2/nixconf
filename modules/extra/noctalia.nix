@@ -54,10 +54,10 @@
             };
             monitors = {
               DP-1 = {
-                path = "${wallpaperDir}/nerv_catppuccin_uw.png";
+                path = "${wallpaperDir}/flowers-21_hr.png";
               };
               DP-2 = {
-                path = "${wallpaperDir}/angel.jpg";
+                path = "${wallpaperDir}/nerv_catppuccinn_uw.jpg";
               };
               LVDS-1 = {
                 path = "${wallpaperDir}/rei-ii.jpg";

@@ -29,3 +29,11 @@
 | shell        | fish                            |
 | file manager | yazi                            |
 | theming      | catppuccin mocha, jetbrainsmono |
+
+## wallpapers
+
+# \_hr in filename means its >4K (high res)
+
+# \_uw in filename means its ultrawide
+
+# \_up in filename means its upscaled
