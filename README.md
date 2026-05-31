@@ -41,7 +41,7 @@
 | <img src='https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/home-assistant.svg' width=32 height=32> | Home Assistant   | Home automation                  | Services |
 | <img src='https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/unbound.svg' width=32 height=32>        | Unbound          | DNS Resolver                     | Services |
 | <img src='https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/uptime-kuma.svg' width=32 height=32>    | Uptime Kuma      | Tells me if things are broken    | Services |
-| <img src='https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/ubiqiti-unifi.svg' width=32 height=32>  | Unifi Controller | Controller for ubiuqiti products | Services |
+| <img src='https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/ubiquiti-unifi.svg' width=32 height=32> | Unifi Controller | Controller for ubiuqiti products | Services |
 | <img src='https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/vaultwarden.svg' width=32 height=32>    | Vaultwarden      | Password manager                 | Services |
 
 ### glados
