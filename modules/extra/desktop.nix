@@ -189,8 +189,7 @@
         hl.monitor({ output = "LVDS-1", mode = "1920x1080@60.0",  position = "0x0",   scale = 1.0 })
         hl.monitor({ output = "",     mode = "preferred",        position = "auto",     scale = "auto" })
 
-        -- Workspaces 1–5 pinned to DP-1, using master layout
-        for i = 1, 9 do
+        for i = 1, 8 do
           hl.workspace_rule({
             workspace = tostring(i),
             monitor   = "DP-1",
@@ -201,31 +200,22 @@
         end
 
         -- Pin workspaces 10–19 to your second monitor
-        for i = 10, 19 do
+        for i = 9, 9 do
           hl.workspace_rule({
             workspace  = tostring(i),
             monitor    = "DP-2",
             layout     = "master",
             persistent = true,
-            default    = (i == 10),
+            default    = (i == 9),
           })
         end
 
+        local ipc = "noctalia msg"
 
         -- ==================
         -- GENERAL SETTINGS
         -- ==================
         hl.config({
-          plugin = {
-            split_monitor_workspaces = {
-              count                      = 9,
-              keep_focused               = 0,
-              enable_notifications       = 0,
-              enable_persistent_workspaces = 1,
-              enable_wrapping            = 1,
-              link_monitors              = 0,
-            },
-          },
           master = {
             orientation = center,
             slave_count_for_center_master = 0,
@@ -319,8 +309,6 @@
         -- KEYBINDS
         -- ==================
         local mainMod = "SUPER"
-        local smw     = hl.plugin.split_monitor_workspaces
-        local ipc     = "noctalia msg"
 
         -- Mouse binds
         hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
@@ -378,10 +366,10 @@
         hl.bind("CTRL + SHIFT + Print", hl.dsp.exec_cmd("${screenshot}/bin/screenshot window-s"))
 
         -- Workspace switching + moving (split-monitor-workspaces)
-        for i = 1, 9 do
-          local key = tostring(i)
-          hl.bind(mainMod .. " + " .. key, function() return smw.workspace(i) end)
-          hl.bind(mainMod .. " + SHIFT + " .. key, function() return smw.move_to_workspace(i) end)
+        for i = 1, 10 do
+          local key = i % 10 -- 10 maps to key 0
+          hl.bind(mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i}))
+          hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
         end
       '';
     };

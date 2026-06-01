@@ -24,6 +24,6 @@
     homeDir = "/home/ye";
     timezone = "Europe/Belfast";
     locale = "en_GB.UTF-8";
-    stateVersion = "26.05";
+    stateVersion = "26.11";
   };
 }
