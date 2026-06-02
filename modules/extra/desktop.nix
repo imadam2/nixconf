@@ -139,7 +139,7 @@
         enable = true;
         settings = {
           general = {
-            lock_cmd = "pidof noctalia || noctalia msg screen-lock";
+            lock_cmd = "pidof noctalia || noctalia msg session lock";
             before_sleep_cmd = "loginctl lock-session";
             after_sleep_cmd = "hyprctl dispatch dpms on";
           };
@@ -345,7 +345,7 @@
 
         -- App launchers
         hl.bind(mainMod .. " + Return",      hl.dsp.exec_cmd("foot"))
-        hl.bind(mainMod .. " + Backspace",   hl.dsp.exec_cmd(ipc .. " screen-lock"))
+        hl.bind(mainMod .. " + Backspace",   hl.dsp.exec_cmd(ipc .. " session lock"))
         hl.bind(mainMod .. " + W",           hl.dsp.exec_cmd("zen-beta"))
         hl.bind(mainMod .. " + E",           hl.dsp.exec_cmd(ipc .. " panel-toggle launcher /emo"))
         hl.bind(mainMod .. " + R",           hl.dsp.exec_cmd("foot -e yazi"))
