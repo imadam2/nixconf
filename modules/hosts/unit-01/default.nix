@@ -18,7 +18,6 @@
   flake.nixosModules.unit-01Configuration =
     { ... }:
     {
-      my.wallpaper = ../../../assets/wallpapers/flowers-21.png;
       networking.hostName = "unit-01";
     };
 }

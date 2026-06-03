@@ -15,6 +15,7 @@
       unbound
       unifi
       uptime-kuma
+      topology
       vaultwarden
 
       homepageServices

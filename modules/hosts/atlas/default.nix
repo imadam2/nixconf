@@ -26,7 +26,6 @@
   flake.nixosModules.atlasConfiguration =
     { pkgs, ... }:
     {
-      my.wallpaper = ../../../assets/wallpapers/nerv_catppuccin_uw.png;
       networking.hostName = "atlas";
       powerManagement.cpuFreqGovernor = "performance";
 

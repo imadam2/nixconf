@@ -19,10 +19,8 @@
   flake.nixosModules.heavyConfiguration =
     { ... }:
     {
-      my.wallpaper = ../../../assets/wallpapers/cool.jpg;
       networking.hostName = "heavy";
 
-      # Unique to heavy: blacklist dGPU entirely
       boot = {
         extraModprobeConfig = ''
           blacklist nouveau
