@@ -3,11 +3,11 @@
   flake.homeModules.obs =
     { pkgs, ... }:
     {
-      catppuccin.obs.enable = true;
-
       imports = [
         inputs.catppuccin.homeModules.catppuccin
       ];
+
+      catppuccin.obs.enable = true;
 
       programs = {
         obs-studio = {

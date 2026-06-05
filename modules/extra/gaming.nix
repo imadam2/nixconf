@@ -1,8 +1,9 @@
-{ ... }:
+{ inputs, ... }:
 {
   flake.nixosModules.gaming =
     { pkgs, ... }:
     {
+
       programs = {
         gamemode.enable = true;
         steam = {
@@ -25,7 +26,6 @@
         winetricks
         wineWow64Packages.staging
         gamemode
-        mangohud
         protonup-qt
         heroic
         protontricks
@@ -35,7 +35,15 @@
   flake.homeModules.gaming =
     { pkgs, ... }:
     {
+      imports = [
+        inputs.catppuccin.homeModules.catppuccin
+      ];
+
+      catppuccin.mangohud.enable = true;
+
       home.packages = with pkgs; [
+        mangohud
+
         (prismlauncher.override {
           textToSpeechSupport = false;
           additionalLibs = [
