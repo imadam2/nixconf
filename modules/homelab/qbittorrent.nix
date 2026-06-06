@@ -29,15 +29,23 @@ in
             LegalNotice.Accepted = true;
             BitTorrent = {
               Session = {
-                Port = "50000";
-                GlobalUPSpeedLimit = "9000";
+                AddTorrentStopped = false;
+                BTProtocol = "TCP";
+                DHTEnabled = false;
+                DsableAutoTMMByDefault = false;
+                LSDEnabled = false;
+                GlobalUPSpeedLimit = "0";
                 MaxActiveDownloads = "10";
                 MaxActiveTorrents = "20";
                 MaxActiveUploads = "20";
                 MaxConnections = "800";
                 MaxConnectionsPerTorrent = "200";
-                MaxUploadsPerTorrent = "30";
+                MaxUploads = "100";
+                MaxUploadsPerTorrent = "20";
+                PeXEnabled = false;
+                Port = "50000";
                 QueueingSystemEnabled = false;
+                uTPMixedMode = "Proportional";
                 uTPRateLimited = true;
               };
             };
