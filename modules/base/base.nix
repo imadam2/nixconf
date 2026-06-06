@@ -86,6 +86,9 @@
           immich_api = {
             sopsFile = ../../secrets/homelab.yaml;
           };
+          autobrr = {
+            sopsFile = ../../secrets/homelab.yaml;
+          };
           password.neededForUsers = true;
         };
       };
