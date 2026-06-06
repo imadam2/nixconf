@@ -30,7 +30,7 @@ in
             BitTorrent = {
               Session = {
                 Port = "50000";
-                GlobalUPSpeedLimit = "9000";
+                GlobalUPSpeedLimit = "0";
                 MaxActiveDownloads = "10";
                 MaxActiveTorrents = "20";
                 MaxActiveUploads = "20";
