@@ -9,6 +9,7 @@ keys:
   - &chell_host age1szzurdrppevemlyc5zaydewskwhfcmndf7g0jmd7an3gds8qtvwq9p2q6t
   - &unit-00_host age14r4q0ucn96jhq6j3ykpntwgrzxwvzn3ak2wrmsxeesuuf99ut3ase3ktke
   - &glados_host age1kglyf3c43cxkkw26lvltp9ra2q3vlnl66ys8hzw55vdwsnux6qsq2dsj0f
+  - &seedbox_host age1yakkpxmvqp0vjdjtfn8kk3ea2tvnwe5pwepa2pdys3u3wljjh4jq9fup44
 
 creation_rules:
   - path_regex: secrets/[^/]+\.yaml$
@@ -24,3 +25,4 @@ creation_rules:
             - *chell_host
             - *unit-00_host
             - *glados_host
+            - *seedbox_host
