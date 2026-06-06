@@ -242,6 +242,11 @@ in
                           icon = "sh:qbittorrent";
                         }
                         {
+                          title = "qBittorrent on seedbox";
+                          url = "https://qbittorrent2.${hl.domain}";
+                          icon = "sh:qbittorrent";
+                        }
+                        {
                           title = "FlareSolverr";
                           url = "https://flaresolverr.${hl.domain}";
                           icon = "sh:flaresolverr";

@@ -32,6 +32,12 @@
             reverse_proxy "${glados}:8080"
           '';
         };
+        "qbittorrent2.${hl.domain}" = {
+          useACMEHost = hl.domain;
+          extraConfig = ''
+            reverse_proxy "10.1.10.234:8080"
+          '';
+        };
         "radarr.${hl.domain}" = {
           useACMEHost = hl.domain;
           extraConfig = ''
