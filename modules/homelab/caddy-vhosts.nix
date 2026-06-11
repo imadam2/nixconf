@@ -32,12 +32,6 @@
             reverse_proxy "${glados}:8080"
           '';
         };
-        "qbittorrent2.${hl.domain}" = {
-          useACMEHost = hl.domain;
-          extraConfig = ''
-            reverse_proxy "10.1.10.234:8080"
-          '';
-        };
         "radarr.${hl.domain}" = {
           useACMEHost = hl.domain;
           extraConfig = ''
@@ -68,12 +62,6 @@
             reverse_proxy "${glados}:8989"
           '';
         };
-        "autobrr.${hl.domain}" = {
-          useACMEHost = hl.domain;
-          extraConfig = ''
-            reverse_proxy "http://10.1.10.234:7474"
-          '';
-        };
         "opnsense.${hl.domain}" = {
           useACMEHost = hl.domain;
           extraConfig = ''
@@ -84,16 +72,6 @@
           useACMEHost = hl.domain;
           extraConfig = ''
             reverse_proxy https://10.1.10.2:8006 {
-              transport http {
-                tls_insecure_skip_verify
-              }
-            }
-          '';
-        };
-        "proxmox2.${hl.domain}" = {
-          useACMEHost = hl.domain;
-          extraConfig = ''
-            reverse_proxy https://10.1.10.220:8006 {
               transport http {
                 tls_insecure_skip_verify
               }

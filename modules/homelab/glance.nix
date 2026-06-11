@@ -232,18 +232,8 @@ in
                           icon = "sh:prowlarr";
                         }
                         {
-                          title = "Autobrr";
-                          url = "https://autobrr.${hl.domain}";
-                          icon = "sh:autobrr";
-                        }
-                        {
                           title = "qBittorrent";
                           url = "https://qbittorrent.${hl.domain}";
-                          icon = "sh:qbittorrent";
-                        }
-                        {
-                          title = "qBittorrent on seedbox";
-                          url = "https://qbittorrent2.${hl.domain}";
                           icon = "sh:qbittorrent";
                         }
                         {
@@ -316,11 +306,6 @@ in
                         {
                           title = "Proxmox";
                           url = "https://proxmox.${hl.domain}";
-                          icon = "sh:proxmox";
-                        }
-                        {
-                          title = "Proxmox 2";
-                          url = "https://proxmox2.${hl.domain}";
                           icon = "sh:proxmox";
                         }
                       ];
