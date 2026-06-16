@@ -3,7 +3,6 @@
   flake.nixosModules.gaming =
     { pkgs, ... }:
     {
-
       programs = {
         gamemode.enable = true;
         steam = {
@@ -40,6 +39,12 @@
       ];
 
       catppuccin.mangohud.enable = true;
+
+      programs = {
+        lutris = {
+          enable = true;
+        };
+      };
 
       home.packages = with pkgs; [
         mangohud
