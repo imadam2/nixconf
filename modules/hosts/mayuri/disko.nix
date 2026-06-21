@@ -1,12 +1,12 @@
 { inputs, ... }:
 {
-  flake.diskoConfigurations.beast = {
-    imports = [ inputs.disko.flakeModules.default ];
+  flake.nixosModules.mayuriDisko = {
+    imports = [ inputs.disko.nixosModules.disko ];
     disko.devices = {
       disk = {
         main = {
           type = "disk";
-          device = "/dev/disk/by-id/ata-V_Series_SATA_SSD_120GB_213810663701292";
+          device = "/dev/nvme0n1";
           content = {
             type = "gpt";
             partitions = {

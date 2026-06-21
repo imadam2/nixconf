@@ -1,5 +1,5 @@
 {
-  flake.nixosModules.heavyHardware =
+  flake.nixosModules.daruHardware =
     {
       config,
       lib,

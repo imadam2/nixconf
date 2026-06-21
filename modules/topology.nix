@@ -4,7 +4,7 @@
     { ... }:
     {
       topology.nixosConfigurations = {
-        inherit (self.nixosConfigurations) chell glados atlas;
+        inherit (self.nixosConfigurations) kurisu glados mayuri;
       };
 
       topology.modules = [
@@ -43,7 +43,7 @@
               interfaces.eth1 = { };
               interfaces.eth2 = { };
               interfaces.eth3 = { };
-              connections.eth1 = mkConnection "chell" "eno1";
+              connections.eth1 = mkConnection "kurisu" "eno1";
               connections.eth2 = mkConnection "ubiquiti" "uplink";
               connections.eth3 = mkConnection "u7-lr" "eth0";
             };
@@ -60,13 +60,13 @@
               interfaces.eth2 = { };
               interfaces.eth3 = { };
               interfaces.eth4 = { };
-              connections.eth1 = mkConnection "atlas" "enp3s0";
+              connections.eth1 = mkConnection "mayuri" "enp3s0";
               connections.eth2 = mkConnection "glados" "enp4s0";
               connections.eth3 = mkConnection "hp-z620" "eth0";
               connections.eth4 = mkConnection "capture-pc" "eth0";
             };
 
-            nodes.chell = {
+            nodes.kurisu = {
               interfaces.eno1.network = "lan";
               services.caddy.hidden = true;
             };
@@ -76,7 +76,7 @@
               services.caddy.hidden = true;
             };
 
-            nodes.atlas.interfaces.enp3s0.network = "lan";
+            nodes.mayuri.interfaces.enp3s0.network = "lan";
 
             nodes.hp-z620 = {
               name = "HP Z620";

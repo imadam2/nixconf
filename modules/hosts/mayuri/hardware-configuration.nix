@@ -1,5 +1,5 @@
 {
-  flake.nixosModules.chellHardware =
+  flake.nixosModules.mayuriHardware =
     {
       config,
       lib,
@@ -12,13 +12,13 @@
       ];
 
       boot = {
-        kernelModules = [ "kvm-intel" ];
+        kernelModules = [ "kvm-amd" ];
         extraModulePackages = [ ];
         initrd = {
           kernelModules = [ ];
           availableKernelModules = [
+            "nvme"
             "xhci_pci"
-            "ehci_pci"
             "ahci"
             "usb_storage"
             "usbhid"
@@ -26,7 +26,6 @@
           ];
         };
       };
-
       swapDevices = [ ];
 
       nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

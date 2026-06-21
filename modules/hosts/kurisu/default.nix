@@ -5,7 +5,7 @@
   ...
 }:
 {
-  flake.nixosConfigurations.chell = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations.kurisu = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
       adguardhome
       caddy
@@ -24,9 +24,9 @@
       profileServer
       nfs
       stylix
-      chellConfiguration
-      chellHardware
-      chellDisko
+      kurisuConfiguration
+      kurisuHardware
+      kurisuDisko
       homeManager
 
       inputs.nix-topology.nixosModules.default
@@ -39,15 +39,15 @@
     ];
   };
 
-  flake.nixosModules.chellConfiguration =
+  flake.nixosModules.kurisuConfiguration =
     { pkgs, ... }:
     {
       topology.self = {
-        name = "Chell";
+        name = "kurisu";
         hardware.info = "Mini secondary network and essential server";
       };
 
-      networking.hostName = "chell";
+      networking.hostName = "kurisu";
 
       services = {
         openssh.enable = true;

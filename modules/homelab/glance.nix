@@ -188,7 +188,7 @@ in
                       servers = [
                         {
                           type = "local";
-                          name = "chell";
+                          name = "kurisu";
                           mountpoints = {
                             "/" = {
                               name = "Root";

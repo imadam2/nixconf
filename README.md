@@ -4,9 +4,9 @@
 
 | Host    | Description        |
 | ------- | ------------------ |
-| atlas   | Ryzen Main Desktop |
+| mayuri  | Ryzen Main Desktop |
 | beast   | Dual CPU HP Z620   |
-| chell   | ThinkCentre M93p   |
+| kurisu  | ThinkCentre M93p   |
 | glados  | i5-12500 NAS       |
 | heavy   | ThinkPad W520      |
 | unit-00 | ThinkPad X230 #1   |
@@ -31,7 +31,7 @@
 
 ## homelab
 
-### chell
+### kurisu
 
 | Icon                                                                                                 | Name             | Description                      | Category |
 | ---------------------------------------------------------------------------------------------------- | ---------------- | -------------------------------- | -------- |

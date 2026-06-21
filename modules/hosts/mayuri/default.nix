@@ -4,14 +4,14 @@
   ...
 }:
 {
-  flake.nixosConfigurations.atlas = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations.mayuri = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
       profileDesktop
       gaming
       virtualization
-      atlasConfiguration
-      atlasHardware
-      atlasDisko
+      mayuriConfiguration
+      mayuriHardware
+      mayuriDisko
       homeManager
       inputs.nix-topology.nixosModules.default
       {
@@ -24,15 +24,15 @@
     ];
   };
 
-  flake.nixosModules.atlasConfiguration =
+  flake.nixosModules.mayuriConfiguration =
     { pkgs, ... }:
     {
       topology.self = {
-        name = "Atlas";
+        name = "mayuri";
         hardware.info = "Main Ryzen 5800x Desktop";
       };
 
-      networking.hostName = "atlas";
+      networking.hostName = "mayuri";
 
       powerManagement.cpuFreqGovernor = "performance";
 

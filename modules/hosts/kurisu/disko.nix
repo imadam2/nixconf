@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  flake.nixosModules.heavyDisko = {
+  flake.nixosModules.kurisuDisko = {
     imports = [ inputs.disko.nixosModules.disko ];
     disko.devices = {
       disk = {

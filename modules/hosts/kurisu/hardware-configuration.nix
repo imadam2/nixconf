@@ -1,5 +1,5 @@
 {
-  flake.nixosModules.atlasHardware =
+  flake.nixosModules.kurisuHardware =
     {
       config,
       lib,
@@ -12,13 +12,13 @@
       ];
 
       boot = {
-        kernelModules = [ "kvm-amd" ];
+        kernelModules = [ "kvm-intel" ];
         extraModulePackages = [ ];
         initrd = {
           kernelModules = [ ];
           availableKernelModules = [
-            "nvme"
             "xhci_pci"
+            "ehci_pci"
             "ahci"
             "usb_storage"
             "usbhid"
@@ -26,6 +26,7 @@
           ];
         };
       };
+
       swapDevices = [ ];
 
       nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

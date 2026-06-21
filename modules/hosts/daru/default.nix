@@ -1,11 +1,11 @@
 { self, inputs, ... }:
 {
-  flake.nixosConfigurations.heavy = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations.daru = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
       profileDesktop
       profileLaptop
-      heavyConfiguration
-      heavyHardware
+      daruConfiguration
+      daruHardware
       homeManager
       {
         home-manager.users.ye.imports = with self.homeModules; [
@@ -16,10 +16,10 @@
     ];
   };
 
-  flake.nixosModules.heavyConfiguration =
+  flake.nixosModules.daruConfiguration =
     { ... }:
     {
-      networking.hostName = "heavy";
+      networking.hostName = "daru";
 
       boot = {
         extraModprobeConfig = ''
