@@ -4,11 +4,10 @@
 
 | Host    | Description        |
 | ------- | ------------------ |
-| mayuri  | Ryzen Main Desktop |
-| beast   | Dual CPU HP Z620   |
-| kurisu  | ThinkCentre M93p   |
 | glados  | i5-12500 NAS       |
 | heavy   | ThinkPad W520      |
+| kurisu  | ThinkCentre M93p   |
+| mayuri  | Ryzen Main Desktop |
 | unit-00 | ThinkPad X230 #1   |
 | unit-01 | ThinkPad X230 #2   |
 | vm      | generic vm host    |
@@ -58,11 +57,3 @@
 | <img src='https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/slskd.svg' width=32 height=32>        | Slskd        | Web-based Soulseek client                       | Media    |
 | <img src='https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/sonarr.svg' width=32 height=32>       | Sonarr       | TV show collection manager                      | Media    |
 | <img src='https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/syncthing.svg' width=32 height=32>    | Syncthing    | Syncs things                                    | Services |
-
-## wallpapers
-
-\_hr in filename means its >4K (high res)
-
-\_uw in filename means its ultrawide
-
-\_up in filename means its upscaled
