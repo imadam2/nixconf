@@ -40,7 +40,7 @@ in
           dnsProvider = "cloudflare";
           dnsResolver = "1.1.1.1:53";
           dnsPropagationCheck = true;
-          environmentFile = config.sops.secrets.cloudflare_api.path;
+          environmentFile = config.sops.secrets.elpsy-moe_api.path;
         };
       };
     };

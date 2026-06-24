@@ -109,8 +109,8 @@
           enable = true;
           settings.Resolve = {
             domains = [
-              "tjd.lol"
-              "~tjd.lol"
+              "elpsy.moe"
+              "~elpsy.moe"
             ];
           };
         };

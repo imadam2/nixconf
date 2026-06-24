@@ -6,7 +6,7 @@
       options.homelab = {
         domain = lib.mkOption {
           type = lib.types.str;
-          default = "tjd.lol";
+          default = "elpsy.moe";
         };
         gladosIP = lib.mkOption {
           type = lib.types.str;
