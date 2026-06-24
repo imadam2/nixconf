@@ -125,7 +125,6 @@
         bc
         curl
         dust
-        fastfetch
         gdu
         killall
         neovim

@@ -45,8 +45,8 @@
           theme = {
             indicator = {
               padding = {
-                open = "▐";
-                close = "▌";
+                open = "█";
+                close = "█";
               };
             };
           };
@@ -79,6 +79,75 @@
               gradient_color_7 = "'#eba0ac'";
               gradient_color_8 = "'#f38ba8'";
             };
+          };
+        };
+        fastfetch = {
+          enable = true;
+          settings = {
+            "$schema" = "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json";
+
+            logo = {
+              source = "${config.my.homeDir}/nixconf/assets/pfp.jpg";
+              type = "sixel";
+              width = 24;
+            };
+
+            display = {
+              separator = "  ";
+              color.keys = "blue";
+              key.type = "icon";
+              size = {
+                ndigits = 0;
+              };
+            };
+
+            modules = [
+              "break"
+              {
+                type = "title";
+                color = {
+                  user = "green";
+                  at = "red";
+                  host = "blue";
+                };
+              }
+              "os"
+              "kernel"
+              "packages"
+              {
+                type = "terminalfont";
+              }
+              {
+                type = "media";
+                key = "Song";
+              }
+              "break"
+              {
+                type = "cpu";
+                showPeCoresAsECores = true;
+              }
+              {
+                type = "gpu";
+                detectionMethod = "pci";
+              }
+              "memory"
+              {
+                type = "disk";
+              }
+              {
+                type = "display";
+                compactType = "original-with-refresh-rate";
+              }
+              {
+                type = "localip";
+                showIpv4 = true;
+                showIpv6 = false;
+                showLoop = false;
+              }
+              "uptime"
+              "break"
+              "colors"
+            ];
           };
         };
 
