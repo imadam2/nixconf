@@ -16,6 +16,7 @@
       inputs.nix-topology.nixosModules.default
       {
         home-manager.users.ye.imports = with self.homeModules; [
+          discord
           profileDesktop
           gaming
           obs
