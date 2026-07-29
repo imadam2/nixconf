@@ -482,6 +482,7 @@
         hl.bind(mainMod .. " + W",           hl.dsp.exec_cmd("zen-beta"))
         hl.bind(mainMod .. " + E",           hl.dsp.exec_cmd(ipc .. " panel-toggle launcher /emo"))
         hl.bind(mainMod .. " + R",           hl.dsp.exec_cmd("foot -e yazi"))
+        hl.bind(mainMod .. " + SHIFT + R",   hl.dsp.exec_cmd("thunar"))
         hl.bind(mainMod .. " + A",           hl.dsp.exec_cmd(ipc .. " bar-toggle"))
         hl.bind(mainMod .. " + D",           hl.dsp.exec_cmd(ipc .. " panel-toggle launcher"))
         hl.bind(mainMod .. " + V",           hl.dsp.exec_cmd(ipc .. " panel-toggle clipboard"))
