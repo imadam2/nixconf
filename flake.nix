@@ -6,6 +6,7 @@
     import-tree.url = "github:vic/import-tree";
     hyprland.url = "github:hyprwm/Hyprland";
     catppuccin.url = "github:catppuccin/nix";
+    sc0710.url = "github:Nakildias/sc0710";
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";

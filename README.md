@@ -8,6 +8,7 @@
 | glados  | i5-12500 NAS       |
 | kurisu  | ThinkCentre M93p   |
 | mayuri  | Ryzen Main Desktop |
+| ritsuko | Other Ryzen PC     |
 | unit-00 | ThinkPad X230 #1   |
 | unit-01 | ThinkPad X230 #2   |
 | vm      | generic vm host    |
