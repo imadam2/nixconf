@@ -320,6 +320,7 @@
         hl.monitor({ output = "DP-1", mode = "3840x2160@160.0",  position = "0x1440",   scale = 1.0, bitdepth = 10 })
         hl.monitor({ output = "DP-2", mode = "3440x1440@165.0", position = "200x0", scale = 1.0 })
         hl.monitor({ output = "LVDS-1", mode = "1920x1080@60.0",  position = "0x0",   scale = 1.0 })
+        hl.monitor({ output = "HDMI-A-1", mode = "1600x1200@60.0",  position = "0x0",   scale = 1.0, transform = 1 })
         hl.monitor({ output = "",     mode = "preferred",        position = "auto",     scale = "auto" })
 
         for i = 1, 8 do

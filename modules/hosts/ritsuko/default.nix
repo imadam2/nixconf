@@ -9,7 +9,7 @@
       profileDesktop
       ritsukoConfiguration
       ritsukoHardware
-      ritsukoDisko
+      #ritsukoDisko
       homeManager
       inputs.nix-topology.nixosModules.default
       inputs.sc0710.nixosModules.default
@@ -40,6 +40,12 @@
         extraModprobeConfig = "";
       };
 
+      zramSwap = {
+        enable = true;
+        algorithm = "zstd";
+        memoryPercent = 200;
+      };
+
       services.xserver.videoDrivers = [ "nvidia" ];
 
       hardware = {
@@ -50,7 +56,7 @@
           enable32Bit = true;
         };
         nvidia = {
-          open = true;
+          open = false;
           modesetting.enable = true;
           package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
         };
