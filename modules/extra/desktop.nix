@@ -407,9 +407,6 @@
           -- Workspace 3: Gaming
           hl.exec_cmd("prismlauncher", { workspace = "3" })
           hl.exec_cmd("steam",         { workspace = "3" })
-
-          -- Workspace 4: OrcaSlicer
-          hl.exec_cmd("orca-slicer",   { workspace = "4" })
         end)
 
         -- ==================

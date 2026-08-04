@@ -23,7 +23,7 @@
   };
 
   flake.nixosModules.ritsukoConfiguration =
-    { config, ... }:
+    { config, lib, ... }:
     {
       topology.self = {
         name = "ritsuko";
@@ -33,6 +33,10 @@
       networking.hostName = "ritsuko";
 
       powerManagement.cpuFreqGovernor = "performance";
+
+      services.xserver.videoDrivers = [ "nvidia" ];
+
+      services.hypridle.enable = lib.mkForce false;
 
       boot = {
         kernelParams = [
@@ -45,8 +49,6 @@
         algorithm = "zstd";
         memoryPercent = 200;
       };
-
-      services.xserver.videoDrivers = [ "nvidia" ];
 
       hardware = {
         sc0710.enable = true;
