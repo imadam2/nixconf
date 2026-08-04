@@ -23,6 +23,7 @@
       };
 
       environment.systemPackages = with pkgs; [
+        _86box-with-roms
         qemu
         spice
         spice-gtk

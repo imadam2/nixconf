@@ -1,4 +1,4 @@
-{ inputs, self, ... }:
+{ self, ... }:
 {
   perSystem =
     { ... }:
@@ -62,8 +62,8 @@
               interfaces.eth4 = { };
               connections.eth1 = mkConnection "mayuri" "enp3s0";
               connections.eth2 = mkConnection "glados" "enp4s0";
-              connections.eth3 = mkConnection "hp-z620" "eth0";
-              connections.eth4 = mkConnection "capture-pc" "eth0";
+              connections.eth3 = mkConnection "beast" "eth0";
+              connections.eth4 = mkConnection "ritsuko" "eth0";
             };
 
             nodes.kurisu = {
@@ -76,20 +76,14 @@
               services.caddy.hidden = true;
             };
 
+            nodes.beast = {
+              interfaces.eth0.network = "lan";
+            };
+
+            nodes.ritsuko = {
+              interfaces.eth0.network = "lan";
+            };
             nodes.mayuri.interfaces.enp3s0.network = "lan";
-
-            nodes.hp-z620 = {
-              name = "HP Z620";
-              deviceType = "device";
-              hardware.info = "Windows 7 / XP";
-              interfaces.eth0.network = "lan";
-            };
-
-            nodes.capture-pc = {
-              name = "Capture PC";
-              deviceType = "device";
-              interfaces.eth0.network = "lan";
-            };
           }
         )
       ];

@@ -1,7 +1,7 @@
-{ inputs, ... }:
+{ ... }:
 {
   flake.nixosModules.services =
-    { pkgs, ... }:
+    { ... }:
     {
       services = {
         gvfs.enable = true;
@@ -10,7 +10,7 @@
         fstrim.enable = true;
         mullvad-vpn = {
           enable = true;
-          package = pkgs.mullvad-vpn;
+          gui.enable = true;
         };
       };
     };

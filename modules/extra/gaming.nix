@@ -41,12 +41,6 @@
   flake.homeModules.gaming =
     { pkgs, ... }:
     {
-      imports = [
-        inputs.catppuccin.homeModules.catppuccin
-      ];
-
-      catppuccin.mangohud.enable = true;
-
       programs = {
         lutris = {
           enable = true;
