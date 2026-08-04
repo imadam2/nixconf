@@ -25,15 +25,16 @@
       };
       hardware.steam-hardware.enable = true;
       environment.systemPackages = with pkgs; [
-        waywall
-        zulu
-        steamtinkerlaunch
-        winetricks
-        wineWow64Packages.staging
         gamemode
-        protonup-qt
         heroic
+        lunar-client
         protontricks
+        protonup-qt
+        steamtinkerlaunch
+        waywall
+        wineWow64Packages.staging
+        winetricks
+        zulu
       ];
     };
 
