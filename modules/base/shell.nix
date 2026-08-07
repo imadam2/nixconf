@@ -86,11 +86,11 @@
           settings = {
             "$schema" = "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json";
 
-            logo = {
-              source = "${config.my.homeDir}/nixconf/assets/pfp2.jpg";
-              type = "sixel";
-              width = 24;
-            };
+            #logo = {
+            #  source = "${config.my.homeDir}/nixconf/assets/pfp2.jpg";
+            #  type = "sixel";
+            #  width = 24;
+            #};
 
             display = {
               separator = "  ";
