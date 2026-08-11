@@ -13,9 +13,11 @@
           devices = {
             "glados" = {
               id = "HWHYRLZ-HHHUPIX-TJ7ZT32-GZRQRVV-2HMP6TH-VTHSV27-Y2GEQZB-2MOYTAF";
+              autoAcceptFolders = true;
             };
             "misato" = {
               id = "4TIZGOT-CPJ47IF-MDUELV4-5NOGKKY-YFPTSNQ-EDM54NG-LY2OT7T-KITLXAM";
+              autoAcceptFolders = true;
             };
           };
         };

@@ -35,9 +35,11 @@ in
           devices = {
             "mayuri" = {
               id = "LUWLTCC-GRPZW7H-OQWX6AU-ZCFFFO6-HWH6FTC-PIIZITI-YPT4MNQ-GCSLCAG";
+              autoAcceptFolders = true;
             };
             "misato" = {
               id = "4TIZGOT-CPJ47IF-MDUELV4-5NOGKKY-YFPTSNQ-EDM54NG-LY2OT7T-KITLXAM";
+              autoAcceptFolders = true;
             };
           };
           options = {
