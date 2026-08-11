@@ -1,12 +1,14 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    flake-parts.url = "github:hercules-ci/flake-parts";
-    flake-file.url = "github:vic/flake-file";
-    import-tree.url = "github:vic/import-tree";
-    hyprland.url = "github:hyprwm/Hyprland";
     catppuccin.url = "github:catppuccin/nix";
+    flake-file.url = "github:vic/flake-file";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    hyprland.url = "github:hyprwm/Hyprland";
+    import-tree.url = "github:vic/import-tree";
     sc0710.url = "github:Nakildias/sc0710";
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+
     nixvim = {
       url = "github:nix-community/nixvim";
     };
