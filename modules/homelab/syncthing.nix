@@ -26,12 +26,20 @@ in
       services.syncthing = {
         enable = true;
         user = hl.user;
-        dataDir = "${hl.storageDir}/Notes";
-        configDir = "${hl.appdataDir}/${service}";
+        dataDir = "${hl.appdataDir}/${service}";
+        configDir = "${hl.appdataDir}/${service}/config";
         guiAddress = "10.1.10.3:${toString port}";
         openDefaultPorts = true;
 
         settings = {
+          devices = {
+            "mayuri" = {
+              id = "LUWLTCC-GRPZW7H-OQWX6AU-ZCFFFO6-HWH6FTC-PIIZITI-YPT4MNQ-GCSLCAG";
+            };
+            "misato" = {
+              id = "4TIZGOT-CPJ47IF-MDUELV4-5NOGKKY-YFPTSNQ-EDM54NG-LY2OT7T-KITLXAM";
+            };
+          };
           options = {
             globalAnnounceEnabled = true;
             relaysEnabled = true;
@@ -42,10 +50,7 @@ in
             notes = {
               path = "${hl.storageDir}/Notes";
               label = "Notes";
-              versioning = {
-                type = "trashcan";
-                params.cleanoutDays = "30";
-              };
+              type = "sendreceive";
             };
           };
         };
