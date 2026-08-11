@@ -59,6 +59,12 @@
         openssh.enable = true;
       };
 
+      zramSwap = {
+        enable = true;
+        algorithm = "zstd";
+        memoryPercent = 200;
+      };
+
       #boot.kernelParams = [
       #  "i915.enable_guc=2"
       #];
@@ -72,6 +78,7 @@
 
       hardware = {
         cpu.intel.updateMicrocode = true;
+        enableAllFirmware = true;
         graphics = {
           enable = true;
           extraPackages = with pkgs; [
@@ -81,7 +88,6 @@
           ];
           enable32Bit = true;
         };
-        enableAllFirmware = true;
       };
 
       environment.sessionVariables = {
