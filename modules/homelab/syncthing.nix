@@ -49,7 +49,8 @@ in
           };
 
           folders = {
-            notes = {
+            "Notes" = {
+              id = "notes";
               path = "${hl.storageDir}/Notes";
               label = "Notes";
               devices = [

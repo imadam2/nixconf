@@ -12,7 +12,7 @@
         settings = {
           devices = {
             "glados" = {
-              id = "HWHYRLZ-HHHUPIX-TJ7ZT32-GZRQRVV-2HMP6TH-VTHSV27-Y2GEQZB-2MOYTAF";
+              id = "57MCCKJ-ZI7ZG33-5HXG7HM-4IVHZV6-JAKJNT6-PKZQUFQ-P7VYBWG-EMXOZQE";
               autoAcceptFolders = true;
             };
             "misato" = {
@@ -23,7 +23,9 @@
         };
         folders = {
           "Notes" = {
+            id = "notes";
             path = "${config.my.homeDir}/Documents/Notes";
+            label = "Notes";
             devices = [
               "glados"
               "misato"
