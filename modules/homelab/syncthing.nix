@@ -50,7 +50,10 @@ in
             notes = {
               path = "${hl.storageDir}/Notes";
               label = "Notes";
-              type = "sendreceive";
+              devices = [
+                "mayuri"
+                "misato"
+              ];
             };
           };
         };

@@ -22,7 +22,10 @@
         folders = {
           "Notes" = {
             path = "${config.my.homeDir}/Documents/Notes";
-            type = "sendreceive";
+            devices = [
+              "glados"
+              "misato"
+            ];
           };
         };
       };
