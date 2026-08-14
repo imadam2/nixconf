@@ -4,7 +4,12 @@
     { ... }:
     {
       topology.nixosConfigurations = {
-        inherit (self.nixosConfigurations) kurisu glados mayuri;
+        inherit (self.nixosConfigurations)
+          glados
+          kurisu
+          ritsuko
+          mayuri
+          ;
       };
 
       topology.modules = [

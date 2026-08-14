@@ -33,15 +33,5 @@ in
           '';
         };
       };
-
-      homelab.homepage.cfg.Network = [
-        {
-          "Uptime Kuma" = {
-            description = "Unifi Controller";
-            href = "https://${service}.${hl.domain}";
-            icon = "sh-${service}.svg";
-          };
-        }
-      ];
     };
 }

@@ -44,10 +44,6 @@
           type = lib.types.str;
           default = "acme";
         };
-        homepage.cfg = lib.mkOption {
-          type = lib.types.attrsOf (lib.types.listOf lib.types.attrs);
-          default = { };
-        };
         caddy.virtualHosts = lib.mkOption {
           type = lib.types.attrsOf lib.types.attrs;
           default = { };

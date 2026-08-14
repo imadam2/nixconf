@@ -1,65 +1,7 @@
-{ inputs, ... }:
+{ self, inputs, ... }:
 {
   flake.nixosModules.gladosDisko = {
     imports = [ inputs.disko.nixosModules.disko ];
-    disko.devices = {
-      disk = {
-        main = {
-          type = "disk";
-          device = "/dev/disk/by-id/nvme-Patriot_M.2_P300_256GB_P300IBBB23122503548";
-          content = {
-            type = "gpt";
-            partitions = {
-              boot = {
-                size = "512M";
-                type = "EF00"; # EFI System Partition
-                content = {
-                  type = "filesystem";
-                  format = "vfat";
-                  mountpoint = "/boot";
-                };
-              };
-              root = {
-                size = "100%";
-                content = {
-                  type = "btrfs";
-                  extraArgs = [ "-f" ];
-                  subvolumes = {
-                    "@" = {
-                      mountpoint = "/";
-                      mountOptions = [
-                        "noatime"
-                        "compress-force=zstd:2"
-                      ];
-                    };
-                    "@home" = {
-                      mountpoint = "/home";
-                      mountOptions = [
-                        "noatime"
-                        "compress-force=zstd:2"
-                      ];
-                    };
-                    "@nix" = {
-                      mountpoint = "/nix";
-                      mountOptions = [
-                        "noatime"
-                        "compress-force=zstd:2"
-                      ];
-                    };
-                    "@.snapshots" = {
-                      mountpoint = "/.snapshots";
-                      mountOptions = [
-                        "noatime"
-                        "compress-force=zstd:2"
-                      ];
-                    };
-                  };
-                };
-              };
-            };
-          };
-        };
-      };
-    };
+    disko.devices = self.lib.mkDisko "/dev/disk/by-id/nvme-Patriot_M.2_P300_256GB_P300IBBB23122503548";
   };
 }

@@ -30,15 +30,5 @@ in
           '';
         };
       };
-
-      homelab.homepage.cfg.Network = [
-        {
-          "Unifi" = {
-            description = "Unifi Controller";
-            href = "https://${service}.${hl.domain}";
-            icon = "sh-ubiquiti-${service}.svg";
-          };
-        }
-      ];
     };
 }

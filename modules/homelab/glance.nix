@@ -272,11 +272,6 @@ in
                           url = "https://zigbee2mqtt.${hl.domain}";
                           icon = "sh:zigbee";
                         }
-                        {
-                          title = "Homepage";
-                          url = "https://homepage.${hl.domain}";
-                          icon = "sh:homepage";
-                        }
                       ];
                     }
                     {
@@ -352,15 +347,5 @@ in
           '';
         };
       };
-
-      homelab.homepage.cfg.Network = [
-        {
-          "Glance" = {
-            description = "Homepage alternative 🤷🤷‍♂️";
-            href = "https://${service}.${hl.domain}";
-            icon = "sh-${service}.svg";
-          };
-        }
-      ];
     };
 }

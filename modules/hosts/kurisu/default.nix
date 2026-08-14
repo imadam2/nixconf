@@ -11,13 +11,11 @@
       caddy
       glance
       homeassistant
-      homepage
       unbound
       unifi
       uptime-kuma
       vaultwarden
 
-      homepageServices
       caddyVhosts
       shareUser
 

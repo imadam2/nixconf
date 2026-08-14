@@ -36,15 +36,5 @@ in
           '';
         };
       };
-
-      homelab.homepage.cfg.Cloud = [
-        {
-          "Vaultwarden" = {
-            description = "Password Manager";
-            href = "https://${service}.${hl.domain}";
-            icon = "sh-${service}.svg";
-          };
-        }
-      ];
     };
 }

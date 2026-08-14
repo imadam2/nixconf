@@ -37,12 +37,12 @@ in
           };
           nginx.listen = [
             {
-              addr = "10.1.10.3";
+              addr = config.homelab.gladosIP;
               port = 4343;
               ssl = true;
             }
             {
-              addr = "10.1.10.3";
+              addr = config.homelab.gladosIP;
               port = 1488;
             }
           ];

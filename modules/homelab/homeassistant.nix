@@ -37,19 +37,9 @@ in
         "${service}.${hl.domain}" = {
           useACMEHost = "${hl.domain}";
           extraConfig = ''
-            reverse_proxy "localhost:"${toString port}""
+            reverse_proxy "localhost:${toString port}"
           '';
         };
       };
-
-      homelab.homepage.cfg.Cloud = [
-        {
-          "Home Assistant" = {
-            description = "Home Automation";
-            href = "https://${service}.${hl.domain}";
-            icon = "sh-${serviceAlt}.svg";
-          };
-        }
-      ];
     };
 }

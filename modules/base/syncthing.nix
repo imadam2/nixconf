@@ -20,16 +20,16 @@
               autoAcceptFolders = true;
             };
           };
-        };
-        folders = {
-          "Notes" = {
-            id = "notes";
-            path = "${config.my.homeDir}/Documents/Notes";
-            label = "Notes";
-            devices = [
-              "glados"
-              "misato"
-            ];
+          folders = {
+            "Notes" = {
+              id = "notes";
+              path = "${config.my.homeDir}/Documents/Notes";
+              label = "Notes";
+              devices = [
+                "glados"
+                "misato"
+              ];
+            };
           };
         };
       };

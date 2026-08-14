@@ -124,15 +124,5 @@ in
           '';
         };
       };
-
-      homelab.homepage.cfg.Network = [
-        {
-          "AdGuard Home" = {
-            description = "DNS Ad Blocker";
-            href = "https://${service}.${hl.domain}";
-            icon = "sh-${serviceAlt}.svg";
-          };
-        }
-      ];
     };
 }

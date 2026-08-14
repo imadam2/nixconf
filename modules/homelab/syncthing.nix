@@ -28,7 +28,7 @@ in
         user = hl.user;
         dataDir = "${hl.appdataDir}/${service}";
         configDir = "${hl.appdataDir}/${service}/config";
-        guiAddress = "10.1.10.3:${toString port}";
+        guiAddress = "${config.homelab.gladosIP}:${toString port}";
         openDefaultPorts = true;
 
         settings = {

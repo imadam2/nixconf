@@ -1,7 +1,7 @@
 { inputs, ... }:
 {
   flake.homeModules.noctalia =
-    { config, ... }:
+    { config, lib, ... }:
     let
       wallpaperDir = "${config.home.homeDirectory}/nixconf/assets/wallpapers";
     in
@@ -18,7 +18,7 @@
           };
           shell = {
             avatar_path = "${config.home.homeDirectory}/nixconf/assets/pfp.jpg";
-            font_family = "JetBrainsMono NF";
+            font_family = lib.mkForce "JetBrainsMono NF";
           };
           ui = {
             fontDefault = "JetBrainsMono Nerd Font";

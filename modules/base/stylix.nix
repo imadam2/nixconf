@@ -9,7 +9,6 @@
 
       stylix = {
         enable = true;
-        image = config.my.wallpaper;
         base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
         polarity = "dark";
         opacity.terminal = 0.9;
