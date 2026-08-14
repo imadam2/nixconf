@@ -32,7 +32,10 @@
       };
 
       nixpkgs.config.allowUnfree = true;
-      programs.nix-index-database.comma.enable = true;
+      programs = {
+        nix-index-database.comma.enable = true;
+        fish.enable = true;
+      };
       nix = {
         gc = {
           automatic = true;
@@ -114,15 +117,15 @@
           enable = true;
           settings.Resolve = {
             domains = [
-              "elpsy.moe"
-              "~elpsy.moe"
+              "${config.my.domain}"
+              "~${config.my.domain}"
             ];
           };
         };
       };
 
       networking = {
-        domain = "elpsy.moe";
+        domain = "${config.my.domain}";
         networkmanager = {
           enable = true;
           dns = "systemd-resolved";

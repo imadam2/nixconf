@@ -2,6 +2,7 @@
 {
   options.my = with lib; {
     username = mkOption { type = types.str; };
+    domain = mkOption { type = types.str; };
     gitEmail = mkOption { type = types.str; };
     gitName = mkOption { type = types.str; };
     timezone = mkOption { type = types.str; };
@@ -19,6 +20,7 @@
 
   config.my = {
     username = "ye";
+    domain = "elpsy.moe";
     gitEmail = "248238336+imadam2@users.noreply.github.com";
     gitName = "imadam2";
     homeDir = "/home/ye";
