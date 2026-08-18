@@ -43,6 +43,24 @@
       imports = [
         inputs.mangowm.hmModules.mango
       ];
+      programs = {
+        foot = {
+          enable = true;
+          settings = {
+            key-bindings = {
+              scrollback-down-page = "Mod1+j";
+              scrollback-up-page = "Mod1+k";
+              clipboard-copy = "Mod1+c";
+              clipboard-paste = "Mod1+v";
+              font-decrease = "Mod1+Shift+j";
+              font-increase = "Mod1+Shift+k";
+              font-reset = "Mod1+Shift+l";
+              search-start = "Mod1+slash";
+            };
+            main.pad = "0x0";
+          };
+        };
+      };
       wayland.windowManager.mango = {
         enable = true;
         systemd.enable = true;
@@ -50,7 +68,6 @@
           noctalia &
         '';
         settings = {
-          mouse_accel_profile = "flat";
           repeat_rate = 50;
           repeat_delay = 300;
           blur = 1;
@@ -102,10 +119,10 @@
             "SUPER,K,focusdir,right"
             "SUPER,L,resizewin,+100,0"
 
-            "SUPER+SHIFT,H,exchance_client,left"
-            "SUPER+SHIFT,J,exchance_client,down"
-            "SUPER+SHIFT,K,exchance_client,up"
-            "SUPER+SHIFT,L,exchance_client,right"
+            "SUPER+SHIFT,H,exchange_client,left"
+            "SUPER+SHIFT,J,exchange_client,down"
+            "SUPER+SHIFT,K,exchange_client,up"
+            "SUPER+SHIFT,L,exchange_client,right"
 
             "SUPER+CTRL,J,focusdir,down"
             "SUPER+CTRL,k,focusdir,up"
@@ -114,19 +131,20 @@
 
             "SUPER,W,spawn,zen-beta"
             "SUPER,E,spawn,noctalia msg panel-toggle launcher /emo"
-            "SUPER,R,reload_config"
+            "SUPER+SHIFT,R,reload_config"
+            "SUPER,R,spawn,foot -e yazi"
             "SUPER,A,spawn,noctalia msg bar-toggle"
             "SUPER,D,spawn,noctalia msg panel-toggle launcher"
             "SUPER,V,spawn,noctalia msg panel-toggle clipboard"
             "SUPER,M,spawn,foot -e jellyfin-tui"
             "SUPER,Return,spawn,foot"
 
-            "NONE,Print,spawn,${screenshot}/bin/screenshot area"
-            "SUPER+Print,spawn,${screenshot}/bin/screenshot window"
-            "NONE+SHIFT+Print,spawn,${screenshot}/bin/screenshot display"
-            "CTRL+NONE,Print,spawn,${screenshot}/bin/screenshot area-s"
-            "CTRL+SUPER+Print,spawn,${screenshot}/bin/screenshot window-s"
-            "CTRL+NONE+SHIFT+Print,spawn,${screenshot}/bin/screenshot display-s"
+            #"NONE,Print,spawn,${screenshot}/bin/screenshot area"
+            #"SUPER,Print,spawn,${screenshot}/bin/screenshot window"
+            #"SHIFT,Print,spawn,${screenshot}/bin/screenshot display"
+            #"CTRL,Print,spawn,${screenshot}/bin/screenshot area-s"
+            #"CTRL,SUPER,Print,spawn,${screenshot}/bin/screenshot window-s"
+            #"CTRL,SHIFT,Print,spawn,${screenshot}/bin/screenshot display-s"
           ];
         };
       };
