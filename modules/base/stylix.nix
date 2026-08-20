@@ -11,13 +11,13 @@
         enable = true;
         base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
         polarity = "dark";
-        opacity.terminal = 0.9;
+        opacity.terminal = 1.0;
         #### Commented because it pulls in inkscape, which compiles from source for whatever reason
         fonts = {
-          sizes.terminal = 11.25;
+          sizes.terminal = 11;
           monospace = {
-            package = pkgs.nerd-fonts.iosevka;
-            name = "Iosevka Nerd Font";
+            package = pkgs.nerd-fonts.iosevka-term;
+            name = "IosevkaTerm Nerd Font Mono SemiBold";
           };
 
           serif = {

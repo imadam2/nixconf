@@ -18,11 +18,11 @@
           };
           shell = {
             avatar_path = "${config.home.homeDirectory}/nixconf/assets/pfp.jpg";
-            font_family = lib.mkForce "JetBrainsMono NF";
+            font_family = lib.mkForce "IosevkaTerm Nerd Font SemiBold";
           };
           ui = {
-            fontDefault = "JetBrainsMono Nerd Font";
-            fontFixed = "JetBrainsMono Nerd Font";
+            fontDefault = "IosevkaTerm Nerd Font SemiBold";
+            fontFixed = "IosevkaTerm Nerd Font SemiBold";
           };
           appLauncher = {
             enableClipboardHistory = true;
@@ -35,10 +35,13 @@
               input_device = "/dev/input/event0";
             };
             workspaces = {
+              anchor = true;
               empty_color = "primary";
               focused_color = "hover";
               occupied_color = "primary";
+              max_label_chars = 1;
               minimal = true;
+              style = "minimal";
             };
           };
           nightLight = {

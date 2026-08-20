@@ -18,14 +18,14 @@
           noto-fonts
           noto-fonts-cjk-sans
           noto-fonts-color-emoji
-          nerd-fonts.jetbrains-mono
+          nerd-fonts.iosevka-term
           dejavu_fonts
           liberation_ttf
         ];
         fontconfig = {
           enable = true;
           defaultFonts = {
-            monospace = [ "JetBrainsMono Nerd Font" ];
+            monospace = [ "IosevkaTerm Nerd Font SemiBold" ];
             sansSerif = [ "Noto Sans" ];
             serif = [ "Noto Serif" ];
           };
@@ -251,9 +251,11 @@
 
       services.xdg-desktop-portal-termfilepickers =
         let
-          termfilepickers = inputs.xdp-termfilepickers.packages.${pkgs.system}.default.override {
-            replaceYazi = false;
-          };
+          termfilepickers =
+            inputs.xdp-termfilepickers.packages.${pkgs.stdenv.hostPlatform.system}.default.override
+              {
+                replaceYazi = false;
+              };
         in
         {
           enable = true;
@@ -294,6 +296,9 @@
         };
         kitty = {
           enable = true;
+          settings = {
+            "confirm_os_window_close" = "0";
+          };
           keybindings = {
             "alt+c" = "copy_to_clipboard";
             "alt+v" = "paste_to_clipboard";
@@ -392,17 +397,17 @@
           },
           general = {
             layout = "dwindle";
-            gaps_in   = 10,
-            gaps_out  = 15,
-            border_size = 3,
-            ["col.active_border"]   = "rgb(${config.lib.stylix.colors.base0D})",
+            gaps_in   = 3,
+            gaps_out  = 5,
+            border_size = 4,
+            ["col.active_border"]   = "rgb(${config.lib.stylix.colors.base09})",
             ["col.inactive_border"] = "rgb(${config.lib.stylix.colors.base01})",
           },
           animations = {
             enabled = false,
           },
           decoration = {
-            rounding = 3,
+            rounding = 0,
             rounding_power = 2,
             blur = {
               enabled = true,
