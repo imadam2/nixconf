@@ -4,8 +4,9 @@
 }:
 {
   flake.nixosModules.desktop =
-    { pkgs, ... }:
+    { lib, pkgs, ... }:
     {
+
       hardware.graphics.enable = true;
       stylix.cursor = {
         package = pkgs.catppuccin-cursors.mochaBlue;
@@ -46,7 +47,12 @@
     };
 
   flake.homeModules.desktop =
-    { config, pkgs, ... }:
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     let
       screenshot = pkgs.writeShellApplication {
         name = "screenshot";
@@ -241,6 +247,21 @@
       };
     in
     {
+      imports = [ inputs.xdp-termfilepickers.homeManagerModules.default ];
+
+      services.xdg-desktop-portal-termfilepickers =
+        let
+          termfilepickers = inputs.xdp-termfilepickers.packages.${pkgs.system}.default.override {
+            replaceYazi = false;
+          };
+        in
+        {
+          enable = true;
+          package = termfilepickers;
+          config = {
+            terminal_command = [ (lib.getExe pkgs.kitty) ];
+          };
+        };
       home = {
         pointerCursor.enable = true;
         packages = [
@@ -269,6 +290,19 @@
               search-start = "Mod1+slash";
             };
             main.pad = "0x0";
+          };
+        };
+        kitty = {
+          enable = true;
+          keybindings = {
+            "alt+c" = "copy_to_clipboard";
+            "alt+v" = "paste_to_clipboard";
+            "alt+j" = "scroll_page_down";
+            "alt+k" = "scroll_page_up";
+            "alt+shift+j" = "change_font_size all +2.0";
+            "alt+shift+k" = "change_font_size all -2.0";
+            "alt+shift+l" = "change_font_size all 0";
+            "alt+/" = "search_scrollback";
           };
         };
       };
@@ -400,7 +434,7 @@
           hl.exec_cmd("noctalia")
 
           -- Workspace 1: Terminal
-          hl.exec_cmd("foot",          { workspace = "1" })
+          hl.exec_cmd("kitty",          { workspace = "1" })
 
           -- Workspace 2: Browser
           hl.exec_cmd("zen-beta",      { workspace = "2" })
@@ -476,16 +510,16 @@
         hl.bind(mainMod .. " + CTRL + K",      hl.dsp.focus({ direction = "up" }))
 
         -- App launchers
-        hl.bind(mainMod .. " + Return",      hl.dsp.exec_cmd("foot"))
+        hl.bind(mainMod .. " + Return",      hl.dsp.exec_cmd("kitty"))
         hl.bind(mainMod .. " + Backspace",   hl.dsp.exec_cmd(ipc .. " session lock"))
         hl.bind(mainMod .. " + W",           hl.dsp.exec_cmd("zen-beta"))
         hl.bind(mainMod .. " + E",           hl.dsp.exec_cmd(ipc .. " panel-toggle launcher /emo"))
-        hl.bind(mainMod .. " + R",           hl.dsp.exec_cmd("foot -e yazi"))
+        hl.bind(mainMod .. " + R",           hl.dsp.exec_cmd("kitty -e yazi"))
         hl.bind(mainMod .. " + SHIFT + R",   hl.dsp.exec_cmd("thunar"))
         hl.bind(mainMod .. " + A",           hl.dsp.exec_cmd(ipc .. " bar-toggle"))
         hl.bind(mainMod .. " + D",           hl.dsp.exec_cmd(ipc .. " panel-toggle launcher"))
         hl.bind(mainMod .. " + V",           hl.dsp.exec_cmd(ipc .. " panel-toggle clipboard"))
-        hl.bind(mainMod .. " + M",           hl.dsp.exec_cmd("foot -e jellyfin-tui"))
+        hl.bind(mainMod .. " + M",           hl.dsp.exec_cmd("kitty -e jellyfin-tui"))
 
         -- Monitor mode toggle
         hl.bind(mainMod .. " + SHIFT + M",   hl.dsp.exec_cmd("${toggle-monitor-mode}/bin/toggle-monitor-mode"))

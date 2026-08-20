@@ -8,6 +8,7 @@
     import-tree.url = "github:vic/import-tree";
     sc0710.url = "github:Nakildias/sc0710";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+    xdp-termfilepickers.url = "github:Guekka/xdg-desktop-portal-termfilepickers";
 
     nixvim = {
       url = "github:nix-community/nixvim";

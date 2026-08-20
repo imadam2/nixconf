@@ -16,8 +16,8 @@
         fonts = {
           sizes.terminal = 11.25;
           monospace = {
-            package = pkgs.nerd-fonts.jetbrains-mono;
-            name = "JetBrainsMono Nerd Font";
+            package = pkgs.nerd-fonts.iosevka;
+            name = "Iosevka Nerd Font";
           };
 
           serif = {

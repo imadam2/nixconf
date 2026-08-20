@@ -15,7 +15,7 @@
     };
 
   flake.homeModules.shell =
-    { ... }:
+    { lib, pkgs, ... }:
     {
       programs = {
         bat.enable = true;
@@ -39,6 +39,7 @@
         };
 
         yazi = {
+          package = (pkgs.yazi.override { _7zz = pkgs._7zz-rar; });
           enable = true;
           enableFishIntegration = true;
           shellWrapperName = "y";
@@ -60,6 +61,34 @@
               sort_sensitive = false;
             };
           };
+          keymap.mgr.prepend_keymap = [
+            # Add your other keymaps here
+          ]
+          ++
+            lib.mapAttrsToList
+              (
+                dir: key:
+                let
+                  keys =
+                    if lib.isString key then
+                      [
+                        "b"
+                        key
+                      ]
+                    else
+                      [ "b" ] ++ key;
+                in
+                {
+                  on = keys;
+                  run = "cd ${dir}";
+                  desc = "Go to ${dir}";
+                }
+              )
+              {
+                "/media/NAS/" = "n";
+                "~/Downloads/" = [ "d" ];
+                "~/Documents/" = [ "D" ];
+              };
         };
 
         cava = {
