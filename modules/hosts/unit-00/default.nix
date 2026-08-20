@@ -35,6 +35,5 @@
     { lib, ... }:
     {
       networking.hostName = "unit-00";
-      stylix.fonts.sizes.terminal = lib.mkForce 8;
     };
 }
