@@ -14,10 +14,10 @@
         opacity.terminal = 1.0;
         #### Commented because it pulls in inkscape, which compiles from source for whatever reason
         fonts = {
-          sizes.terminal = 11;
+          sizes.terminal = 11.75;
           monospace = {
             package = pkgs.nerd-fonts.iosevka-term;
-            name = "IosevkaTerm Nerd Font Mono SemiBold";
+            name = "IosevkaTerm NFM Medium";
           };
 
           serif = {
