@@ -1,4 +1,4 @@
-{ config, ... }:
+{ ... }:
 {
   flake.nixosModules.shell =
     { pkgs, ... }:
@@ -9,13 +9,20 @@
         btop
         eza
         fd
+        fuse
+        glib
+        gvfs
         jq
         ripgrep
       ];
     };
 
   flake.homeModules.shell =
-    { lib, pkgs, ... }:
+    {
+      lib,
+      pkgs,
+      ...
+    }:
     {
       programs = {
         bat.enable = true;
@@ -505,7 +512,7 @@
             "nsp" = "nix-shell -p";
             "scg" = "sudo nix-collect-garbage -d";
             "ucg" = "nix-collect-garbage -d";
-            "cfg" = "z /home/${config.my.username}/nixconf/";
+            "cfg" = "z ~/nixconf/";
             "rn" = "nh os switch ~/nixconf";
           };
         };

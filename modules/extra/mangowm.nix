@@ -11,7 +11,7 @@
       };
       xdg.portal = {
         enable = true;
-        wlr.enable = true; # Enables xdg-desktop-portal-wlr
+        wlr.enable = true;
         extraPortals = [
           pkgs.xdg-desktop-portal-wlr
           pkgs.xdg-desktop-portal-gtk
@@ -28,7 +28,7 @@
     };
 
   flake.homeModules.mangowm =
-    { pkgs, ... }:
+    { ... }:
     {
       imports = [
         inputs.mangowm.hmModules.mango
@@ -44,11 +44,19 @@
           repeat_delay = 300;
           blur = 1;
           blur_optimized = 1;
-          border_radius = 3;
+          gappih = 0;
+          gappiv = 0;
+          gappoh = 0;
+          gappov = 0;
           blur_params = {
             radius = 5;
             num_passes = 2;
           };
+
+          mousebind = [
+            "SUPER,btn_left,moveresize,curmove"
+            "SUPER,btn_right,moveresize,curresize"
+          ];
 
           bind = [
             "NONE,XF86AudioMute,spawn,noctalia msg volume-mute"

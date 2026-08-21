@@ -13,6 +13,7 @@
         shell
         stylix
         syncthing-client
+        userConfig
       ];
     };
 

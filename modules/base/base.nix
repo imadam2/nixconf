@@ -12,7 +12,6 @@
         inputs.sops-nix.nixosModules.sops
         inputs.nix-index-database.nixosModules.default
         inputs.nix-topology.nixosModules.default
-        ./userconfig.nix
       ];
 
       users.users = {

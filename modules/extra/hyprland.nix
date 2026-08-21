@@ -4,7 +4,7 @@
 }:
 {
   flake.nixosModules.hyprland =
-    { lib, pkgs, ... }:
+    { pkgs, ... }:
     {
       programs.hyprland = {
         enable = true;
@@ -17,7 +17,6 @@
   flake.homeModules.hyprland =
     {
       config,
-      lib,
       pkgs,
       ...
     }:

@@ -1,7 +1,7 @@
-{ config, ... }:
+{ ... }:
 {
   flake.nixosModules.git =
-    { ... }:
+    { config, ... }:
     {
       programs.git = {
         enable = true;

@@ -4,7 +4,7 @@
 }:
 {
   flake.nixosModules.desktop =
-    { lib, pkgs, ... }:
+    { pkgs, ... }:
     {
       hardware.graphics.enable = true;
 
@@ -33,7 +33,9 @@
         };
       };
 
-      xdg.portal.enable = true;
+      xdg.portal = {
+        enable = true;
+      };
 
       environment.etc."libinput/local-overrides.quirks".text = pkgs.lib.mkForce ''
         [Debounce]
@@ -234,7 +236,9 @@
           };
         };
 
-      xdg.portal.enable = true;
+      xdg.portal = {
+        enable = true;
+      };
 
       home = {
         pointerCursor.enable = true;

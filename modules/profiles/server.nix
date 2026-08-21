@@ -8,6 +8,7 @@
         shell
         git
         homelabConfig
+        userConfig
       ];
 
       services.openssh.enable = true;
