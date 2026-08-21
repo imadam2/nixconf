@@ -6,6 +6,14 @@
   flake.nixosModules.desktop =
     { pkgs, ... }:
     {
+      services = {
+        displayManager = {
+          ly = {
+            enable = true;
+          };
+        };
+      };
+
       hardware.graphics.enable = true;
 
       stylix.cursor = {

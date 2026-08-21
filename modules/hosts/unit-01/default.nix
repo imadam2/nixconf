@@ -2,6 +2,7 @@
 {
   flake.nixosConfigurations.unit-01 = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
+      mangowm
       profileDesktop
       profileLaptop
       unit-01Configuration
@@ -10,7 +11,10 @@
       inputs.disko.nixosModules.disko
       homeManager
       {
-        home-manager.users.ye.imports = [ self.homeModules.profileDesktop ];
+        home-manager.users.ye.imports = with self.homeModules; [
+          mangowm
+          profileDesktop
+        ];
       }
     ];
   };
