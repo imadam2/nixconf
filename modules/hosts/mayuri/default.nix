@@ -6,6 +6,7 @@
 {
   flake.nixosConfigurations.mayuri = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
+      hyprland
       profileDesktop
       gaming
       virtualization
@@ -16,6 +17,7 @@
       inputs.nix-topology.nixosModules.default
       {
         home-manager.users.ye.imports = with self.homeModules; [
+          hyprland
           discord
           profileDesktop
           gaming

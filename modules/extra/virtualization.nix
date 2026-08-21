@@ -1,7 +1,7 @@
-{ config, ... }:
+{ ... }:
 {
   flake.nixosModules.virtualization =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
     {
       virtualisation = {
         libvirtd = {
