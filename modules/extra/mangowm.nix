@@ -1,7 +1,7 @@
 { inputs, ... }:
 {
   flake.nixosModules.mangowm =
-    { ... }:
+    { pkgs, ... }:
     {
       imports = [
         inputs.mangowm.nixosModules.mango
@@ -9,58 +9,30 @@
       programs.mango = {
         enable = true;
       };
+      xdg.portal = {
+        enable = true;
+        wlr.enable = true; # Enables xdg-desktop-portal-wlr
+        extraPortals = [
+          pkgs.xdg-desktop-portal-wlr
+          pkgs.xdg-desktop-portal-gtk
+        ];
+        config = {
+          common = {
+            default = [
+              "wlr"
+              "gtk"
+            ];
+          };
+        };
+      };
     };
 
   flake.homeModules.mangowm =
     { pkgs, ... }:
-    let
-      screenshot = pkgs.writeShellApplication {
-        name = "screenshot";
-        runtimeInputs = with pkgs; [
-          grim
-          slurp
-          satty
-          wl-clipboard
-          jq
-        ];
-        text = ''
-          NAS=/media/NAS/storage/Pictures/Screenshots/$(date +%Y)/$(date +%m)
-          mkdir -p "$NAS" 2>/dev/null && DIR=$NAS || DIR=$HOME/Pictures/Screenshots
-          FILE="$DIR/$(date +%Y%m%d_%H%M%S).png"
-
-          case "$1" in
-            area)       grim -g "$(slurp)" - | tee "$FILE" | wl-copy ;;
-            display)    grim -g "$(hyprctl monitors -j | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"')" - | tee "$FILE" | wl-copy ;;
-            window)     grim -g "$(hyprctl activewindow -j | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"')" - | tee "$FILE" | wl-copy ;;
-            area-s)     grim -g "$(slurp)" - | satty --filename - --output-filename "$FILE" --copy-command wl-copy ;;
-            display-s)  grim -g "$(hyprctl monitors -j | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"')" - | satty --filename - --output-filename "$FILE" --copy-command wl-copy ;;
-            window-s)   grim -g "$(hyprctl activewindow -j | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"')" - | satty --filename - --output-filename "$FILE" --copy-command wl-copy ;;
-          esac
-        '';
-      };
-    in
     {
       imports = [
         inputs.mangowm.hmModules.mango
       ];
-      programs = {
-        foot = {
-          enable = true;
-          settings = {
-            key-bindings = {
-              scrollback-down-page = "Mod1+j";
-              scrollback-up-page = "Mod1+k";
-              clipboard-copy = "Mod1+c";
-              clipboard-paste = "Mod1+v";
-              font-decrease = "Mod1+Shift+j";
-              font-increase = "Mod1+Shift+k";
-              font-reset = "Mod1+Shift+l";
-              search-start = "Mod1+slash";
-            };
-            main.pad = "0x0";
-          };
-        };
-      };
       wayland.windowManager.mango = {
         enable = true;
         systemd.enable = true;
@@ -132,12 +104,12 @@
             "SUPER,W,spawn,zen-beta"
             "SUPER,E,spawn,noctalia msg panel-toggle launcher /emo"
             "SUPER+SHIFT,R,reload_config"
-            "SUPER,R,spawn,foot -e yazi"
+            "SUPER,R,spawn,kitty -e yazi"
             "SUPER,A,spawn,noctalia msg bar-toggle"
             "SUPER,D,spawn,noctalia msg panel-toggle launcher"
             "SUPER,V,spawn,noctalia msg panel-toggle clipboard"
-            "SUPER,M,spawn,foot -e jellyfin-tui"
-            "SUPER,Return,spawn,foot"
+            "SUPER,M,spawn,kitty -e jellyfin-tui"
+            "SUPER,Return,spawn,kitty"
 
             #"NONE,Print,spawn,${screenshot}/bin/screenshot area"
             #"SUPER,Print,spawn,${screenshot}/bin/screenshot window"

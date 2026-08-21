@@ -1,38 +1,27 @@
 { self, inputs, ... }:
 {
   flake.nixosConfigurations.unit-00 = inputs.nixpkgs.lib.nixosSystem {
+
     modules = with self.nixosModules; [
       mangowm
-      audio
-      base
-      git
-      nfs
-      services
-      shell
-      stylix
-      syncthing-client
+      profileDesktop
       profileLaptop
-      unit-00Configuration
-      unit-00Hardware
-      unit-00Disko
+      unit-01Configuration
+      unit-01Hardware
+      unit-01Disko
       inputs.disko.nixosModules.disko
       homeManager
       {
         home-manager.users.ye.imports = with self.homeModules; [
           mangowm
-          browser
-          media
-          neovim
-          noctalia
-          packages
-          shell
+          profileDesktop
         ];
       }
     ];
   };
 
   flake.nixosModules.unit-00Configuration =
-    { lib, ... }:
+    { ... }:
     {
       networking.hostName = "unit-00";
     };
