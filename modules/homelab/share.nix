@@ -1,7 +1,7 @@
 { ... }:
 {
   flake.nixosModules.share =
-    { config, pkgs, ... }:
+    { config, ... }:
     let
       hl = config.homelab;
     in
@@ -56,6 +56,14 @@
               writeable = "true";
               browseable = "yes";
               "read only" = "no";
+              "guest ok" = "yes";
+              "guest account" = "ye";
+            };
+            media = {
+              path = "${hl.mediaDir}";
+              writeable = "true";
+              browseable = "yes";
+              "read only" = "yes";
               "guest ok" = "yes";
               "guest account" = "ye";
             };
