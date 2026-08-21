@@ -11,7 +11,24 @@
       };
       xdg.portal = {
         enable = true;
-        wlr.enable = true;
+        wlr = {
+          enable = true;
+          settings = {
+            screencast = {
+              chooser_type = "dmenu";
+              chooser_cmd = "/etc/profiles/per-user/ye/bin/noctalia dmenu -p 'Select Screen'";
+              max_fps = "60";
+              force_mod_linear = true;
+            };
+          };
+        };
+        config = {
+          mango = {
+            default = [ "gtk" ];
+            "org.freedesktop.impl.portal.Screenshot" = [ "wlr" ];
+            "org.freedesktop.impl.portal.ScreenCast" = [ "wlr" ];
+          };
+        };
         extraPortals = [
           pkgs.xdg-desktop-portal-wlr
           pkgs.xdg-desktop-portal-gtk
@@ -33,11 +50,15 @@
       imports = [
         inputs.mangowm.hmModules.mango
       ];
+
       wayland.windowManager.mango = {
         enable = true;
         systemd.enable = true;
         autostart_sh = ''
           noctalia &
+          prismlauncher &
+          steam &
+          zen-beta &
         '';
         settings = {
           repeat_rate = 50;
@@ -48,6 +69,14 @@
           gappiv = 0;
           gappoh = 0;
           gappov = 0;
+          xkb_rules_layout = "gb";
+          xkb_rules_options = "ctrl:nocaps";
+          mouse_accel_profile = 1;
+
+          monitorrule = [
+            "name:DP-1,width:3840,height:2160,refresh:160,x:0,y:1440"
+            "name:DP-2,width:3440,height:1440,refresh:165,x:200,y:0"
+          ];
           blur_params = {
             radius = 5;
             num_passes = 2;
@@ -56,6 +85,32 @@
           mousebind = [
             "SUPER,btn_left,moveresize,curmove"
             "SUPER,btn_right,moveresize,curresize"
+          ];
+
+          tagrule = [
+            "id:*,monitor_name:DP-1,layout_name:dwindle"
+            "id:*,monitor_name:DP-2,layout_name:tile"
+          ];
+
+          windowrule = [
+            "title:mpv,isfloating:1"
+            "appid:imv,isfloating:1"
+            "title:waywall,isfloating:1"
+            "title:.*[Mm]inecraft.*,isfloating:1"
+            "title:.*[Ll]unar.*,isfloating:1"
+            "appid:org-prismlauncher-EntryPoint,isfloating:1"
+            "title:Open File,isfloating:1"
+            "title:Select a File,isfloating:1"
+            "title:Choose Wallpaper,isfloating:1"
+            "title:Save As,isfloating:1"
+            "title:Library,isfloating:1"
+            "title:File Upload,isfloating:1"
+
+            "appid:vesktop,tags:1"
+            "appid:zen-beta,tags:2"
+            "appid:steam,tags:3"
+            "appid:org.prismlauncher.PrismLauncher,tags:3"
+            "appid:lunarclient,tags:3"
           ];
 
           bind = [
@@ -111,7 +166,8 @@
 
             "SUPER,W,spawn,zen-beta"
             "SUPER,E,spawn,noctalia msg panel-toggle launcher /emo"
-            "SUPER+SHIFT,R,reload_config"
+            "SUPER+SHIFT,R,spawn,thunar"
+            "SUPER+SHIFT,E,reload_config"
             "SUPER,R,spawn,kitty -e yazi"
             "SUPER,A,spawn,noctalia msg bar-toggle"
             "SUPER,D,spawn,noctalia msg panel-toggle launcher"
@@ -119,12 +175,12 @@
             "SUPER,M,spawn,kitty -e jellyfin-tui"
             "SUPER,Return,spawn,kitty"
 
-            #"NONE,Print,spawn,${screenshot}/bin/screenshot area"
-            #"SUPER,Print,spawn,${screenshot}/bin/screenshot window"
-            #"SHIFT,Print,spawn,${screenshot}/bin/screenshot display"
-            #"CTRL,Print,spawn,${screenshot}/bin/screenshot area-s"
-            #"CTRL,SUPER,Print,spawn,${screenshot}/bin/screenshot window-s"
-            #"CTRL,SHIFT,Print,spawn,${screenshot}/bin/screenshot display-s"
+            "NONE,Print,spawn,screenshot area"
+            "SUPER,Print,spawn,screenshot window"
+            "SHIFT,Print,spawn,screenshot display"
+            "CTRL,Print,spawn,screenshot area-s"
+            "CTRL+SUPER,Print,spawn,screenshot window-s"
+            "CTRL+SHIFT,Print,spawn,screenshot display-s"
           ];
         };
       };

@@ -2,6 +2,7 @@
 {
   flake.nixosConfigurations.daru = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
+      mangowm
       profileDesktop
       profileLaptop
       daruConfiguration
@@ -9,8 +10,8 @@
       homeManager
       {
         home-manager.users.ye.imports = with self.homeModules; [
+          mangowm
           profileDesktop
-          #mangowm
         ];
       }
     ];

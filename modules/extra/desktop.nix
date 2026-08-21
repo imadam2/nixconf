@@ -54,7 +54,6 @@
 
   flake.homeModules.desktop =
     {
-      config,
       lib,
       pkgs,
       ...
@@ -65,6 +64,7 @@
         runtimeInputs = with pkgs; [
           grim
           hyprland
+          mango
           jq
           libnotify
           satty
@@ -72,28 +72,76 @@
           wl-clipboard
         ];
         text = ''
+          if [ $# -lt 1 ]; then
+            echo "Usage: screenshot {area|display|window|area-s|display-s|window-s}" >&2
+            exit 1
+          fi
+
           NAS=/media/NAS/storage/Pictures/Screenshots/$(date +%Y)/$(date +%m)
           mkdir -p "$NAS" 2>/dev/null && DIR=$NAS || DIR=$HOME/Pictures/Screenshots
           FILE="$DIR/$(date +%Y%m%d_%H%M%S).png"
 
+          if [ -n "''${HYPRLAND_INSTANCE_SIGNATURE:-}" ]; then
+            WM=hypr
+          elif [ -n "''${MANGO_INSTANCE_SIGNATURE:-}" ]; then
+            WM=mango
+          else
+            echo "screenshot: could not detect Hyprland or MangoWM" >&2
+            exit 1
+          fi
+
+          focused_output() {
+            case "$WM" in
+              hypr)  hyprctl monitors -j | jq -r '.[] | select(.focused) | .name' ;;
+              mango) mmsg get all-monitors | jq -r '.monitors[] | select(.active) | .name' ;;
+            esac
+          }
+
+          focused_window_geometry() {
+            case "$WM" in
+              hypr)
+                hyprctl activewindow -j | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"'
+                ;;
+              mango)
+                mmsg get focusing-client | jq -r '"\(.x),\(.y) \(.width)x\(.height)"'
+                ;;
+            esac
+          }
+
           case "$1" in
-            area)      grim -g "$(slurp)" - | tee "$FILE" | wl-copy
-                       notify-send "Screenshot" "Area → $FILE" ;;
-            display)   grim -o "$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name')" - | tee "$FILE" | wl-copy
-                       notify-send "Screenshot" "Display → $FILE" ;;
-            window)    grim -g "$(hyprctl activewindow -j | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"')" - | tee "$FILE" | wl-copy
-                       notify-send "Screenshot" "Window → $FILE" ;;
-            area-s)    grim -g "$(slurp)" - | satty --filename - --output-filename "$FILE" --copy-command wl-copy
-                       notify-send "Screenshot" "Area (annotated) → $FILE" ;;
-            display-s) grim -o "$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name')" - | satty --filename - --output-filename "$FILE" --copy-command wl-copy
-                       notify-send "Screenshot" "Display (annotated) → $FILE" ;;
-            window-s)  grim -g "$(hyprctl activewindow -j | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"')" - | satty --filename - --output-filename "$FILE" --copy-command wl-copy
-                       notify-send "Screenshot" "Window (annotated) → $FILE" ;;
+            area)
+              g=$(slurp) || exit 0
+              [ -z "$g" ] && exit 0
+              grim -g "$g" - | tee "$FILE" | wl-copy
+              notify-send "Screenshot" "Area → $FILE"
+              ;;
+            display)
+              grim -o "$(focused_output)" - | tee "$FILE" | wl-copy
+              notify-send "Screenshot" "Display → $FILE"
+              ;;
+            window)
+              grim -g "$(focused_window_geometry)" - | tee "$FILE" | wl-copy
+              notify-send "Screenshot" "Window → $FILE"
+              ;;
+            area-s)
+              g=$(slurp) || exit 0
+              [ -z "$g" ] && exit 0
+              grim -g "$g" - | satty --filename - --output-filename "$FILE" --copy-command wl-copy
+              notify-send "Screenshot" "Area (annotated) → $FILE"
+              ;;
+            display-s)
+              grim -o "$(focused_output)" - | satty --filename - --output-filename "$FILE" --copy-command wl-copy
+              notify-send "Screenshot" "Display (annotated) → $FILE"
+              ;;
+            window-s)
+              grim -g "$(focused_window_geometry)" - | satty --filename - --output-filename "$FILE" --copy-command wl-copy
+              notify-send "Screenshot" "Window (annotated) → $FILE"
+              ;;
+            *) echo "Usage: screenshot {area|display|window|area-s|display-s|window-s}" >&2; exit 1 ;;
           esac
         '';
       };
 
-      # No Hyprland dependency — just MPRIS via playerctl, works anywhere.
       jellyfin-add-to-playlist = pkgs.writeShellApplication {
         name = "jellyfin-add-to-playlist";
         runtimeInputs = with pkgs; [
@@ -244,6 +292,16 @@
           };
         };
 
+      systemd.user.services.xdg-desktop-portal-termfilepickers = {
+        Unit = {
+          After = [ "mango-session.target" ];
+          PartOf = [ "mango-session.target" ];
+        };
+        Install = {
+          WantedBy = [ "mango-session.target" ];
+        };
+      };
+
       xdg.portal = {
         enable = true;
       };
@@ -262,6 +320,15 @@
       };
 
       programs = {
+        imv = {
+          enable = true;
+          settings = {
+            options = {
+              width = 1920;
+              height = 1080;
+            };
+          };
+        };
         foot = {
           enable = true;
           settings = {

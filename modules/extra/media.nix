@@ -22,7 +22,6 @@
 
       home.packages = with pkgs; [
         ffmpeg
-        imv
         jellyfin-media-player
         jellyfin-tui
       ];

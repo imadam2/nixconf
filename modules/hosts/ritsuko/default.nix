@@ -6,6 +6,7 @@
 {
   flake.nixosConfigurations.ritsuko = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
+      mangowm
       profileDesktop
       ritsukoConfiguration
       ritsukoHardware
@@ -15,6 +16,7 @@
       inputs.sc0710.nixosModules.default
       {
         home-manager.users.ye.imports = with self.homeModules; [
+          mangowm
           profileDesktop
           obs
         ];
