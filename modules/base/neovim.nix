@@ -46,6 +46,8 @@
           timeoutlen = 300;
 
           fillchars.__raw = ''{ eob = " " }'';
+
+          clipboard = "unnamedplus";
         };
 
         globals = {
@@ -934,6 +936,7 @@
           ripgrep
           fd
           gcc
+          wl-clipboard
         ];
 
         extraPlugins = with pkgs.vimPlugins; [

@@ -43,6 +43,12 @@
           enable = true;
           enableFishIntegration = true;
           shellWrapperName = "y";
+          plugins = with pkgs.yaziPlugins; {
+            compress.package = compress;
+            convert.package = convert;
+            gvfs.package = gvfs;
+            zoom.package = zoom;
+          };
           theme = {
             indicator = {
               padding = {
@@ -62,7 +68,218 @@
             };
           };
           keymap.mgr.prepend_keymap = [
-            # Add your other keymaps here
+            # Mount
+            {
+              run = "plugin gvfs -- select-then-mount";
+              on = [
+                "M"
+                "m"
+              ];
+            }
+            # or this if you want to jump to mountpoint after mounted
+            {
+              on = [
+                "M"
+                "m"
+              ];
+              run = "plugin gvfs -- select-then-mount --jump";
+              desc = "Select device to mount and jump to its mount point";
+            }
+
+            {
+              on = [
+                "M"
+                "R"
+              ];
+              run = "plugin gvfs -- remount-current-cwd-device";
+              desc = "Remount device under cwd";
+            }
+
+            {
+              on = [
+                "M"
+                "u"
+              ];
+              run = "plugin gvfs -- select-then-unmount";
+              desc = "Select device then unmount";
+            }
+            {
+              on = [
+                "M"
+                "U"
+              ];
+              run = "plugin gvfs -- select-then-unmount --eject";
+              desc = "Select device then eject";
+            }
+
+            {
+              on = [
+                "M"
+                "U"
+              ];
+              run = "plugin gvfs -- select-then-unmount --eject --force";
+              desc = "Select device then force to eject/unmount";
+            }
+
+            {
+              on = [
+                "M"
+                "a"
+              ];
+              run = "plugin gvfs -- add-mount";
+              desc = "Add a GVFS mount URI";
+            }
+
+            {
+              on = [
+                "M"
+                "e"
+              ];
+              run = "plugin gvfs -- edit-mount";
+              desc = "Edit a GVFS mount URI";
+            }
+
+            {
+              on = [
+                "M"
+                "r"
+              ];
+              run = "plugin gvfs -- remove-mount";
+              desc = "Remove a GVFS mount URI";
+            }
+
+            {
+              on = [
+                "g"
+                "m"
+              ];
+              run = "plugin gvfs -- jump-to-device";
+              desc = "Select device then jump to its mount point";
+            }
+            {
+              on = [
+                "g"
+                "m"
+              ];
+              run = "plugin gvfs -- jump-to-device --automount";
+              desc = "Automount then select device to jump to its mount point";
+            }
+            {
+              on = [
+                "`"
+                "`"
+              ];
+              run = "plugin gvfs -- jump-back-prev-cwd";
+              desc = "Jump back to the position before jumped to device";
+            }
+
+            {
+              on = [
+                "m"
+                "a"
+              ];
+              run = [
+                "plugin yamb -- save"
+                "plugin gvfs -- automount-when-cd"
+              ];
+              desc = "Add bookmark and enable automount when cd";
+            }
+            {
+              on = [
+                "M"
+                "t"
+              ];
+              run = "plugin gvfs -- automount-when-cd";
+              desc = "Enable automount when cd to device under cwd";
+            }
+            {
+              on = [
+                "M"
+                "T"
+              ];
+              run = "plugin gvfs -- automount-when-cd --disabled";
+              desc = "Disable automount when cd to device under cwd";
+            }
+
+            {
+              on = [
+                "c"
+                "a"
+                "a"
+              ];
+              run = "plugin compress";
+              desc = "Archive selected files";
+            }
+            {
+              on = [
+                "c"
+                "a"
+                "p"
+              ];
+              run = "plugin compress -p";
+              desc = "Archive selected files (password)";
+            }
+            {
+              on = [
+                "c"
+                "a"
+                "h"
+              ];
+              run = "plugin compress -ph";
+              desc = "Archive selected files (password+header)";
+            }
+            {
+              on = [
+                "c"
+                "a"
+                "l"
+              ];
+              run = "plugin compress -l";
+              desc = "Archive selected files (compression level)";
+            }
+            {
+              on = [
+                "c"
+                "a"
+                "u"
+              ];
+              run = "plugin compress -phl";
+              desc = "Archive selected files (password+header+level)";
+            }
+            {
+              on = [
+                "c"
+                "p"
+              ];
+              run = "plugin convert -- --extension='png'";
+              desc = "Convert selected files to PNG";
+            }
+            {
+              on = [
+                "c"
+                "j"
+              ];
+              run = "plugin convert -- --extension='jpg'";
+              desc = "Convert selected files to JPG";
+            }
+            {
+              on = [
+                "c"
+                "w"
+              ];
+              run = "plugin convert -- --extension='webp'";
+              desc = "Convert selected files to WebP";
+            }
+            {
+              on = "+";
+              run = "plugin zoom 1";
+              desc = "Zoom in hovered file";
+            }
+            {
+              on = "-";
+              run = "plugin zoom -1";
+              desc = "Zoom out hovered file";
+            }
           ]
           ++
             lib.mapAttrsToList
@@ -85,7 +302,23 @@
                 }
               )
               {
-                "/media/NAS/" = "n";
+                "/media/NAS/" = [ "n" ];
+                "/media/NAS/storage/Pictures/Screenshots/" = [
+                  "n"
+                  "s"
+                ];
+                "/media/NAS/storage/Videos/" = [
+                  "n"
+                  "v"
+                ];
+                "~/.local/share/Steam/steamapps/common" = [
+                  "s"
+                  "a"
+                ];
+                "~/nixconf" = [
+                  "n"
+                  "c"
+                ];
                 "~/Downloads/" = [ "d" ];
                 "~/Documents/" = [ "D" ];
               };
