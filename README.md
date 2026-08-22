@@ -6,6 +6,7 @@
 | ------- | ------------------ |
 | daru    | ThinkPad W520      |
 | glados  | i5-12500 NAS       |
+| kagura  | ThinkPad T480      |
 | kurisu  | ThinkCentre M93p   |
 | mayuri  | Ryzen Main Desktop |
 | ritsuko | Other Ryzen PC     |
@@ -19,15 +20,15 @@
 
 | Component    | Name             |
 | ------------ | ---------------- |
-| WM           | Hyprland         |
+| WM           | Mango            |
 | Bar          | Noctalia v5      |
-| Terminal     | Foot             |
+| Terminal     | Kitty            |
 | Browser      | Zen              |
 | Editor       | Neovim           |
 | Shell        | Fish             |
 | File manager | Yazi             |
 | Theming      | Catppuccin Mocha |
-| Font         | JetBrainsMono    |
+| Font         | IosevkaTerm      |
 
 ## homelab
 
