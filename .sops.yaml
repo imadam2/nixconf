@@ -2,6 +2,7 @@ keys:
   - &daru_host age1lakwj5gtc8sjksshhy850eqeh4ac7gkp39xecqhngaldr5xj7ayqvz6yj3
   - &daru_user age178f7dvqqr4r2k06fj3u5lrmg4n4qzu5u2q03vwjes42n5dajnaeshxnn69
   - &glados_host age1kglyf3c43cxkkw26lvltp9ra2q3vlnl66ys8hzw55vdwsnux6qsq2dsj0f
+  - &kagura_host age1xrxkmvfna46vjfw3dvdf4n30x44zr0tz2wxylp2glfqkxxhg59us7exrqx
   - &kurisu_host age1szzurdrppevemlyc5zaydewskwhfcmndf7g0jmd7an3gds8qtvwq9p2q6t
   - &mayuri_host age13wzrwf8apqz9qr0rrtr4wkc7pw3yzj73znjwsy2dnkzmamu2xqts5s8869
   - &mayuri_user age1x5mapzr2pcswvela9nmdah6uzrv4csthupk2vkslwjpne32m6d3syp9nst
@@ -17,6 +18,7 @@ creation_rules:
             - *daru_host
             - *daru_user
             - *glados_host
+            - *kagura_host
             - *kurisu_host
             - *mayuri_host
             - *mayuri_user
