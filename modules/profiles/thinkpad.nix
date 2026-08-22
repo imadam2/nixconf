@@ -3,8 +3,6 @@
   flake.nixosModules.profileLaptop =
     { config, ... }:
     {
-      imports = [ ]; # profileDesktop gets imported in the host itself
-
       boot = {
         kernelModules = [
           "acpi_call"

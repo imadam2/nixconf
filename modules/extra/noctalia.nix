@@ -1,46 +1,62 @@
 { inputs, ... }:
 {
   flake.homeModules.noctalia =
-    { config, lib, ... }:
+    {
+      config,
+      pkgs,
+      lib,
+      ...
+    }:
     let
-      wallpaperDir = "${config.home.homeDirectory}/nixconf/assets/wallpapers";
+      wallpaperDir = "/media/NAS/storage/Pictures/Wallpapers";
     in
     {
       imports = [
         inputs.noctalia.homeModules.default
       ];
+
+      home.packages = with pkgs; [
+        bitwarden-cli
+      ];
+
       programs.noctalia = {
         enable = true;
         settings = {
           theme = {
-            colorScheme = "catppuccin";
             builtin = "Catppuccin";
+            colorScheme = "catppuccin";
           };
           shell = {
             avatar_path = "${config.home.homeDirectory}/nixconf/assets/pfp.jpg";
-            font_family = lib.mkForce "IosevkaTerm Nerd Font SemiBold";
+            corner_radius_scale = 0;
+            font_family = lib.mkForce "IosevkaTerm NFM SemiBold";
+            screen_time_enabled = true;
+            launcher = {
+              providers.windows.global = false;
+              categories = false;
+              compact = true;
+              sort_by_usage = false;
+            };
           };
           ui = {
-            fontDefault = "IosevkaTerm Nerd Font SemiBold";
-            fontFixed = "IosevkaTerm Nerd Font SemiBold";
+            fontDefault = "IosevkaTerm NFM SemiBold";
+            fontFixed = "IosevkaTerm NFM SemiBold";
           };
           appLauncher = {
             enableClipboardHistory = true;
-            terminalCommand = "foot -e";
+            terminalCommand = "kitty -e";
           };
           widget = {
-            bongocat = {
-              script = "scripts/bongocat.lua";
-              type = "scripted";
-              input_device = "/dev/input/event0";
+            battery = {
+              display_mode = "graphic";
             };
             workspaces = {
               anchor = true;
               empty_color = "primary";
               focused_color = "hover";
-              occupied_color = "primary";
               max_label_chars = 1;
               minimal = true;
+              occupied_color = "primary";
               style = "minimal";
             };
           };
@@ -50,6 +66,17 @@
             manualSunrise = "08:00";
             manualSunset = "23:00";
             nightTemp = "3500";
+          };
+          plugin_settings."noctalia/bitwarden" = {
+            gen_length = 24;
+            gen_special = true;
+            server_url = "https://vaultwarden.elpsy.moe";
+            vault_timeout = "never";
+          };
+          plugins = {
+            enabled = [
+              "noctalia/bitwarden"
+            ];
           };
           wallpaper = {
             directory = "${wallpaperDir}";
@@ -84,8 +111,8 @@
             bar = {
               capsule_radius = "3.0";
               font_weight = 700;
-              margin_ends = 0;
               margin_edge = 0;
+              margin_ends = 0;
               position = "right";
               radius = 0;
               widget_spacing = 20;
@@ -93,7 +120,6 @@
                 "date"
                 "clock"
                 "media"
-                "bongocat"
               ];
               center = [
                 "workspaces"

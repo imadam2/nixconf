@@ -4,10 +4,11 @@
     { ... }:
     {
       services = {
-        gvfs.enable = true;
-        fwupd.enable = true;
         dbus.enable = true;
         fstrim.enable = true;
+        fwupd.enable = true;
+        gvfs.enable = true;
+        upower.enable = true;
         mullvad-vpn = {
           enable = true;
           gui.enable = true;
