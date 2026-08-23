@@ -164,6 +164,7 @@
             "SUPER+CTRL,k,focusdir,up"
 
             "SUPER+SHIFT,SPACE,togglefloating"
+            "SUPER,BACKSPACE,spawn,noctalia msg session lock"
 
             "SUPER,W,spawn,zen-beta"
             "SUPER,E,spawn,noctalia msg panel-toggle launcher /emo"
