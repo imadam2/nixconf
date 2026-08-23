@@ -71,7 +71,10 @@
           gappov = 0;
           xkb_rules_layout = "gb";
           xkb_rules_options = "ctrl:nocaps";
-          mouse_accel_profile = 1;
+
+          devicerule = [
+            "name:Endgame Gear Endgame Gear HS Dongle,accel_profile:1"
+          ];
 
           monitorrule = [
             "name:DP-1,width:3840,height:2160,refresh:160,x:0,y:1440"
