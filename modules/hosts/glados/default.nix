@@ -45,7 +45,29 @@
         hardware.info = "2U Main media and storage server";
       };
 
-      networking.hostName = "glados";
+      networking = {
+        hostName = "glados";
+        firewall = {
+          allowedTCPPorts = [
+            27973
+          ];
+          allowedUDPPorts = [
+            27973
+          ];
+        };
+      };
+
+      systemd.services.agent = {
+        description = "Glance Agent";
+        after = [ "network.target" ];
+        wantedBy = [ "multi-user.target" ];
+
+        serviceConfig = {
+          ExecStart = "/home/ye/agent";
+          Restart = "on-failure";
+          User = "ye"; # run as your user, not root
+        };
+      };
 
       environment.systemPackages = with pkgs; [
         hddtemp
