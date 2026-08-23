@@ -195,6 +195,16 @@ in
                             };
                           };
                         }
+                        {
+                          type = "remote";
+                          name = "glados";
+                          url = "http://${hl.gladosIP}:27973";
+                          #  mountpoints = {
+                          #    "/mnt/user" = {
+                          #      name = "Storage";
+                          #    };
+                          #  };
+                        }
                       ];
                     }
                     {
