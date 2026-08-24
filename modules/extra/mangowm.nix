@@ -79,7 +79,7 @@
           monitorrule = [
             "name:DP-1,width:3840,height:2160,refresh:160,x:0,y:1440"
             "name:DP-2,width:3440,height:1440,refresh:165,x:200,y:0"
-            "name:HDMI-A-1,width:1600,height:1200,refresh:60,1"
+            "name:HDMI-A-1,width:1600,height:1200,refresh:60,rr:1"
           ];
           blur_params = {
             radius = 5;
@@ -94,6 +94,7 @@
           tagrule = [
             "id:*,monitor_name:DP-1,layout_name:dwindle"
             "id:*,monitor_name:DP-2,layout_name:tile"
+            "id:*,monitor_name:HDMI-A-1,layout_name:vertical_tile"
           ];
 
           windowrule = [
