@@ -125,35 +125,6 @@
       };
 
       networking = {
-        firewall = {
-          allowedUDPPorts = [
-            5353
-            5960
-            5961
-            5962
-            5963
-            6960
-            6961
-            6962
-            6963
-            7960
-            7961
-            7962
-            7963
-          ];
-          allowedTCPPorts = [
-            5959
-            5960
-            6960
-            6961
-            6962
-            6963
-            7960
-            7961
-            7962
-            7963
-          ];
-        };
         domain = "${config.my.domain}";
         networkmanager = {
           enable = true;
