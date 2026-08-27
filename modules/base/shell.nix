@@ -1,15 +1,29 @@
-{ ... }:
+{ self, inputs, ... }:
 {
   flake.nixosModules.shell =
     { pkgs, ... }:
     {
-      programs.fish.enable = true;
+      imports = [
+        inputs.catppuccin.nixosModules.catppuccin
+      ];
+      catppuccin.fish.enable = true;
+      programs = {
+        bat.enable = true;
+        zoxide.enable = true;
+        yazi = {
+          enable = true;
+          package = self.packages.${pkgs.stdenv.hostPlatform.system}.myYazi;
+        };
+      };
 
       environment.systemPackages = with pkgs; [
+        self.packages.${pkgs.stdenv.hostPlatform.system}.myCava
+        self.packages.${pkgs.stdenv.hostPlatform.system}.myFastfetch
         btop
         eza
         fd
         fuse
+        fzf
         glib
         gvfs
         jq
@@ -18,44 +32,210 @@
     };
 
   flake.homeModules.shell =
+    { ... }:
     {
-      lib,
+      programs.fish = {
+        enable = true;
+        interactiveShellInit = ''
+          fish_config theme choose catppuccin-mocha --color-theme=dark
+          set fish_greeting
+          function fish_user_key_bindings
+            fish_vi_key_bindings
+          end
+          function fish_mode_prompt
+          end
+          function y
+          	set tmp (mktemp -t "yazi-cwd.XXXXXX")
+          	yazi $argv --cwd-file="$tmp"
+          	if read -z cwd < "$tmp"; and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+          		builtin cd -- "$cwd"
+          	end
+          	rm -f -- "$tmp"
+          end
+        '';
+
+        functions = {
+          fish_prompt = {
+            body = ''
+              set -l mocha_blue   \e\[38\;2\;137\;180\;250m
+              set -l mocha_green  \e\[38\;2\;166\;227\;161m
+              set -l mocha_red    \e\[38\;2\;243\;139\;168m
+              set -l reset        \e\[0m
+
+              set -l cwd (prompt_pwd --full-length-dirs 1 --dir-length 1)
+
+              set -l status_color $mocha_green
+              if test $status -ne 0
+                set status_color $mocha_red
+              end
+
+              if set -q SSH_CONNECTION
+                echo -s $mocha_blue (hostname) " " $reset $cwd " " $status_color ">" $reset " "
+              else
+                echo -s $mocha_blue $cwd " " $status_color ">" $reset " "
+              end
+            '';
+          };
+        };
+
+        shellAbbrs = {
+          "vim" = "nvim";
+          "vi" = "nvim";
+          "v" = "nvim";
+          "neovim" = "nvim";
+          "n" = "nvim";
+          "vfzf" = "nvim $(fzf)";
+          "cp" = "cp -iv";
+          "mv" = "mv -iv";
+          "rm" = "rm -vI";
+          "rsync" = "rsync -vrPlu";
+          "md" = "mkdir -pv";
+          "fa" = "fastfetch --config examples/13.jsonc";
+
+          "g" = "git";
+          "gc" = "git clone";
+          "ga" = "git add";
+          "gaa" = "git add -A";
+          "gcm" = "git commit -m";
+          "gp" = "git push";
+          "gpp" = "git pull";
+
+          "yt" = "yt-dlp --embed-metadata -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4'";
+          "yta" = "yt -x -f bestaudio/best";
+          "ffmpeg" = "ffmpeg -hide_banner";
+
+          "ls" = "eza --group-directories-first --icons always";
+          "ll" = "eza --group-directories-first -lag --icons always --header";
+          "grep" = "rg";
+          "cat" = "bat";
+          "cd" = "z";
+          "cc" = "clear; z";
+          "ka" = "killall";
+
+          ".." = "z ..";
+          "..." = "z ../..";
+          "...." = "z ../../..";
+
+          "untar" = "tar -zxvf";
+          "mktar" = "tar -cvzf";
+
+          # Nixos related
+          "nr" = "nixos-rebuild";
+          "nuc" = "nh os switch ~/nixconf -u && nh clean all";
+          "nru" = "z ~/nixconf && sudo nixos-rebuild switch --flake . --upgrade";
+          "nsp" = "nix-shell -p";
+          "scg" = "sudo nix-collect-garbage -d";
+          "ucg" = "nix-collect-garbage -d";
+          "cfg" = "z ~/nixconf/";
+          "rn" = "nh os switch ~/nixconf";
+        };
+      };
+    };
+
+  perSystem =
+    {
       pkgs,
+      lib,
       ...
     }:
     {
-      programs = {
-        bat.enable = true;
-
-        zoxide = {
-          enable = true;
-          enableFishIntegration = true;
-        };
-
-        btop = {
-          enable = true;
-          settings = {
-            theme_background = false;
-            rounded_corners = false;
+      packages.myCava = inputs.wrapper-modules.wrappers.cava.wrap {
+        inherit pkgs;
+        settings = {
+          output = {
+            orientation = "horizontal";
+          };
+          color = {
+            gradient = 1;
+            gradient_color_1 = "'#94e2d5'";
+            gradient_color_2 = "'#89dceb'";
+            gradient_color_3 = "'#74c7ec'";
+            gradient_color_4 = "'#89b4fa'";
+            gradient_color_5 = "'#cba6f7'";
+            gradient_color_6 = "'#f5c2e7'";
+            gradient_color_7 = "'#eba0ac'";
+            gradient_color_8 = "'#f38ba8'";
           };
         };
+      };
+      packages.myFastfetch = inputs.wrapper-modules.wrappers.fastfetch.wrap {
+        inherit pkgs;
+        settings = {
+          "$schema" = "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json";
 
-        fzf = {
-          enable = true;
-          enableFishIntegration = true;
-        };
+          #logo = {
+          #  source = "${config.my.homeDir}/nixconf/assets/pfp2.jpg";
+          #  type = "sixel";
+          #  width = 24;
+          #};
 
-        yazi = {
-          package = (pkgs.yazi.override { _7zz = pkgs._7zz-rar; });
-          enable = true;
-          enableFishIntegration = true;
-          shellWrapperName = "y";
-          plugins = with pkgs.yaziPlugins; {
-            compress.package = compress;
-            convert.package = convert;
-            gvfs.package = gvfs;
-            zoom.package = zoom;
+          display = {
+            separator = "  ";
+            color.keys = "blue";
+            key.type = "icon";
+            size = {
+              ndigits = 0;
+            };
           };
+
+          modules = [
+            "break"
+            {
+              type = "title";
+              color = {
+                user = "green";
+                at = "red";
+                host = "blue";
+              };
+            }
+            "os"
+            "kernel"
+            "packages"
+            {
+              type = "terminalfont";
+            }
+            {
+              type = "media";
+              key = "Song";
+            }
+            "break"
+            {
+              type = "cpu";
+              showPeCoresAsECores = true;
+            }
+            {
+              type = "gpu";
+              detectionMethod = "pci";
+            }
+            "memory"
+            {
+              type = "disk";
+            }
+            {
+              type = "display";
+              compactType = "original-with-refresh-rate";
+            }
+            {
+              type = "localip";
+              showIpv4 = true;
+              showIpv6 = false;
+              showLoop = false;
+            }
+            "uptime"
+            "break"
+            "colors"
+          ];
+        };
+      };
+      packages.myYazi = inputs.wrapper-modules.wrappers.yazi.wrap {
+        inherit pkgs;
+        plugins = with pkgs.yaziPlugins; {
+          compress = compress;
+          convert = convert;
+          gvfs = gvfs;
+          zoom = zoom;
+        };
+        settings = {
           theme = {
             indicator = {
               padding = {
@@ -64,15 +244,13 @@
               };
             };
           };
-          settings = {
-            manager = {
-              linemode = "size";
-              show_symlink = true;
-              sort_by = "natural";
-              sort_dir_first = true;
-              sort_reverse = false;
-              sort_sensitive = false;
-            };
+          yazi.mgr = {
+            linemode = "size";
+            show_symlink = true;
+            sort_by = "natural";
+            sort_dir_first = true;
+            sort_reverse = false;
+            sort_sensitive = false;
           };
           keymap.mgr.prepend_keymap = [
             # Mount
@@ -329,192 +507,6 @@
                 "~/Downloads/" = [ "d" ];
                 "~/Documents/" = [ "D" ];
               };
-        };
-
-        cava = {
-          enable = true;
-          settings = {
-            output = {
-              orientation = "horizontal";
-            };
-            color = {
-              gradient = 1;
-              gradient_color_1 = "'#94e2d5'";
-              gradient_color_2 = "'#89dceb'";
-              gradient_color_3 = "'#74c7ec'";
-              gradient_color_4 = "'#89b4fa'";
-              gradient_color_5 = "'#cba6f7'";
-              gradient_color_6 = "'#f5c2e7'";
-              gradient_color_7 = "'#eba0ac'";
-              gradient_color_8 = "'#f38ba8'";
-            };
-          };
-        };
-        fastfetch = {
-          enable = true;
-          settings = {
-            "$schema" = "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json";
-
-            #logo = {
-            #  source = "${config.my.homeDir}/nixconf/assets/pfp2.jpg";
-            #  type = "sixel";
-            #  width = 24;
-            #};
-
-            display = {
-              separator = "  ";
-              color.keys = "blue";
-              key.type = "icon";
-              size = {
-                ndigits = 0;
-              };
-            };
-
-            modules = [
-              "break"
-              {
-                type = "title";
-                color = {
-                  user = "green";
-                  at = "red";
-                  host = "blue";
-                };
-              }
-              "os"
-              "kernel"
-              "packages"
-              {
-                type = "terminalfont";
-              }
-              {
-                type = "media";
-                key = "Song";
-              }
-              "break"
-              {
-                type = "cpu";
-                showPeCoresAsECores = true;
-              }
-              {
-                type = "gpu";
-                detectionMethod = "pci";
-              }
-              "memory"
-              {
-                type = "disk";
-              }
-              {
-                type = "display";
-                compactType = "original-with-refresh-rate";
-              }
-              {
-                type = "localip";
-                showIpv4 = true;
-                showIpv6 = false;
-                showLoop = false;
-              }
-              "uptime"
-              "break"
-              "colors"
-            ];
-          };
-        };
-
-        fish = {
-          enable = true;
-          interactiveShellInit = ''
-            fish_config theme choose catppuccin-mocha --color-theme=dark
-            set fish_greeting
-            function fish_user_key_bindings
-              fish_vi_key_bindings
-            end
-            function fish_mode_prompt
-            end
-            function y
-            	set tmp (mktemp -t "yazi-cwd.XXXXXX")
-            	yazi $argv --cwd-file="$tmp"
-            	if read -z cwd < "$tmp"; and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
-            		builtin cd -- "$cwd"
-            	end
-            	rm -f -- "$tmp"
-            end
-          '';
-
-          functions = {
-            fish_prompt = {
-              body = ''
-                set -l mocha_blue   \e\[38\;2\;137\;180\;250m
-                set -l mocha_green  \e\[38\;2\;166\;227\;161m
-                set -l mocha_red    \e\[38\;2\;243\;139\;168m
-                set -l reset        \e\[0m
-
-                set -l cwd (prompt_pwd --full-length-dirs 1 --dir-length 1)
-
-                set -l status_color $mocha_green
-                if test $status -ne 0
-                  set status_color $mocha_red
-                end
-
-                if set -q SSH_CONNECTION
-                  echo -s $mocha_blue (hostname) " " $reset $cwd " " $status_color ">" $reset " "
-                else
-                  echo -s $mocha_blue $cwd " " $status_color ">" $reset " "
-                end
-              '';
-            };
-          };
-
-          shellAbbrs = {
-            "vim" = "nvim";
-            "vi" = "nvim";
-            "v" = "nvim";
-            "neovim" = "nvim";
-            "n" = "nvim";
-            "vfzf" = "nvim $(fzf)";
-            "cp" = "cp -iv";
-            "mv" = "mv -iv";
-            "rm" = "rm -vI";
-            "rsync" = "rsync -vrPlu";
-            "md" = "mkdir -pv";
-            "fa" = "fastfetch --config examples/13.jsonc";
-
-            "g" = "git";
-            "gc" = "git clone";
-            "ga" = "git add";
-            "gaa" = "git add -A";
-            "gcm" = "git commit -m";
-            "gp" = "git push";
-            "gpp" = "git pull";
-
-            "yt" = "yt-dlp --embed-metadata -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4'";
-            "yta" = "yt -x -f bestaudio/best";
-            "ffmpeg" = "ffmpeg -hide_banner";
-
-            "ls" = "eza --group-directories-first --icons always";
-            "ll" = "eza --group-directories-first -lag --icons always --header";
-            "grep" = "rg";
-            "cat" = "bat";
-            "cd" = "z";
-            "cc" = "clear; z";
-            "ka" = "killall";
-
-            ".." = "z ..";
-            "..." = "z ../..";
-            "...." = "z ../../..";
-
-            "untar" = "tar -zxvf";
-            "mktar" = "tar -cvzf";
-
-            # Nixos related
-            "nr" = "nixos-rebuild";
-            "nuc" = "nh os switch ~/nixconf -u && nh clean all";
-            "nru" = "z ~/nixconf && sudo nixos-rebuild switch --flake . --upgrade";
-            "nsp" = "nix-shell -p";
-            "scg" = "sudo nix-collect-garbage -d";
-            "ucg" = "nix-collect-garbage -d";
-            "cfg" = "z ~/nixconf/";
-            "rn" = "nh os switch ~/nixconf";
-          };
         };
       };
     };
