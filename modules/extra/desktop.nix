@@ -6,6 +6,8 @@
   flake.nixosModules.desktop =
     { pkgs, ... }:
     {
+
+      hardware.graphics.enable = true;
       services = {
         displayManager = {
           ly = {
@@ -14,7 +16,15 @@
         };
       };
 
-      hardware.graphics.enable = true;
+      stylix.cursor = {
+        package = pkgs.catppuccin-cursors.mochaBlue;
+        name = "catppuccin-mocha-blue-cursors";
+        size = 24;
+      };
+
+      xdg.portal = {
+        enable = true;
+      };
 
       fonts = {
         packages = with pkgs; [
@@ -33,10 +43,6 @@
             serif = [ "Noto Serif" ];
           };
         };
-      };
-
-      xdg.portal = {
-        enable = true;
       };
 
       environment.etc."libinput/local-overrides.quirks".text = pkgs.lib.mkForce ''

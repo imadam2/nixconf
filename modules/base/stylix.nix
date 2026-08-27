@@ -12,11 +12,6 @@
         base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
         polarity = "dark";
         opacity.terminal = 1.0;
-        cursor = {
-          package = pkgs.catppuccin-cursors.mochaBlue;
-          name = "catppuccin-mocha-blue-cursors";
-          size = 24;
-        };
         icons = {
           dark = "Papirus-Dark";
           package = pkgs.catppuccin-papirus-folders;
