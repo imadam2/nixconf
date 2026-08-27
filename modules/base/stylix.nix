@@ -1,7 +1,7 @@
 { inputs, ... }:
 {
   flake.nixosModules.stylix =
-    { config, pkgs, ... }:
+    { pkgs, ... }:
     {
       imports = [
         inputs.stylix.nixosModules.stylix
@@ -12,7 +12,15 @@
         base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
         polarity = "dark";
         opacity.terminal = 1.0;
-        #### Commented because it pulls in inkscape, which compiles from source for whatever reason
+        cursor = {
+          package = pkgs.catppuccin-cursors.mochaBlue;
+          name = "catppuccin-mocha-blue-cursors";
+          size = 24;
+        };
+        icons = {
+          dark = "Papirus-Dark";
+          package = pkgs.catppuccin-papirus-folders;
+        };
         fonts = {
           sizes.terminal = 11.75;
           monospace = {

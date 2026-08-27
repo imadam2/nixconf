@@ -381,6 +381,7 @@
                 };
               }
               "os"
+              "host"
               "kernel"
               "packages"
               {

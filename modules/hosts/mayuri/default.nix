@@ -40,6 +40,7 @@
       powerManagement.cpuFreqGovernor = "performance";
 
       boot = {
+        binfmt.emulatedSystems = [ "aarch64-linux" ];
         kernelParams = [
           "amd_iommu=on"
           "iommu=pt"

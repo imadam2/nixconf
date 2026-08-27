@@ -16,12 +16,6 @@
 
       hardware.graphics.enable = true;
 
-      stylix.cursor = {
-        package = pkgs.catppuccin-cursors.mochaBlue;
-        name = "catppuccin-mocha-blue-cursors";
-        size = 24;
-      };
-
       fonts = {
         packages = with pkgs; [
           noto-fonts
