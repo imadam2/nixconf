@@ -12,13 +12,6 @@
         base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
         polarity = "dark";
         opacity.terminal = 1.0;
-<<<<<<< HEAD
-        icons = {
-          dark = "Papirus-Dark";
-          package = pkgs.catppuccin-papirus-folders;
-        };
-=======
->>>>>>> d3f7faf (noctalia)
         fonts = {
           sizes.terminal = 11.75;
           monospace = {
