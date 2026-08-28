@@ -1,7 +1,4 @@
-{
-  inputs,
-  ...
-}:
+{ inputs, ... }:
 {
   flake.nixosModules.desktop =
     { pkgs, ... }:
@@ -53,11 +50,7 @@
     };
 
   flake.homeModules.desktop =
-    {
-      lib,
-      pkgs,
-      ...
-    }:
+    { lib, pkgs, ... }:
     let
       screenshot = pkgs.writeShellApplication {
         name = "screenshot";
@@ -274,7 +267,9 @@
       };
     in
     {
-      imports = [ inputs.xdp-termfilepickers.homeManagerModules.default ];
+      imports = [
+        inputs.xdp-termfilepickers.homeManagerModules.default
+      ];
 
       services.xdg-desktop-portal-termfilepickers =
         let

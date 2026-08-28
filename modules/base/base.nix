@@ -14,6 +14,8 @@
         inputs.nix-topology.nixosModules.default
       ];
 
+      nixpkgs.config.allowUnfree = true;
+
       users.users = {
         root.hashedPasswordFile = config.sops.secrets.password.path;
         ${config.my.username} = {
@@ -30,7 +32,6 @@
         };
       };
 
-      nixpkgs.config.allowUnfree = true;
       programs = {
         nix-index-database.comma.enable = true;
         fish.enable = true;

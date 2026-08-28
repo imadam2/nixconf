@@ -1,7 +1,4 @@
-{
-  inputs,
-  ...
-}:
+{ inputs, ... }:
 {
   flake.nixosModules.hyprland =
     { pkgs, ... }:
@@ -15,11 +12,7 @@
     };
 
   flake.homeModules.hyprland =
-    {
-      config,
-      pkgs,
-      ...
-    }:
+    { config, pkgs, ... }:
     let
       toggle-monitor-mode = pkgs.writeShellApplication {
         name = "toggle-monitor-mode";

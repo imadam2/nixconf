@@ -10,6 +10,7 @@
       homeManager
       {
         home-manager.users.ye.imports = with self.homeModules; [
+          discord
           mangowm
           profileDesktop
         ];

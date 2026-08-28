@@ -18,11 +18,7 @@
     };
 
   flake.homeModules.shell =
-    {
-      lib,
-      pkgs,
-      ...
-    }:
+    { lib, pkgs, ... }:
     {
       programs = {
         bat.enable = true;
@@ -75,7 +71,6 @@
             };
           };
           keymap.mgr.prepend_keymap = [
-            # Mount
             {
               run = "plugin gvfs -- select-then-mount";
               on = [
@@ -83,7 +78,6 @@
                 "m"
               ];
             }
-            # or this if you want to jump to mountpoint after mounted
             {
               on = [
                 "M"
@@ -92,7 +86,6 @@
               run = "plugin gvfs -- select-then-mount --jump";
               desc = "Select device to mount and jump to its mount point";
             }
-
             {
               on = [
                 "M"
@@ -101,7 +94,6 @@
               run = "plugin gvfs -- remount-current-cwd-device";
               desc = "Remount device under cwd";
             }
-
             {
               on = [
                 "M"
@@ -118,7 +110,6 @@
               run = "plugin gvfs -- select-then-unmount --eject";
               desc = "Select device then eject";
             }
-
             {
               on = [
                 "M"
@@ -127,7 +118,6 @@
               run = "plugin gvfs -- select-then-unmount --eject --force";
               desc = "Select device then force to eject/unmount";
             }
-
             {
               on = [
                 "M"
@@ -136,7 +126,6 @@
               run = "plugin gvfs -- add-mount";
               desc = "Add a GVFS mount URI";
             }
-
             {
               on = [
                 "M"
@@ -145,7 +134,6 @@
               run = "plugin gvfs -- edit-mount";
               desc = "Edit a GVFS mount URI";
             }
-
             {
               on = [
                 "M"
@@ -154,7 +142,6 @@
               run = "plugin gvfs -- remove-mount";
               desc = "Remove a GVFS mount URI";
             }
-
             {
               on = [
                 "g"
@@ -179,7 +166,6 @@
               run = "plugin gvfs -- jump-back-prev-cwd";
               desc = "Jump back to the position before jumped to device";
             }
-
             {
               on = [
                 "m"
@@ -207,7 +193,6 @@
               run = "plugin gvfs -- automount-when-cd --disabled";
               desc = "Disable automount when cd to device under cwd";
             }
-
             {
               on = [
                 "c"
@@ -330,7 +315,6 @@
                 "~/Documents/" = [ "D" ];
               };
         };
-
         cava = {
           enable = true;
           settings = {
@@ -354,13 +338,11 @@
           enable = true;
           settings = {
             "$schema" = "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json";
-
             #logo = {
             #  source = "${config.my.homeDir}/nixconf/assets/pfp2.jpg";
             #  type = "sixel";
             #  width = 24;
             #};
-
             display = {
               separator = "  ";
               color.keys = "blue";
@@ -369,7 +351,6 @@
                 ndigits = 0;
               };
             };
-
             modules = [
               "break"
               {
@@ -420,7 +401,6 @@
             ];
           };
         };
-
         fish = {
           enable = true;
           interactiveShellInit = ''
@@ -440,7 +420,6 @@
             	rm -f -- "$tmp"
             end
           '';
-
           functions = {
             fish_prompt = {
               body = ''
@@ -464,7 +443,6 @@
               '';
             };
           };
-
           shellAbbrs = {
             "vim" = "nvim";
             "vi" = "nvim";
