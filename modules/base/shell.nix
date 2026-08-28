@@ -33,6 +33,9 @@
           settings = {
             theme_background = false;
             rounded_corners = false;
+            cpu_bottom = true;
+            mem_below_net = true;
+            vim_keys = true;
           };
         };
 
