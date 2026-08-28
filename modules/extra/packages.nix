@@ -13,6 +13,7 @@
         signal-desktop
         slurp
         thunar
+        vial
         wl-clipboard
       ];
     };
