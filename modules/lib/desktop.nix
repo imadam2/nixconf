@@ -8,6 +8,7 @@
         base
         desktop
         git
+        mangowm
         nfs
         services
         shell
@@ -23,6 +24,7 @@
       imports = with self.homeModules; [
         browser
         desktop
+        mangowm
         media
         neovim
         noctalia

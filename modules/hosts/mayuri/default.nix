@@ -6,7 +6,6 @@
 {
   flake.nixosConfigurations.mayuri = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
-      mangowm
       profileDesktop
       gaming
       virtualization
@@ -17,7 +16,6 @@
       inputs.nix-topology.nixosModules.default
       {
         home-manager.users.ye.imports = with self.homeModules; [
-          mangowm
           discord
           profileDesktop
           gaming

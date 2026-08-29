@@ -5,12 +5,23 @@
     {
       imports = with self.nixosModules; [
         base
-        shell
         git
+        homeManager
         homelabConfig
+        shell
+        stylix
         userConfig
       ];
 
       services.openssh.enable = true;
+    };
+
+  flake.homeModules.profileServer =
+    { ... }:
+    {
+      imports = with self.homeModules; [
+        neovim
+        shell
+      ];
     };
 }

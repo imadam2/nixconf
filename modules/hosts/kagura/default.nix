@@ -2,7 +2,6 @@
 {
   flake.nixosConfigurations.kagura = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
-      mangowm
       profileDesktop
       kaguraConfiguration
       kaguraHardware
@@ -11,7 +10,6 @@
       {
         home-manager.users.ye.imports = with self.homeModules; [
           discord
-          mangowm
           profileDesktop
         ];
       }

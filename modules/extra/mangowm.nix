@@ -100,6 +100,7 @@
           windowrule = [
             "title:mpv,isfloating:1"
             "appid:imv,isfloating:1"
+            "appid:qemu,isfloating:1"
             "title:waywall,isfloating:1"
             "title:.*[Mm]inecraft.*,isfloating:1"
             "title:.*[Ll]unar.*,isfloating:1"
