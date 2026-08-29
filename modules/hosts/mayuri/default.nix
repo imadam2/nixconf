@@ -52,6 +52,23 @@
         '';
       };
 
+      services.hardware.openrgb = {
+        enable = true;
+        package = pkgs.openrgb-with-all-plugins;
+        motherboard = "amd";
+        server.port = 6742;
+      };
+
+      systemd.user.services.openrgb-blue-profile = {
+        description = "Apply Blue OpenRGB Direct Mode to Motherboard Devices";
+        wantedBy = [ "mango-session.target" ];
+        after = [ "mango-session.target" ];
+        serviceConfig = {
+          Type = "oneshot";
+          ExecStart = "${pkgs.openrgb}/bin/openrgb --device \"ASUS ROG STRIX B450-F GAMING II\" --mode Direct --color 1D79D0 --device \"ASUS ROG STRIX B450-F GAMING II Addressable\" --mode Direct --color 1D79D0";
+        };
+      };
+
       hardware = {
         cpu.amd.updateMicrocode = true;
         graphics = {
