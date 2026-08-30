@@ -1,5 +1,7 @@
 # my nixos config for (almost) every pc i own
 
+![T480 Desktop](desk.png)
+
 ## hosts
 
 | Host    | Description        |
