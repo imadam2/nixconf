@@ -22,16 +22,13 @@
       shareUser
 
       profileServer
-      stylix
       gladosConfiguration
       gladosHardware
       gladosDisko
-      homeManager
       inputs.nix-topology.nixosModules.default
       {
         home-manager.users.ye.imports = with self.homeModules; [
-          neovim
-          shell
+          profileServer
         ];
       }
     ];
