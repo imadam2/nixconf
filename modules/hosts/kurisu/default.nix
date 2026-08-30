@@ -21,17 +21,13 @@
 
       profileServer
       nfs
-      stylix
       kurisuConfiguration
       kurisuHardware
       kurisuDisko
-      homeManager
-
       inputs.nix-topology.nixosModules.default
       {
         home-manager.users.ye.imports = with self.homeModules; [
-          neovim
-          shell
+          profileServer
         ];
       }
     ];
