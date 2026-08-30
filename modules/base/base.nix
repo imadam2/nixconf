@@ -14,28 +14,33 @@
         inputs.nix-topology.nixosModules.default
       ];
 
+      system.stateVersion = config.my.stateVersion;
       nixpkgs.config.allowUnfree = true;
+
+      time.timeZone = config.my.timezone;
+      i18n.defaultLocale = config.my.locale;
+
+      programs = {
+        nix-index-database.comma.enable = true;
+        fish.enable = true;
+      };
 
       users.users = {
         root.hashedPasswordFile = config.sops.secrets.password.path;
         ${config.my.username} = {
           isNormalUser = true;
           home = config.my.homeDir;
+          shell = pkgs.fish;
+          hashedPasswordFile = config.sops.secrets.password.path;
           extraGroups = [
             "wheel"
             "networkmanager"
             "input"
             "plugdev"
           ];
-          shell = pkgs.fish;
-          hashedPasswordFile = config.sops.secrets.password.path;
         };
       };
 
-      programs = {
-        nix-index-database.comma.enable = true;
-        fish.enable = true;
-      };
       nix = {
         gc = {
           automatic = true;
@@ -77,6 +82,7 @@
         age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
         secrets = {
           password = {
+            neededForUsers = true;
           };
           password_plaintext = {
           };
@@ -101,7 +107,6 @@
           autobrr = {
             sopsFile = ../../secrets/homelab.yaml;
           };
-          password.neededForUsers = true;
         };
       };
 
@@ -133,9 +138,6 @@
         };
       };
 
-      time.timeZone = config.my.timezone;
-      i18n.defaultLocale = config.my.locale;
-
       environment.systemPackages = with pkgs; [
         bc
         curl
@@ -151,6 +153,5 @@
         wget
       ];
 
-      system.stateVersion = config.my.stateVersion;
     };
 }

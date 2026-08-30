@@ -15,6 +15,10 @@
               id = "57MCCKJ-ZI7ZG33-5HXG7HM-4IVHZV6-JAKJNT6-PKZQUFQ-P7VYBWG-EMXOZQE";
               autoAcceptFolders = true;
             };
+            "kagura" = {
+              id = "IK7W5UF-CLTGEYR-KG67G5R-JZRRHDL-QZO6QNY-BRE4NSN-KFLBY6P-SFK35AH";
+              autoAcceptFolders = true;
+            };
             "misato" = {
               id = "4TIZGOT-CPJ47IF-MDUELV4-5NOGKKY-YFPTSNQ-EDM54NG-LY2OT7T-KITLXAM";
               autoAcceptFolders = true;
@@ -27,6 +31,7 @@
               label = "Notes";
               devices = [
                 "glados"
+                "kagura"
                 "misato"
               ];
             };

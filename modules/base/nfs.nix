@@ -4,6 +4,8 @@
     { pkgs, ... }:
     {
       environment.systemPackages = with pkgs; [ nfs-utils ];
+      services.rpcbind.enable = true;
+
       boot = {
         supportedFilesystems = [
           "nfs"
@@ -14,8 +16,6 @@
           "nfs4"
         ];
       };
-
-      services.rpcbind.enable = true;
 
       fileSystems."/media/NAS" = {
         device = "10.1.10.3:/";

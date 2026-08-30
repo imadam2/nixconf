@@ -33,6 +33,10 @@ in
 
         settings = {
           devices = {
+            "kagura" = {
+              id = "IK7W5UF-CLTGEYR-KG67G5R-JZRRHDL-QZO6QNY-BRE4NSN-KFLBY6P-SFK35AH";
+              autoAcceptFolders = true;
+            };
             "mayuri" = {
               id = "LUWLTCC-GRPZW7H-OQWX6AU-ZCFFFO6-HWH6FTC-PIIZITI-YPT4MNQ-GCSLCAG";
               autoAcceptFolders = true;
@@ -54,6 +58,7 @@ in
               path = "${hl.storageDir}/Notes";
               label = "Notes";
               devices = [
+                "kagura"
                 "mayuri"
                 "misato"
               ];
