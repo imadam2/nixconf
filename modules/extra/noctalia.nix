@@ -23,8 +23,8 @@
         enable = true;
         settings = {
           theme = {
-            builtin = "Catppuccin";
-            colorScheme = "catppuccin";
+            builtin = "stylix";
+            colorScheme = "stylix";
           };
           shell = {
             avatar_path = "${config.home.homeDirectory}/nixconf/assets/pfp.jpg";

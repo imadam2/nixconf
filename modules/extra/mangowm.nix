@@ -69,6 +69,7 @@
           gappiv = 0;
           gappoh = 0;
           gappov = 0;
+          focuscolor = "0x89b4faff";
           xkb_rules_layout = "gb";
           xkb_rules_options = "ctrl:nocaps";
 

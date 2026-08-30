@@ -2,8 +2,7 @@
 {
   flake.nixosConfigurations.vm = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
-      jellyfin
-      profileServer
+      profileDesktop
       vmConfiguration
       vmHardware
       vmDisko
@@ -11,14 +10,14 @@
       inputs.disko.nixosModules.disko
       {
         home-manager.users.ye.imports = with self.homeModules; [
-          profileServer
+          profileDesktop
         ];
       }
     ];
   };
 
   flake.nixosModules.vmConfiguration =
-    { ... }:
+    { lib, ... }:
     {
       networking.hostName = "vm";
 
@@ -40,6 +39,14 @@
             isNormalUser = true;
             initialPassword = "test";
             group = "vm";
+          };
+        };
+      };
+
+      services = {
+        displayManager = {
+          ly = {
+            enable = lib.mkForce false;
           };
         };
       };
