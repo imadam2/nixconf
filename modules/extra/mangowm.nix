@@ -71,6 +71,7 @@
           gappov = 0;
           disable_trackpad = 1;
           focuscolor = "0x89b4faff";
+          bordercolor = "0x1e1e2eff";
           xkb_rules_layout = "gb";
           xkb_rules_options = "ctrl:nocaps";
 

@@ -109,6 +109,8 @@
               "HDMI-A-1"
             ];
             bar = {
+              border = "primary";
+              border_width = "3.0";
               capsule_radius = "3.0";
               font_weight = 700;
               margin_edge = 0;
