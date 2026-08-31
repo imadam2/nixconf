@@ -59,6 +59,7 @@
           prismlauncher &
           steam &
           zen-beta &
+          mullvad-vpn &
         '';
         settings = {
           repeat_rate = 50;
@@ -120,6 +121,7 @@
             "appid:steam,tags:3"
             "appid:org.prismlauncher.PrismLauncher,tags:3"
             "appid:lunarclient,tags:3"
+            "appid:mullvad-vpn,tags:9"
           ];
 
           bind = [
