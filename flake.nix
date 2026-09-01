@@ -6,6 +6,7 @@
     flake-file.url = "github:vic/flake-file";
     flake-parts.url = "github:hercules-ci/flake-parts";
     hyprland.url = "github:hyprwm/Hyprland";
+    impermanence.url = "github:nix-community/impermanence";
     import-tree.url = "github:vic/import-tree";
     sc0710.url = "github:Nakildias/sc0710";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";

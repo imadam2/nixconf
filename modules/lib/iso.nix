@@ -21,7 +21,12 @@
             rsync
           ];
 
-          users.users.root.initialPassword = "nixos";
+          users.users.root = {
+            initialPassword = "nixos";
+            openssh.authorizedKeys.keys = [
+              "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINWKYIrwL21t4Q/hbGUmLuVFOb1b77OHjbL0vqSo13kc ye@atlas"
+            ];
+          };
 
           users.users.nixos = {
             isNormalUser = true;
