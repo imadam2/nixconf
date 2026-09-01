@@ -28,6 +28,11 @@
           enableFishIntegration = true;
         };
 
+        fzf = {
+          enable = true;
+          enableFishIntegration = true;
+        };
+
         btop = {
           enable = true;
           settings = {
@@ -37,11 +42,6 @@
             mem_below_net = true;
             vim_keys = true;
           };
-        };
-
-        fzf = {
-          enable = true;
-          enableFishIntegration = true;
         };
 
         yazi = {
