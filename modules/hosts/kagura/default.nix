@@ -37,47 +37,6 @@
       security.pam.services.login.fprintAuth = true;
       security.pam.services.sudo.fprintAuth = true;
 
-      services.thinkfan = {
-        enable = true;
-        levels = [
-          [
-            0
-            0
-            55
-          ]
-          [
-            1
-            48
-            60
-          ]
-          [
-            2
-            50
-            65
-          ]
-          [
-            3
-            52
-            70
-          ]
-          [
-            4
-            56
-            75
-          ]
-          [
-            7
-            60
-            80
-          ]
-          [
-            127
-            80
-            32767
-          ]
-        ];
-      };
-
       boot = {
         kernelParams = [
           "i915.enable_psr=0"

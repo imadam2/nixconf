@@ -85,6 +85,7 @@
             "name:DP-2,width:3440,height:1440,refresh:165,x:200,y:0"
             "name:HDMI-A-1,width:1600,height:1200,refresh:60,rr:1"
           ];
+
           blur_params = {
             radius = 5;
             num_passes = 2;
@@ -116,10 +117,10 @@
             "title:Library,isfloating:1"
             "title:File Upload,isfloating:1"
 
-            "appid:vesktop,tags:1"
             "appid:zen-beta,tags:2"
             "appid:steam,tags:3"
             "appid:org.prismlauncher.PrismLauncher,tags:3"
+            "appid:vesktop,tags:4"
             "appid:lunarclient,tags:3"
             "appid:mullvad-vpn,tags:9"
           ];
