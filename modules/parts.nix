@@ -1,6 +1,7 @@
 { inputs, ... }:
 {
   imports = [
+    inputs.flake-file.flakeModules.dendritic
     inputs.home-manager.flakeModules.home-manager
     inputs.nix-topology.flakeModule
   ];

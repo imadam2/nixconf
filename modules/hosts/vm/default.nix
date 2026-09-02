@@ -2,7 +2,6 @@
 {
   flake.nixosConfigurations.vm = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
-      hyprland
       profileDesktop
       vmConfiguration
       vmHardware
@@ -12,7 +11,6 @@
       {
         home-manager.users.ye.imports = with self.homeModules; [
           profileDesktop
-          hyprland
         ];
       }
     ];

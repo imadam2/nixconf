@@ -30,6 +30,9 @@
         noctalia
         packages
         shell
+        screenshot
+        jellyfin-add-to-playlist
+        toggle-monitor-mode
       ];
     };
 }

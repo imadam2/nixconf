@@ -3,6 +3,8 @@
   flake.nixosModules.profileServer =
     { ... }:
     {
+      services.openssh.enable = true;
+
       imports = with self.nixosModules; [
         base
         git
@@ -12,8 +14,6 @@
         stylix
         userConfig
       ];
-
-      services.openssh.enable = true;
     };
 
   flake.homeModules.profileServer =
