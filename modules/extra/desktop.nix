@@ -131,8 +131,8 @@
             "alt+v" = "paste_to_clipboard";
             "alt+j" = "scroll_page_down";
             "alt+k" = "scroll_page_up";
-            "alt+shift+j" = "change_font_size all +2.0";
-            "alt+shift+k" = "change_font_size all -2.0";
+            "alt+shift+j" = "change_font_size all -2.0";
+            "alt+shift+k" = "change_font_size all +2.0";
             "alt+shift+l" = "change_font_size all 0";
             "alt+/" = "search_scrollback";
           };
