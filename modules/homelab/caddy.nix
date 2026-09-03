@@ -32,7 +32,7 @@ in
 
       security.acme = {
         acceptTerms = true;
-        defaults.email = "cf@adamlucas.co.uk"; # :)
+        defaults.email = "adamlucas1690@gmail.com"; # :)
         certs."${hl.domain}" = {
           group = "${hl.acme.group}";
           domain = "${hl.domain}";

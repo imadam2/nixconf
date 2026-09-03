@@ -12,7 +12,7 @@ keys:
   - &vm_keys age16prtvglpvdnfvyng7ppnpyzt4fgt2vpjrughhwmdvencqsyue4msq33gpe
 
 creation_rules:
-  - path_regex: secrets/[^/]+\.yaml$
+  - path_regex: secrets/[^/]+\.(yaml|enc)$
     key_groups:
         - age:
             - *daru_host

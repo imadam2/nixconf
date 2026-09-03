@@ -30,68 +30,88 @@
             Fingerprinting = true;
           };
         };
-        profiles.default = {
-          pinsForce = true;
-          spacesForce = true;
-          containersForce = true;
-          mods = [
-            "181e41d4-dfd3-410d-9a73-561381a2f77d"
-            "a6335949-4465-4b71-926c-4a52d34bc9c0"
-            "c5f7fb68-cc75-4df0-8b02-dc9ee13aa773"
-            "c6813222-6571-4ba6-8faf-58f3343324f6"
-            "c8d9e6e6-e702-4e15-8972-3596e57cf398"
-          ];
-          settings = {
-            "zen.view.compact.enable-at-startup" = true;
-            "zen.view.compact.hide-tabbar" = false;
-            "zen.view.compact.hide-toolbar" = true;
-            "zen.view.compact.should-enable-at-startup" = false;
-            "zen.view.sidebar-expanded" = false;
-            "zen.view.use-single-toolbar" = false;
-            "zen.welcome-screen.seen" = true;
-            "extensions.autoDisableScopes" = false;
-          };
-          pins = {
-            "Glance" = {
-              url = "https://glance.elpsy.moe";
-              id = "487332d8-5eeb-4b21-a89c-b52d4b0af516";
-              position = 101;
-              isEssential = true;
+        profiles.default =
+          let
+            pins = {
+              "Glance" = {
+                url = "https://glance.elpsy.moe";
+                id = "18b3ba01-aec5-403d-a176-117efc8e2cf9";
+                position = 1;
+                isEssential = true;
+              };
+              "YouTube" = {
+                url = "https://youtube.com";
+                id = "ca0dd4a8-6722-4476-a0c5-5798a105500f";
+                position = 2;
+                isEssential = true;
+              };
             };
-            "YouTube" = {
-              url = "https://youtube.com";
-              id = "ca0dd4a8-6722-4476-a0c5-5798a105500f";
-              position = 102;
-              isEssential = true;
-            };
-          };
-
-          extensions = {
-            packages = with inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system}; [
-              ublock-origin
-              bitwarden
-              tridactyl
-              stylus
-              sponsorblock
+          in
+          {
+            pinsForce = true;
+            inherit pins;
+            spacesForce = true;
+            containersForce = true;
+            mods = [
+              "181e41d4-dfd3-410d-9a73-561381a2f77d"
+              "a6335949-4465-4b71-926c-4a52d34bc9c0"
+              "c5f7fb68-cc75-4df0-8b02-dc9ee13aa773"
+              "c6813222-6571-4ba6-8faf-58f3343324f6"
+              "c8d9e6e6-e702-4e15-8972-3596e57cf398"
             ];
-          };
-          search = {
-            force = true;
-            default = "google";
-            engines = {
-              google = {
-                name = "google";
-                urls = [
-                  {
-                    template = "https://google.com/search?q={searchTerms}";
-                    params = [
-                    ];
-                  }
-                ];
+            settings = {
+              "zen.view.compact.enable-at-startup" = true;
+              "zen.view.compact.hide-tabbar" = false;
+              "zen.view.compact.hide-toolbar" = true;
+              "zen.view.compact.should-enable-at-startup" = false;
+              "zen.view.sidebar-expanded" = false;
+              "zen.view.use-single-toolbar" = false;
+              "zen.welcome-screen.seen" = true;
+              "extensions.autoDisableScopes" = 0;
+            };
+            extensionButtons = {
+              "nav-bar" = [
+                "uBlock0@raymondhill.net"
+                "446900e4-71c2-419f-a6a7-df9c091e268b" # Bitwarden
+                "{446900e4-71c2-419f-a6a7-df9c091e268b}" # Bitwarden
+              ];
+
+              "unified-extensions-area" = [
+                "seventv-next@7tv.app"
+                "sponsorBlocker@ajay.app"
+                "{7a7a4a92-a2a0-41d1-9fd7-1e92480d612d}"
+                "7a7a4a92-a2a0-41d1-9fd7-1e92480d612d"
+                "tridactyl.vim@cmcaine.co.uk"
+              ];
+            };
+
+            extensions = {
+              packages = with inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system}; [
+                ublock-origin
+                bitwarden
+                tridactyl
+                seventv
+                stylus
+                sponsorblock
+              ];
+            };
+            search = {
+              force = true;
+              default = "google";
+              engines = {
+                google = {
+                  name = "google";
+                  urls = [
+                    {
+                      template = "https://google.com/search?q={searchTerms}";
+                      params = [
+                      ];
+                    }
+                  ];
+                };
               };
             };
           };
-        };
       };
     };
 }
