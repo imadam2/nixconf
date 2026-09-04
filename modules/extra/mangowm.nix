@@ -55,11 +55,12 @@
         enable = true;
         systemd.enable = true;
         autostart_sh = ''
+          easyeffects &
+          mullvad-vpn &
           noctalia &
           prismlauncher &
           steam &
           zen-beta &
-          mullvad-vpn &
         '';
         settings = {
           repeat_rate = 50;
@@ -104,25 +105,25 @@
           ];
 
           windowrule = [
-            "title:mpv,isfloating:1"
             "appid:imv,isfloating:1"
-            "appid:qemu,isfloating:1"
-            "title:waywall,isfloating:1"
-            "title:.*[Mm]inecraft.*,isfloating:1"
-            "title:.*[Ll]unar.*,isfloating:1"
             "appid:org-prismlauncher-EntryPoint,isfloating:1"
-            "title:Open File,isfloating:1"
-            "title:Select a File,isfloating:1"
+            "appid:qemu,isfloating:1"
+            "title:.*[Ll]unar.*,isfloating:1"
+            "title:.*[Mm]inecraft.*,isfloating:1"
             "title:Choose Wallpaper,isfloating:1"
-            "title:Save As,isfloating:1"
-            "title:Library,isfloating:1"
             "title:File Upload,isfloating:1"
+            "title:Library,isfloating:1"
+            "title:Open File,isfloating:1"
+            "title:Save As,isfloating:1"
+            "title:Select a File,isfloating:1"
+            "title:mpv,isfloating:1"
+            "title:waywall,isfloating:1"
 
             "appid:zen-beta,tags:2"
+            "appid:lunarclient,tags:3"
             "appid:steam,tags:3"
             "appid:org.prismlauncher.PrismLauncher,tags:3"
             "appid:vesktop,tags:4"
-            "appid:lunarclient,tags:3"
             "appid:mullvad-vpn,tags:9"
           ];
 
