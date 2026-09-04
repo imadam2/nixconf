@@ -3,14 +3,16 @@
   inputs,
   ...
 }:
+let
+  hostname = baseNameOf ./.;
+in
 {
-  flake.nixosConfigurations.ritsuko = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations."${hostname}" = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
       mangowm
       profileDesktop
-      ritsukoConfiguration
-      ritsukoHardware
-      #ritsukoDisko
+      self.nixosModules."${hostname}Configuration"
+      self.nixosModules."${hostname}Hardware"
       homeManager
       inputs.nix-topology.nixosModules.default
       inputs.sc0710.nixosModules.default
@@ -25,15 +27,15 @@
     ];
   };
 
-  flake.nixosModules.ritsukoConfiguration =
+  flake.nixosModules."${hostname}Configuration" =
     { config, lib, ... }:
     {
       topology.self = {
-        name = "ritsuko";
+        name = "${hostname}";
         hardware.info = "Ryzen 2600 Capture PC";
       };
 
-      networking.hostName = "ritsuko";
+      networking.hostName = "${hostname}";
 
       powerManagement.cpuFreqGovernor = "performance";
 

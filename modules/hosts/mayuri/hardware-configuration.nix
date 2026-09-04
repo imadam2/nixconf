@@ -1,5 +1,9 @@
+{ ... }:
+let
+  hostname = baseNameOf ./.;
+in
 {
-  flake.nixosModules.mayuriHardware =
+  flake.nixosModules."${hostname}Hardware" =
     {
       config,
       lib,

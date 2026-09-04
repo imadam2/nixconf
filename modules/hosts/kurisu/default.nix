@@ -4,8 +4,11 @@
   inputs,
   ...
 }:
+let
+  hostname = baseNameOf ./.;
+in
 {
-  flake.nixosConfigurations.kurisu = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations."${hostname}" = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
       adguardhome
       caddy
@@ -21,9 +24,9 @@
 
       profileServer
       nfs
-      kurisuConfiguration
-      kurisuHardware
-      kurisuDisko
+      self.nixosModules."${hostname}Configuration"
+      self.nixosModules."${hostname}Hardware"
+      self.nixosModules."${hostname}Disko"
       inputs.nix-topology.nixosModules.default
       {
         home-manager.users.ye.imports = with self.homeModules; [
@@ -33,15 +36,15 @@
     ];
   };
 
-  flake.nixosModules.kurisuConfiguration =
+  flake.nixosModules."${hostname}Configuration" =
     { pkgs, ... }:
     {
       topology.self = {
-        name = "kurisu";
+        name = "${hostname}";
         hardware.info = "Mini secondary network and essential server";
       };
 
-      networking.hostName = "kurisu";
+      networking.hostName = "${hostname}";
 
       services = {
         openssh.enable = true;

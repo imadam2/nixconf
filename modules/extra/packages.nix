@@ -11,12 +11,15 @@
       home.packages = with pkgs; [
         evtest
         grim
+        just
+        nixos-anywhere
         orca-slicer
         pavucontrol
         qbittorrent
         satty
         signal-desktop
         slurp
+        ssh-to-age
         thunar
         vial
         wl-clipboard

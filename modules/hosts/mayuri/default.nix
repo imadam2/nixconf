@@ -3,15 +3,18 @@
   inputs,
   ...
 }:
+let
+  hostname = baseNameOf ./.;
+in
 {
-  flake.nixosConfigurations.mayuri = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations."${hostname}" = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
       profileDesktop
       gaming
       virtualization
-      mayuriConfiguration
-      mayuriHardware
-      mayuriDisko
+      self.nixosModules."${hostname}Configuration"
+      self.nixosModules."${hostname}Hardware"
+      self.nixosModules."${hostname}Disko"
       homeManager
       inputs.nix-topology.nixosModules.default
       {
@@ -25,15 +28,15 @@
     ];
   };
 
-  flake.nixosModules.mayuriConfiguration =
+  flake.nixosModules."${hostname}Configuration" =
     { pkgs, ... }:
     {
       topology.self = {
-        name = "mayuri";
+        name = "${hostname}";
         hardware.info = "Main Ryzen 5800x Desktop";
       };
 
-      networking.hostName = "mayuri";
+      networking.hostName = "${hostname}";
 
       powerManagement.cpuFreqGovernor = "performance";
 

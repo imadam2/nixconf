@@ -1,8 +1,11 @@
 {
   ...
 }:
+let
+  hostname = baseNameOf ./.;
+in
 {
-  flake.nixosModules.vmDisko = {
+  flake.nixosModules."${hostname}Disko" = {
     disko.devices = {
       disk = {
         main = {

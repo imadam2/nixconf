@@ -1,15 +1,18 @@
 {
-  lib,
-  self,
   inputs,
+  self,
+  lib,
   ...
 }:
+let
+  hostname = baseNameOf ./.;
+in
 {
-  flake.nixosConfigurations.maho = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations."${hostname}" = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
       profileServer
-      mahoConfiguration
-      mahoHardware
+      self.nixosModules."${hostname}Configuration"
+      self.nixosModules."${hostname}Hardware"
       shareUser
       homeManager
       inputs.nix-topology.nixosModules.default
@@ -22,15 +25,15 @@
     ];
   };
 
-  flake.nixosModules.mahoConfiguration =
-    { pkgs, ... }:
+  flake.nixosModules."${hostname}Configuration" =
+    { ... }:
     {
       topology.self = {
-        name = "maho";
+        name = "${hostname}";
         hardware.info = "Raspberry Pi 4";
       };
 
-      networking.hostName = "maho";
+      networking.hostName = "${hostname}";
 
       boot.loader.generic-extlinux-compatible.enable = lib.mkForce true;
       boot.loader.systemd-boot.enable = lib.mkForce false;

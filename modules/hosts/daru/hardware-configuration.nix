@@ -1,11 +1,16 @@
+{ ... }:
+let
+  hostname = baseNameOf ./.;
+in
 {
-  flake.nixosModules.daruHardware =
+  flake.nixosModules."${hostname}Hardware" =
     {
       config,
       lib,
       modulesPath,
       ...
     }:
+
     {
       imports = [
         (modulesPath + "/installer/scan/not-detected.nix")

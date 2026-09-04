@@ -1,11 +1,14 @@
 { self, inputs, ... }:
+let
+  hostname = baseNameOf ./.;
+in
 {
-  flake.nixosConfigurations.daru = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations."${hostname}" = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
       profileDesktop
       profileLaptop
-      daruConfiguration
-      daruHardware
+      self.nixosModules."${hostname}Configuration"
+      self.nixosModules."${hostname}Hardware"
       homeManager
       {
         home-manager.users.ye.imports = with self.homeModules; [
@@ -15,10 +18,10 @@
     ];
   };
 
-  flake.nixosModules.daruConfiguration =
+  flake.nixosModules."${hostname}Configuration" =
     { ... }:
     {
-      networking.hostName = "daru";
+      networking.hostName = "${hostname}";
 
       boot = {
         extraModprobeConfig = ''

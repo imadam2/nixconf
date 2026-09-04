@@ -1,11 +1,14 @@
 { self, inputs, ... }:
+let
+  hostname = baseNameOf ./.;
+in
 {
-  flake.nixosConfigurations.kagura = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations.${hostname} = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
       profileDesktop
-      kaguraConfiguration
-      kaguraHardware
-      kaguraDisko
+      self.nixosModules."${hostname}Configuration"
+      self.nixosModules."${hostname}Hardware"
+      self.nixosModules."${hostname}Disko"
       homeManager
       {
         home-manager.users.ye.imports = with self.homeModules; [
@@ -16,12 +19,15 @@
     ];
   };
 
-  flake.nixosModules.kaguraConfiguration =
+  flake.nixosModules."${hostname}Configuration" =
     { pkgs, ... }:
     {
-      networking.hostName = "kagura";
+      networking.hostName = "${hostname}";
 
       services.throttled.enable = true;
+      services.fprintd.enable = true;
+      security.pam.services.login.fprintAuth = true;
+      security.pam.services.sudo.fprintAuth = true;
 
       hardware.graphics = {
         enable = true;
@@ -32,10 +38,6 @@
           libvdpau-va-gl
         ];
       };
-
-      services.fprintd.enable = true;
-      security.pam.services.login.fprintAuth = true;
-      security.pam.services.sudo.fprintAuth = true;
 
       boot = {
         kernelParams = [

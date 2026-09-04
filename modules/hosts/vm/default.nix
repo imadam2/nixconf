@@ -1,11 +1,14 @@
 { self, inputs, ... }:
+let
+  hostname = baseNameOf ./.;
+in
 {
-  flake.nixosConfigurations.vm = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations."${hostname}" = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
       profileDesktop
-      vmConfiguration
-      vmHardware
-      vmDisko
+      self.nixosModules."${hostname}Configuration"
+      self.nixosModules."${hostname}Hardware"
+      self.nixosModules."${hostname}Disko"
       homeManager
       inputs.disko.nixosModules.disko
       {
@@ -16,7 +19,7 @@
     ];
   };
 
-  flake.nixosModules.vmConfiguration =
+  flake.nixosModules."${hostname}Configuration" =
     {
       config,
       pkgs,
@@ -28,7 +31,7 @@
       sops.age.sshKeyPaths = [ "/persist/etc/ssh/ssh_host_ed25519_key" ];
 
       networking = {
-        hostName = "vm";
+        hostName = "${hostname}";
         hostId = "778a0f05";
       };
 

@@ -3,8 +3,11 @@
   inputs,
   ...
 }:
+let
+  hostname = baseNameOf ./.;
+in
 {
-  flake.nixosConfigurations.glados = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations."${hostname}" = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
       flaresolverr
       immich
@@ -18,13 +21,13 @@
       sonarr
       syncthing
 
-      gladosDrives
+      self.nixosModules."${hostname}Drives"
       shareUser
 
       profileServer
-      gladosConfiguration
-      gladosHardware
-      gladosDisko
+      self.nixosModules."${hostname}Configuration"
+      self.nixosModules."${hostname}Hardware"
+      self.nixosModules."${hostname}Disko"
       inputs.nix-topology.nixosModules.default
       {
         home-manager.users.ye.imports = with self.homeModules; [
@@ -34,16 +37,16 @@
     ];
   };
 
-  flake.nixosModules.gladosConfiguration =
+  flake.nixosModules."${hostname}Configuration" =
     { pkgs, ... }:
     {
       topology.self = {
-        name = "Glados";
-        hardware.info = "2U Main media and storage server";
+        name = "${hostname}";
+        hardware.info = "3U Main media and storage server";
       };
 
       networking = {
-        hostName = "glados";
+        hostName = "${hostname}";
         firewall = {
           allowedTCPPorts = [
             27973

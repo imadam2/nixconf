@@ -1,13 +1,16 @@
 { self, inputs, ... }:
+let
+  hostname = baseNameOf ./.;
+in
 {
-  flake.nixosConfigurations.unit-00 = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations."${hostname}" = inputs.nixpkgs.lib.nixosSystem {
 
     modules = with self.nixosModules; [
       profileDesktop
       profileLaptop
-      unit-01Configuration
-      unit-01Hardware
-      unit-01Disko
+      self.nixosModules."${hostname}Configuration"
+      self.nixosModules."${hostname}Hardware"
+      self.nixosModules."${hostname}Disko"
       inputs.disko.nixosModules.disko
       homeManager
       {
@@ -18,9 +21,9 @@
     ];
   };
 
-  flake.nixosModules.unit-00Configuration =
+  flake.nixosModules."${hostname}Configuration" =
     { ... }:
     {
-      networking.hostName = "unit-00";
+      networking.hostName = "${hostname}";
     };
 }

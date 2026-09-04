@@ -1,10 +1,9 @@
+{ self, inputs, ... }:
+let
+  hostName = baseNameOf ./.;
+in
 {
-  self,
-  inputs,
-  ...
-}:
-{
-  flake.nixosModules.kaguraDisko = {
+  flake.nixosModules."${hostName}Disko" = {
     imports = [ inputs.disko.nixosModules.disko ];
     disko.devices = self.lib.mkDisko "/dev/nvme0n1";
   };

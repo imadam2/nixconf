@@ -1,5 +1,9 @@
+{ ... }:
+let
+  hostName = baseNameOf ./.;
+in
 {
-  flake.nixosModules.kaguraHardware =
+  flake.nixosModules."${hostName}Hardware" =
     {
       config,
       lib,
@@ -7,10 +11,7 @@
       ...
     }:
     {
-      imports = [
-        (modulesPath + "/installer/scan/not-detected.nix")
-      ];
-
+      imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
       boot = {
         kernelModules = [ "kvm-intel" ];
         extraModulePackages = [ ];
@@ -30,9 +31,7 @@
           ];
         };
       };
-
       swapDevices = [ ];
-
       nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
       hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
     };

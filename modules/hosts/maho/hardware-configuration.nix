@@ -1,8 +1,10 @@
 { inputs, ... }:
+let
+  hostname = baseNameOf ./.;
+in
 {
-  flake.nixosModules.mahoHardware =
+  flake.nixosModules."${hostname}Hardware" =
     {
-      config,
       lib,
       modulesPath,
       ...

@@ -1,8 +1,11 @@
 {
   ...
 }:
+let
+  hostname = baseNameOf ./.;
+in
 {
-  flake.nixosModules.gladosDrives =
+  flake.nixosModules."${hostname}Drives" =
     { pkgs, ... }:
     {
       environment.systemPackages = with pkgs; [ mergerfs ];
