@@ -17,8 +17,9 @@
       {
         home-manager.users.ye.imports = with self.homeModules; [
           mangowm
-          profileDesktop
+          discord
           obs
+          profileDesktop
         ];
       }
     ];
