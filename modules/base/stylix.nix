@@ -13,7 +13,7 @@
         polarity = "dark";
         opacity.terminal = 1.0;
         fonts = {
-          sizes.terminal = 11.75;
+          sizes.terminal = 11;
           monospace = {
             package = pkgs.nerd-fonts.iosevka-term;
             name = "IosevkaTerm NFM Medium";

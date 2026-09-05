@@ -9,7 +9,7 @@ keys:
   - &ritsuko_host age1rmmaw25jkf3cuf6yjvxxmc8f9rrn4u7g905wj0vxrrp49upsqglskulgmu
   - &seedbox_host age1yakkpxmvqp0vjdjtfn8kk3ea2tvnwe5pwepa2pdys3u3wljjh4jq9fup44
   - &unit-00_host age14r4q0ucn96jhq6j3ykpntwgrzxwvzn3ak2wrmsxeesuuf99ut3ase3ktke
-  - &vm_keys age16prtvglpvdnfvyng7ppnpyzt4fgt2vpjrughhwmdvencqsyue4msq33gpe
+  - &vm_keys age1yq8mapgntvy0m7le2j4twh5n5wnyceqkk9xeksx60u5slaa4n9sstdm494
 
 creation_rules:
   - path_regex: secrets/[^/]+\.(yaml|enc)$

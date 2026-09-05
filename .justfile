@@ -27,14 +27,26 @@ rup host:
   nh os switch ~/nixconf -H {{host}} --target-host {{host}} --ask
   ssh {{host}} 'cd ~/nixconf && git pull'
 
-deploy host ip:
+deploy host ip persist="":
   #!/usr/bin/env bash
   set -euo pipefail
-  mkdir -pv /tmp/{{host}}keys/etc/ssh
-  ssh-keygen -t ed25519 -f /tmp/{{host}}keys/etc/ssh/ssh_host_ed25519 -N "" -C "{{host}}"
+
+  if [ "{{persist}}" = "persist" ]; then
+    keydir="/tmp/{{host}}keys/persist/etc/ssh"
+  else
+    keydir="/tmp/{{host}}keys/etc/ssh"
+  fi
+
+  mkdir -pv "$keydir"
+
+  if [ "{{persist}}" = "persist" ]; then
+    systemd-machine-id-setup --root="/tmp/{{host}}keys/persist" --print
+  fi
+
+  ssh-keygen -t ed25519 -N "" -f "$keydir/ssh_host_ed25519_key" 
   echo ""
   echo "== Age public key for {{host}} =="
-  ssh-to-age -i /tmp/{{host}}keys/etc/ssh/ssh_host_ed25519.pub
+  ssh-to-age -i "$keydir/ssh_host_ed25519_key.pub"
   echo "================================="
   echo ""
   echo ">>> Add the anchor + age entry above to .sops.yaml, save, then press Enter <<<"

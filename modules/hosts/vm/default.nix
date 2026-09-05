@@ -23,6 +23,7 @@ in
     {
       config,
       pkgs,
+      lib,
       ...
     }:
     {
