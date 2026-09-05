@@ -125,6 +125,7 @@
             "appid:org.prismlauncher.PrismLauncher,tags:3"
             "appid:vesktop,tags:4"
             "appid:mullvad-vpn,tags:9"
+            "appid:com.github.wwmm.easyeffects,tags:9"
           ];
 
           bind = [

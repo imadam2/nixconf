@@ -60,6 +60,7 @@
               "c8d9e6e6-e702-4e15-8972-3596e57cf398"
             ];
             settings = {
+              "zen.theme.hide-unified-extensions-button" = false;
               "zen.view.compact.enable-at-startup" = true;
               "zen.view.compact.hide-tabbar" = false;
               "zen.view.compact.hide-toolbar" = true;
