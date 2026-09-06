@@ -22,9 +22,9 @@ in
       services = {
         ${service} = {
           enable = true;
-          configDir = "${hl.appdataDir}/${service}/config";
           dataDir = "${hl.appdataDir}/${service}";
           cacheDir = "${hl.appdataDir}/${service}/config/cache";
+          configDir = "${hl.appdataDir}/${service}/config";
           logDir = "${hl.appdataDir}/${service}/config/log";
           user = hl.user;
           group = hl.group;
@@ -55,20 +55,17 @@ in
         LIBVA_DRIVER_NAME = "iHD";
       };
 
-      nixpkgs.overlays = with pkgs; [
+      nixpkgs.overlays = [
         (final: prev: {
           jellyfin-web = prev.jellyfin-web.overrideAttrs (
             finalAttrs: previousAttrs: {
               installPhase = ''
-                	  runHook preInstall
-
-                	  sed -i "s#</head>#<script src=\"configurationpage?name=skip-intro-button.js\"></script></head>#" dist/index.html
-
-                	  mkdir -p $out/share
-                	  cp -a dist $out/share/jellyfin-web
-
-                	  runHook postInstall
-                	'';
+                runHook preInstall
+                sed -i "s#</head>#<script src=\"configurationpage?name=skip-intro-button.js\"></script></head>#" dist/index.html
+                mkdir -p $out/share
+                cp -a dist $out/share/jellyfin-web
+                runHook postInstall
+              '';
             }
           );
         })
