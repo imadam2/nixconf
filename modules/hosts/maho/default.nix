@@ -10,12 +10,11 @@ in
 {
   flake.nixosConfigurations."${hostname}" = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
-      profileServer
       self.nixosModules."${hostname}Configuration"
       self.nixosModules."${hostname}Hardware"
+
+      profileServer
       shareUser
-      homeManager
-      inputs.nix-topology.nixosModules.default
       {
         home-manager.users.ye.imports = with self.homeModules; [
           neovim

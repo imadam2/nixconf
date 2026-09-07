@@ -9,20 +9,19 @@ in
 {
   flake.nixosConfigurations."${hostname}" = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
-      profileDesktop
-      gaming
-      virtualization
       self.nixosModules."${hostname}Configuration"
       self.nixosModules."${hostname}Hardware"
       self.nixosModules."${hostname}Disko"
-      homeManager
-      inputs.nix-topology.nixosModules.default
+
+      gaming
+      profileDesktop
+      virtualization
       {
         home-manager.users.ye.imports = with self.homeModules; [
           discord
-          profileDesktop
           gaming
           obs
+          profileDesktop
         ];
       }
     ];

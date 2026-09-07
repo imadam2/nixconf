@@ -45,7 +45,7 @@ in
           rootFsOptions = {
             acltype = "posixacl";
             canmount = "off";
-            compression = "zstd";
+            compression = "lz4";
             dnodesize = "auto";
             normalization = "formD";
             relatime = "on";
@@ -56,25 +56,14 @@ in
               type = "zfs_fs";
               mountpoint = "/";
               postCreateHook = "zfs snapshot zroot/root@blank";
-              options = {
-                mountpoint = "legacy";
-                compression = "zstd";
-              };
             };
             "nix" = {
               type = "zfs_fs";
               mountpoint = "/nix";
-              options = {
-                compression = "zstd";
-                atime = "off";
-              };
             };
             "persist" = {
               type = "zfs_fs";
               mountpoint = "/persist";
-              options = {
-                compression = "zstd";
-              };
             };
           };
         };

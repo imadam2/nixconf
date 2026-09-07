@@ -9,9 +9,10 @@
     }:
     {
       imports = [
-        inputs.sops-nix.nixosModules.sops
+        inputs.disko.nixosModules.disko
         inputs.nix-index-database.nixosModules.default
         inputs.nix-topology.nixosModules.default
+        inputs.sops-nix.nixosModules.sops
       ];
 
       system.stateVersion = config.my.stateVersion;

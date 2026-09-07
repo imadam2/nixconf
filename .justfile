@@ -3,11 +3,14 @@ set shell := ["bash", "-uc"]
 default:
   @just --list
 
+clean: gc
+  nix-store --optimize
+
 gc:
   sudo nix-collect-garbage -d
 
-clean: gc
-  nix-store --optimize
+iso:
+  nix build ~/nixconf#nixosConfigurations.iso.config.system.build.isoImage
 
 up:
   nh os switch ~/nixconf

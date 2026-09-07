@@ -9,26 +9,24 @@ in
 {
   flake.nixosConfigurations."${hostname}" = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
+      self.nixosModules."${hostname}Configuration"
+      self.nixosModules."${hostname}Hardware"
+      self.nixosModules."${hostname}Disko"
+      self.nixosModules."${hostname}Drives"
+
       flaresolverr
       immich
       jellyfin
+      profileServer
       prowlarr
       qbittorrent
       radarr
       seerr
       share
+      shareUser
       slskd
       sonarr
       syncthing
-
-      self.nixosModules."${hostname}Drives"
-      shareUser
-
-      profileServer
-      self.nixosModules."${hostname}Configuration"
-      self.nixosModules."${hostname}Hardware"
-      self.nixosModules."${hostname}Disko"
-      inputs.nix-topology.nixosModules.default
       {
         home-manager.users.ye.imports = with self.homeModules; [
           profileServer
@@ -86,10 +84,6 @@ in
         algorithm = "zstd";
         memoryPercent = 200;
       };
-
-      #boot.kernelParams = [
-      #  "i915.enable_guc=2"
-      #];
 
       powerManagement = {
         enable = true;

@@ -5,12 +5,11 @@ in
 {
   flake.nixosConfigurations."${hostname}" = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
-      profileDesktop
       self.nixosModules."${hostname}Configuration"
       self.nixosModules."${hostname}Hardware"
       self.nixosModules."${hostname}Disko"
-      homeManager
-      inputs.disko.nixosModules.disko
+
+      profileDesktop
       {
         home-manager.users.ye.imports = with self.homeModules; [
           profileDesktop
@@ -23,7 +22,6 @@ in
     {
       config,
       pkgs,
-      lib,
       ...
     }:
     {
@@ -37,8 +35,11 @@ in
       };
 
       hardware.graphics.enable = true;
-      services.qemuGuest.enable = true;
-      services.openssh.enable = true;
+
+      services = {
+        qemuGuest.enable = true;
+        openssh.enable = true;
+      };
 
       environment.persistence."/persist" = {
         directories = [

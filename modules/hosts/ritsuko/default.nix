@@ -9,16 +9,13 @@ in
 {
   flake.nixosConfigurations."${hostname}" = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
-      mangowm
-      profileDesktop
       self.nixosModules."${hostname}Configuration"
       self.nixosModules."${hostname}Hardware"
-      homeManager
-      inputs.nix-topology.nixosModules.default
+
       inputs.sc0710.nixosModules.default
+      profileDesktop
       {
         home-manager.users.ye.imports = with self.homeModules; [
-          mangowm
           discord
           obs
           profileDesktop
@@ -39,9 +36,10 @@ in
 
       powerManagement.cpuFreqGovernor = "performance";
 
-      services.xserver.videoDrivers = [ "nvidia" ];
-
-      services.hypridle.enable = lib.mkForce false;
+      services = {
+        hypridle.enable = lib.mkForce false;
+        xserver.videoDrivers = [ "nvidia" ];
+      };
 
       systemd = {
         targets = {

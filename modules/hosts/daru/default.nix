@@ -5,11 +5,11 @@ in
 {
   flake.nixosConfigurations."${hostname}" = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
-      profileDesktop
-      profileLaptop
       self.nixosModules."${hostname}Configuration"
       self.nixosModules."${hostname}Hardware"
-      homeManager
+
+      profileDesktop
+      profileLaptop
       {
         home-manager.users.ye.imports = with self.homeModules; [
           profileDesktop

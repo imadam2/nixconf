@@ -8,6 +8,7 @@
         base
         desktop
         git
+        homeManager
         mangowm
         nfs
         services

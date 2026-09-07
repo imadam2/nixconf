@@ -10,24 +10,22 @@ in
 {
   flake.nixosConfigurations."${hostname}" = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.nixosModules; [
+      self.nixosModules."${hostname}Configuration"
+      self.nixosModules."${hostname}Hardware"
+      self.nixosModules."${hostname}Disko"
+
       adguardhome
       caddy
+      caddyVhosts
       glance
       homeassistant
+      nfs
+      profileServer
+      shareUser
       unbound
       unifi
       uptime-kuma
       vaultwarden
-
-      caddyVhosts
-      shareUser
-
-      profileServer
-      nfs
-      self.nixosModules."${hostname}Configuration"
-      self.nixosModules."${hostname}Hardware"
-      self.nixosModules."${hostname}Disko"
-      inputs.nix-topology.nixosModules.default
       {
         home-manager.users.ye.imports = with self.homeModules; [
           profileServer
