@@ -7,6 +7,15 @@ in
 {
   flake.nixosModules."${hostname}Disko" = {
     disko.devices = {
+      nodev = {
+        "/" = {
+          fsType = "tmpfs";
+          mountOptions = [
+            "size=2G"
+            "mode=755"
+          ];
+        };
+      };
       disk = {
         main = {
           type = "disk";
@@ -52,11 +61,6 @@ in
             xattr = "sa";
           };
           datasets = {
-            "root" = {
-              type = "zfs_fs";
-              mountpoint = "/";
-              postCreateHook = "zfs snapshot zroot/root@blank";
-            };
             "nix" = {
               type = "zfs_fs";
               mountpoint = "/nix";
