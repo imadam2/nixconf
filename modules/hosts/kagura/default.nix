@@ -10,6 +10,7 @@ in
       self.nixosModules."${hostname}Disko"
 
       profileDesktop
+      preservation
       {
         home-manager.users.ye.imports = with self.homeModules; [
           discord
@@ -22,7 +23,10 @@ in
   flake.nixosModules."${hostname}Configuration" =
     { pkgs, ... }:
     {
-      networking.hostName = "${hostname}";
+      networking = {
+        hostName = "${hostname}";
+        hostId = "544b7097";
+      };
 
       hardware.graphics = {
         enable = true;
