@@ -21,6 +21,7 @@
         preserveAt."/persist" = {
           directories = [
             "/etc/NetworkManager/system-connections"
+            "/etc/mullvad-vpn"
             "/var/lib/NetworkManager"
             "/var/lib/acme"
             "/var/lib/bluetooth"
@@ -45,7 +46,6 @@
           files = [
             "/etc/ssh/ssh_host_ed25519_key"
             "/etc/ssh/ssh_host_ed25519_key.pub"
-            "/etc/mullvad-vpn"
             {
               file = "/etc/machine-id";
               inInitrd = true;
