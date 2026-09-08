@@ -1,9 +1,13 @@
 { ... }:
 {
+  flake.nixosModules.obs =
+    { ... }:
+    {
+      programs.obs-studio.enableVirtualCamera = true;
+    };
   flake.homeModules.obs =
     { pkgs, ... }:
     {
-
       programs = {
         obs-studio = {
           enable = true;

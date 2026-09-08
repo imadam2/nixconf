@@ -14,6 +14,7 @@ in
 
       inputs.sc0710.nixosModules.default
       profileDesktop
+      obs
       {
         home-manager.users.ye.imports = with self.homeModules; [
           discord
@@ -37,6 +38,7 @@ in
       powerManagement.cpuFreqGovernor = "performance";
 
       services = {
+        openssh.enable = true;
         hypridle.enable = lib.mkForce false;
         xserver.videoDrivers = [ "nvidia" ];
       };
