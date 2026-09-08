@@ -10,7 +10,7 @@
       ];
 
       sops.age.sshKeyPaths = [ "/persist/etc/ssh/ssh_host_ed25519_key" ];
-
+      systemd.suppressedSystemUnits = [ "systemd-machine-id-commit.service" ];
       fileSystems = {
         "/persist".neededForBoot = true;
         "/nix".neededForBoot = true;
@@ -20,13 +20,32 @@
         enable = true;
         preserveAt."/persist" = {
           directories = [
-            "/var/log"
-            "/var/lib"
             "/etc/NetworkManager/system-connections"
+            "/var/lib/NetworkManager"
+            "/var/lib/acme"
+            "/var/lib/bluetooth"
+            "/var/lib/caddy"
+            "/var/lib/fwupd"
+            "/var/lib/immich"
+            "/var/lib/libvirt"
+            "/var/lib/postgresql"
+            "/var/lib/private/AdGuardHome"
+            "/var/lib/private/prowlarr"
+            "/var/lib/private/seerr"
+            "/var/lib/private/uptime-kuma"
+            "/var/lib/prowlarr"
+            "/var/lib/redis-immich"
+            "/var/lib/seerr"
+            "/var/lib/slskd"
+            "/var/lib/unifi"
+            "/var/lib/uptime-kuma"
+            "/var/lib/vaultwarden"
+            "/var/log"
           ];
           files = [
             "/etc/ssh/ssh_host_ed25519_key"
             "/etc/ssh/ssh_host_ed25519_key.pub"
+            "/etc/mullvad-vpn"
             {
               file = "/etc/machine-id";
               inInitrd = true;

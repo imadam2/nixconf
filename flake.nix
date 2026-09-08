@@ -5,16 +5,13 @@
     catppuccin.url = "github:catppuccin/nix";
     flake-file.url = "github:vic/flake-file";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    impermanence.url = "github:nix-community/impermanence";
-    preservation.url = "github:nix-community/preservation";
     import-tree.url = "github:vic/import-tree";
+    nixvim.url = "github:nix-community/nixvim";
+    noctalia.url = "github:noctalia-dev/noctalia/cachix";
+    preservation.url = "github:nix-community/preservation";
     sc0710.url = "github:Nakildias/sc0710";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     xdp-termfilepickers.url = "github:Guekka/xdg-desktop-portal-termfilepickers";
-
-    nixvim = {
-      url = "github:nix-community/nixvim";
-    };
 
     nix-topology = {
       url = "github:oddlama/nix-topology";
@@ -39,10 +36,6 @@
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    noctalia = {
-      url = "github:noctalia-dev/noctalia/cachix";
     };
 
     stylix = {

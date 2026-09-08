@@ -34,7 +34,7 @@ in
         settings = {
           devices = {
             "kagura" = {
-              id = "IK7W5UF-CLTGEYR-KG67G5R-JZRRHDL-QZO6QNY-BRE4NSN-KFLBY6P-SFK35AH";
+              id = "EJXVF3G-XBWMYZT-WIX3AZA-37FCW6M-HZBXZGE-HJNRESR-NMX67SI-CHN6FAO";
               autoAcceptFolders = true;
             };
             "mayuri" = {
