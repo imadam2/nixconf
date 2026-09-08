@@ -55,4 +55,5 @@ deploy host ip persist="":
   echo ">>> Add the anchor + age entry above to .sops.yaml, save, then press Enter <<<"
   read -r _
   sops updatekeys secrets/secrets.yaml
+  sops updatekeys secrets/homelab.yaml
   nixos-anywhere --flake ~/nixconf#{{host}} --target-host root@{{ip}} --extra-files /tmp/{{host}}keys
