@@ -3,6 +3,9 @@ set shell := ["bash", "-uc"]
 default:
   @just --list
 
+check:
+  nix flake check --all-systems --no-build
+
 clean: gc
   nix-store --optimize
 

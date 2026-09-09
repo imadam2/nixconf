@@ -21,6 +21,8 @@
       time.timeZone = config.my.timezone;
       i18n.defaultLocale = config.my.locale;
 
+      security.sudo.wheelNeedsPassword = false;
+
       programs = {
         nix-index-database.comma.enable = true;
         fish.enable = true;
