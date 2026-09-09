@@ -53,14 +53,14 @@
           ];
           users.ye = {
             directories = [
+              ".lunarclient"
+              ".minecraft"
+              ".steam"
               "Documents"
               "Games"
               "Pictures"
               "Videos"
               "nixconf"
-              ".lunarclient"
-              ".minecraft"
-              ".steam"
               ".config/Bitwarden CLI"
               ".config/Mullvad VPN"
               ".config/OrcaSlicer"
@@ -82,8 +82,10 @@
               ".local/share/jellyfin-desktop"
               ".local/share/jellyfin-tui"
               ".local/share/lutris"
+              ".local/share/nvim"
               ".local/share/qBittorrent"
               ".local/share/umu"
+              ".local/state/zoxide"
               ".local/state/noctalia"
               {
                 directory = ".ssh";

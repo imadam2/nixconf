@@ -67,11 +67,16 @@
           repeat_delay = 300;
           blur = 1;
           blur_optimized = 1;
+          disable_trackpad = 1;
+          drag_tile_to_tile = 1;
+          enable_floating_snap = 1;
+          exchange_cross_monitor = 1;
+          focus_cross_monitor = 1;
           gappih = 0;
           gappiv = 0;
           gappoh = 0;
           gappov = 0;
-          disable_trackpad = 1;
+          no_border_when_single = 1;
           focuscolor = "0x89b4faff";
           bordercolor = "0x1e1e2eff";
           xkb_rules_layout = "gb";
