@@ -3,9 +3,11 @@
   flake.homeModules.firefox =
     { pkgs, ... }:
     {
-      stylix.targets.firefox.profileNames = [ "default" ];
-
+      stylix.targets.firefox = {
+        profileNames = [ "default" ];
+      };
       programs.firefox = {
+        enable = true;
         policies = {
           AppAutoUpdate = false;
           BackgroundAppUpdate = false;
@@ -29,6 +31,11 @@
           DontCheckDefaultBrowser = true;
           NoDefaultBookmarks = true;
           OfferToSaveLogins = false;
+          ExtensionSettings = {
+            "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
+              default_area = "navbar";
+            };
+          };
           EnableTrackingProtection = {
             Value = true;
             Locked = true;
@@ -36,7 +43,6 @@
             Fingerprinting = true;
           };
         };
-        enable = true;
         profiles.default = {
           id = 0;
           name = "default";
@@ -51,7 +57,7 @@
             "browser.newtabpage.activity-stream.showSponsored" = false;
             "browser.newtabpage.enabled" = false;
             "browser.quickactions.enabled" = false;
-            "browser.startup.homepage" = "about:blank";
+            "browser.startup.homepage" = "https://glance.elpsy.moe";
             "browser.toolbars.bookmarks.visibility" = "never";
             "browser.uidensity" = 1;
             "dom.security.https_only_mode" = true;
