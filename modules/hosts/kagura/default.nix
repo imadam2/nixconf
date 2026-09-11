@@ -14,6 +14,7 @@ in
       {
         home-manager.users.ye.imports = with self.homeModules; [
           discord
+          firefox
           profileDesktop
         ];
       }

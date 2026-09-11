@@ -23,17 +23,17 @@
     { ... }:
     {
       imports = with self.homeModules; [
-        browser
         desktop
+        jellyfin-add-to-playlist
         mangowm
         media
         neovim
         noctalia
         packages
-        shell
         screenshot
-        jellyfin-add-to-playlist
+        shell
         toggle-monitor-mode
+        zen
       ];
     };
 }

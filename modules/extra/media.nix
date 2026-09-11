@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ lib, inputs, ... }:
 {
   flake.homeModules.media =
     { pkgs, ... }:
@@ -16,8 +16,11 @@
           enabledExtensions = with spicePkgs.extensions; [
             adblock
             hidePodcasts
+            keyboardShortcut
             shuffle
           ];
+          theme = lib.mkForce spicePkgs.themes.text;
+          colorScheme = lib.mkForce "CatppuccinMocha";
         };
 
       home.packages = with pkgs; [

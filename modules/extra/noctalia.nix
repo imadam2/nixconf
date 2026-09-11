@@ -47,15 +47,31 @@
             terminalCommand = "kitty -e";
           };
           widget = {
+            active_window = {
+              max_length = 350;
+            };
             battery = {
-              display_mode = "graphic";
+              display_mode = "glyph";
+            };
+            clock = {
+              format = "{:%a %d %b} {:%H:%M:%S}";
+            };
+            cat = {
+              type = "noctalia/bongocat:cat";
+              input_devices = [
+                "/dev/input/event1"
+                "/dev/input/event2"
+              ];
+            };
+            media = {
+              max_length = 800;
             };
             workspaces = {
               anchor = true;
+              capsule_padding = 10;
               empty_color = "primary";
               focused_color = "hover";
               max_label_chars = 1;
-              minimal = true;
               occupied_color = "primary";
               style = "minimal";
             };
@@ -76,6 +92,7 @@
           plugins = {
             enabled = [
               "noctalia/bitwarden"
+              "noctalia/bongocat"
             ];
           };
           wallpaper = {
@@ -110,29 +127,39 @@
             ];
             bar = {
               border = "primary";
-              border_width = "3.0";
-              capsule_radius = "3.0";
+              border_width = 20.0;
+              capsule = true;
+              capsule_radius = 0;
+              capsule_thickness = 1;
+              concave_edge_corners = false;
               font_weight = 700;
               margin_edge = 0;
               margin_ends = 0;
-              position = "right";
+              padding = 0;
+              panel_overlap = 0;
+              position = "bottom";
               radius = 0;
-              widget_spacing = 20;
+              shadow = false;
+              thickness = 25;
+              widget_spacing = 0;
               start = [
-                "date"
-                "clock"
-                "media"
+                "workspaces"
+                "active_window"
               ];
               center = [
-                "workspaces"
+                "media"
+                "clock"
               ];
               end = [
-                "tray"
+                "audio_visualizer"
+                "temp"
+                "cpu"
+                "ram"
                 "bluetooth"
-                "volume"
                 "brightness"
-                "network"
+                "volume"
                 "battery"
+                "tray"
                 "control-center"
               ];
               left = [
