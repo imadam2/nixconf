@@ -18,7 +18,7 @@
       };
 
       fileSystems."/media/NAS" = {
-        device = "10.1.10.3:/";
+        device = "glados:/";
         fsType = "nfs4";
         options = [
           "nfsvers=4.2"

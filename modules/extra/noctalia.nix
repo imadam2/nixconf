@@ -46,6 +46,25 @@
             enableClipboardHistory = true;
             terminalCommand = "kitty -e";
           };
+          nightLight = {
+            autoSchedule = true;
+            enabled = true;
+            manualSunrise = "08:00";
+            manualSunset = "23:00";
+            nightTemp = "3500";
+          };
+          plugin_settings."noctalia/bitwarden" = {
+            gen_length = 24;
+            gen_special = true;
+            server_url = "https://vaultwarden.elpsy.moe";
+            vault_timeout = "never";
+          };
+          plugins = {
+            enabled = [
+              "noctalia/bitwarden"
+              "noctalia/bongocat"
+            ];
+          };
           widget = {
             active_window = {
               max_length = 350;
@@ -66,6 +85,10 @@
             media = {
               max_length = 800;
             };
+            spacer_2 = {
+              length = 3;
+              type = "spacer";
+            };
             workspaces = {
               anchor = true;
               capsule_padding = 10;
@@ -75,25 +98,6 @@
               occupied_color = "primary";
               style = "minimal";
             };
-          };
-          nightLight = {
-            autoSchedule = true;
-            enabled = true;
-            manualSunrise = "08:00";
-            manualSunset = "23:00";
-            nightTemp = "3500";
-          };
-          plugin_settings."noctalia/bitwarden" = {
-            gen_length = 24;
-            gen_special = true;
-            server_url = "https://vaultwarden.elpsy.moe";
-            vault_timeout = "never";
-          };
-          plugins = {
-            enabled = [
-              "noctalia/bitwarden"
-              "noctalia/bongocat"
-            ];
           };
           wallpaper = {
             directory = "${wallpaperDir}";
@@ -144,22 +148,26 @@
               widget_spacing = 0;
               start = [
                 "workspaces"
+                "spacer_2"
                 "active_window"
-              ];
-              center = [
+                "spacer_2"
                 "media"
-                "clock"
               ];
               end = [
                 "audio_visualizer"
+                "spacer_2"
                 "temp"
                 "cpu"
                 "ram"
                 "bluetooth"
+                "spacer_2"
                 "brightness"
                 "volume"
-                "battery"
+                "spacer_2"
                 "tray"
+                "spacer_2"
+                "clock"
+                "spacer_2"
                 "control-center"
               ];
               left = [
