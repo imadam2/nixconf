@@ -60,7 +60,7 @@
           noctalia &
           prismlauncher &
           steam &
-          zen-beta &
+          firefox &
         '';
         settings = {
           repeat_rate = 50;
@@ -124,7 +124,7 @@
             "title:mpv,isfloating:1"
             "title:waywall,isfloating:1"
 
-            "appid:zen-beta,tags:2"
+            "appid:firefox,tags:2"
             "appid:lunarclient,tags:3"
             "appid:steam,tags:3"
             "appid:org.prismlauncher.PrismLauncher,tags:3"
@@ -185,7 +185,7 @@
             "SUPER+SHIFT,SPACE,togglefloating"
             "SUPER,BACKSPACE,spawn,noctalia msg session lock"
 
-            "SUPER,W,spawn,zen-beta"
+            "SUPER,W,spawn,firefox"
             "SUPER,E,spawn,noctalia msg panel-toggle launcher /emo"
             "SUPER+SHIFT,E,reload_config"
             "SUPER,R,spawn,kitty -e yazi"
