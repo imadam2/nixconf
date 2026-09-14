@@ -15,6 +15,7 @@ in
 
       gaming
       profileDesktop
+      osu
       virtualization
       {
         home-manager.users.ye.imports = with self.homeModules; [
@@ -22,6 +23,7 @@ in
           firefox
           gaming
           obs
+          osu
           profileDesktop
         ];
       }
