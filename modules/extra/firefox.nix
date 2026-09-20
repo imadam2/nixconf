@@ -25,7 +25,6 @@
           DisableFormHistory = true;
           DisablePasswordReveal = true;
           BlockAboutConfig = false;
-          BlockAboutProfiles = true;
           BlockAboutSupport = true;
           DisplayMenuBar = "never";
           DontCheckDefaultBrowser = true;
@@ -116,13 +115,6 @@
             	--toolbarbutton-padding-inner: 0.3em !important;
             }
             #statuspanel { display: none !important; }
-            menupopup, panel { --panel-border-radius: 0 !important; }
-            menu, menuitem, menucaption { border-radius: 0 !important; }
-            menupopup > #context-navigation { display: none !important; }
-            menupopup > #context-sep-navigation { display: none !important; }
-            #back-button { display: none; }
-            #forward-button { display: none; }
-            #reload-button { display: none; }
             #stop-button { display: none; }
             #home-button { display: none; }
             #library-button { display: none; }

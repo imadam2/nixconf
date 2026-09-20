@@ -153,6 +153,8 @@
                 "spacer_2"
                 "media"
               ];
+              center = [
+              ];
               end = [
                 "audio_visualizer"
                 "spacer_2"
