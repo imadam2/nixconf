@@ -1,6 +1,6 @@
 # my nixos config for (almost) every pc i own
 
-![T480 Desktop](desk.png)
+![mayuri desktop](desk.png)
 
 ## hosts
 
