@@ -33,6 +33,10 @@
             useACMEHost = hl.domain;
             extraConfig = "reverse_proxy \"https://10.1.10.1:443\"";
           };
+          "jfpub.${hl.domain}" = {
+            useACMEHost = hl.domain;
+            extraConfig = "reverse_proxy \"${glados}:8096\"";
+          };
           "proxmox.${hl.domain}" = {
             useACMEHost = hl.domain;
             extraConfig = ''
