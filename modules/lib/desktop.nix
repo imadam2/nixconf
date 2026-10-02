@@ -24,6 +24,7 @@
     {
       imports = with self.homeModules; [
         desktop
+        firefox
         jellyfin-add-to-playlist
         mangowm
         media
@@ -33,7 +34,6 @@
         screenshot
         shell
         toggle-monitor-mode
-        zen
       ];
     };
 }
