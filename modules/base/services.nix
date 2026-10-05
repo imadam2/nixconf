@@ -15,6 +15,8 @@
         };
         udev.extraRules = ''
           KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="feed", ATTRS{idProduct}=="6536", MODE="0660", GROUP="users"
+          KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="152a", ATTRS{idProduct}=="8750", MODE="0660", GROUP="users"
+          KERNEL=="usb*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="152a", ATTRS{idProduct}=="8750", MODE="0660", GROUP="users"
         '';
       };
     };
