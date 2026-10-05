@@ -54,14 +54,7 @@
       wayland.windowManager.mango = {
         enable = true;
         systemd.enable = true;
-        autostart_sh = ''
-          easyeffects &
-          mullvad-vpn &
-          noctalia &
-          prismlauncher &
-          steam &
-          firefox &
-        '';
+        autostart_sh = "";
         settings = {
           repeat_rate = 50;
           repeat_delay = 300;
@@ -72,21 +65,30 @@
           enable_floating_snap = 1;
           exchange_cross_monitor = 1;
           focus_cross_monitor = 1;
-          gappih = 0;
-          gappiv = 0;
-          gappoh = 0;
-          gappov = 0;
+          gap_inner_horizontal = 0;
+          gap_inner_vertical = 0;
+          gap_outer_horizontal = 0;
+          gap_outer_vertical = 0;
           no_border_when_single = 1;
-          focuscolor = "0x89b4faff";
-          bordercolor = "0x1e1e2eff";
+          focus_color = "0x89b4faff";
+          border_color = "0x1e1e2eff";
           xkb_rules_layout = "gb";
           xkb_rules_options = "ctrl:nocaps";
 
-          devicerule = [
+          exec_once = [
+            "easyeffects &"
+            "mullvad-vpn &"
+            "noctalia &"
+            "prismlauncher &"
+            "steam &"
+            "firefox &"
+          ];
+
+          device_rule = [
             "name:Endgame Gear Endgame Gear HS Dongle,accel_profile:1"
           ];
 
-          monitorrule = [
+          monitor_rule = [
             "name:DP-1,width:3840,height:2160,refresh:160,x:0,y:1440"
             "name:DP-2,width:3440,height:1440,refresh:165,x:200,y:0"
             "name:HDMI-A-1,width:1600,height:1200,refresh:60,rr:1"
@@ -103,34 +105,34 @@
             "SUPER,btn_right,moveresize,curresize"
           ];
 
-          tagrule = [
+          tag_rule = [
             "id:*,monitor_name:DP-1,layout_name:dwindle"
             "id:*,monitor_name:DP-2,layout_name:tile"
             "id:*,monitor_name:HDMI-A-1,layout_name:vertical_tile"
           ];
 
-          windowrule = [
-            "appid:imv,isfloating:1"
-            "appid:org-prismlauncher-EntryPoint,isfloating:1"
-            "appid:qemu,isfloating:1"
-            "title:.*[Ll]unar.*,isfloating:1"
-            "title:.*[Mm]inecraft.*,isfloating:1"
-            "title:Choose Wallpaper,isfloating:1"
-            "title:File Upload,isfloating:1"
-            "title:Library,isfloating:1"
-            "title:Open File,isfloating:1"
-            "title:Save As,isfloating:1"
-            "title:Select a File,isfloating:1"
-            "title:mpv,isfloating:1"
-            "title:waywall,isfloating:1"
+          window_rule = [
+            "app_id:imv,is_floating:1"
+            "app_id:org-prismlauncher-EntryPoint,is_floating:1"
+            "app_id:qemu,is_floating:1"
+            "title:.*[Ll]unar.*,is_floating:1"
+            "title:.*[Mm]inecraft.*,is_floating:1"
+            "title:Choose Wallpaper,is_floating:1"
+            "title:File Upload,is_floating:1"
+            "title:Library,is_floating:1"
+            "title:Open File,is_floating:1"
+            "title:Save As,is_floating:1"
+            "title:Select a File,is_floating:1"
+            "title:mpv,is_floating:1"
+            "title:waywall,is_floating:1"
 
-            "appid:firefox,tags:2"
-            "appid:lunarclient,tags:3"
-            "appid:steam,tags:3"
-            "appid:org.prismlauncher.PrismLauncher,tags:3"
-            "appid:vesktop,tags:4"
-            "appid:mullvad-vpn,tags:9"
-            "appid:com.github.wwmm.easyeffects,tags:9"
+            "app_id:firefox,tags:2"
+            "app_id:lunarclient,tags:3"
+            "app_id:steam,tags:3"
+            "app_id:org.prismlauncher.PrismLauncher,tags:3"
+            "app_id:vesktop,tags:4"
+            "app_id:mullvad-vpn,tags:9"
+            "app_id:com.github.wwmm.easyeffects,tags:9"
           ];
 
           bind = [
@@ -143,7 +145,6 @@
             "NONE,XF86AudioNext,spawn,noctalia msg media next"
             "NONE,XF86AudioPrev,spawn,noctalia msg media previous"
             "NONE,XF86AudioPlay,spawn,noctalia msg media toggle"
-            "NONE,XF86AudioPause,spawn,noctalia msg media stop"
 
             "SUPER,1,view,1"
             "SUPER,2,view,2"
