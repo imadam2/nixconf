@@ -146,6 +146,7 @@
         curl
         dust
         gdu
+        just
         killall
         neovim
         nh

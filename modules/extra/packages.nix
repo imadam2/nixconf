@@ -11,7 +11,6 @@
       home.packages = with pkgs; [
         evtest
         grim
-        just
         nixos-anywhere
         orca-slicer
         pavucontrol
