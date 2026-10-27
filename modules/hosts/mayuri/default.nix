@@ -38,7 +38,21 @@ in
         hardware.info = "Main Ryzen 5800x Desktop";
       };
 
-      networking.hostName = "${hostname}";
+      environment.systemPackages = with pkgs; [
+        immich-machine-learning
+      ];
+
+      networking = {
+        hostName = "${hostname}";
+        firewall = {
+          allowedUDPPorts = [
+            3003
+          ];
+          allowedTCPPorts = [
+            3003
+          ];
+        };
+      };
 
       powerManagement.cpuFreqGovernor = "performance";
 
