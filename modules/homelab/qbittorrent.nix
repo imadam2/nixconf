@@ -60,6 +60,7 @@ in
                 Username = "adam";
                 Password_PBKDF2 = "@ByteArray(yY2ev2x39V1reCALLZCK1Q==:zA73cEWzLqZAmeJAZY+It0bYOAHK8Cjdk7LYs1wtvQo39855fSMIRSwYawFwPRwb7zO+CVU5tG0vYivYAVcGIw==)";
                 ServerDomains = "${hl.domain}";
+                HostHeaderValidation = false;
               };
             };
           };
