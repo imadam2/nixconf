@@ -63,7 +63,6 @@
           jdks = [
             graalvmPackages.graalvm-ce
             zulu
-            zulu8
             zulu17
           ];
         })
