@@ -27,6 +27,7 @@
       environment.systemPackages = with pkgs; [
         gamemode
         heroic
+        libnotify
         lunar-client
         protontricks
         protonup-qt
@@ -34,6 +35,7 @@
         waywall
         wineWow64Packages.staging
         winetricks
+        wlr-randr
         zulu
       ];
     };
