@@ -41,7 +41,6 @@
       home.packages = with pkgs; [
         ffmpeg
         jellyfin-media-player
-        jellyfin-tui
       ];
 
       programs = {
