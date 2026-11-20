@@ -68,7 +68,7 @@
               ".config/qBittorrent"
               ".config/spotify"
               ".config/syncthing"
-              ".config/vesktop"
+              ".config/equibop"
               ".config/zen"
               ".local/share/easyeffects"
               ".local/share/fish"

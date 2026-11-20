@@ -10,15 +10,16 @@
       xdg.mimeApps = {
         enable = true;
         defaultApplications = {
-          "audio/flac" = [ "mpv.desktop" ];
-          "audio/mpeg" = [ "mpv.desktop" ];
-          "audio/ogg" = [ "mpv.desktop" ];
-          "video/avi" = [ "mpv.desktop" ];
-          "video/mkv" = [ "mpv.desktop" ];
-          "video/mp4" = [ "mpv.desktop" ];
-          "video/webm" = [ "mpv.desktop" ];
-          "video/x-matroska" = [ "mpv.desktop" ];
-          "video/x-mkv" = [ "mpv.desktop" ];
+          "audio/flac" = "mpv.desktop";
+          "audio/mpeg" = "mpv.desktop";
+          "audio/ogg" = "mpv.desktop";
+          "video/avi" = "mpv.desktop";
+          "video/matroska" = "mpv.desktop";
+          "video/mkv" = "mpv.desktop";
+          "video/mp4" = "mpv.desktop";
+          "video/webm" = "mpv.desktop";
+          "video/x-matroska" = "mpv.desktop";
+          "video/x-mkv" = "mpv.desktop";
         };
       };
 

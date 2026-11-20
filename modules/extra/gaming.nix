@@ -25,8 +25,8 @@
       };
       hardware.steam-hardware.enable = true;
       environment.systemPackages = with pkgs; [
+        faugus-launcher
         gamemode
-        heroic
         libnotify
         lunar-client
         protontricks
@@ -43,15 +43,8 @@
   flake.homeModules.gaming =
     { pkgs, ... }:
     {
-      programs = {
-        lutris = {
-          enable = true;
-        };
-      };
-
       home.packages = with pkgs; [
         mangohud
-
         (prismlauncher.override {
           textToSpeechSupport = false;
           additionalLibs = [
