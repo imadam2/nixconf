@@ -39,7 +39,8 @@ in
           extraDomainNames = [ "*.${hl.domain}" ];
           dnsProvider = "cloudflare";
           dnsResolver = "1.1.1.1:53";
-          dnsPropagationCheck = true;
+          dnsAuthoritativePropagationCheck = true;
+          dnsRecursivePropagationCheck = true;
           environmentFile = config.sops.secrets.elpsy-moe_api.path;
         };
       };

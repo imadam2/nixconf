@@ -20,6 +20,8 @@
   flake.homeModules.shell =
     { lib, pkgs, ... }:
     {
+      stylix.targets.wayprompt.enable = false;
+
       programs = {
         bat.enable = true;
 
