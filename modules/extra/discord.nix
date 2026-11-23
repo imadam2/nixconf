@@ -3,7 +3,7 @@
   flake.homeModules.discord =
     { ... }:
     {
-      programs.equibop = {
+      programs.vesktop = {
         enable = true;
         settings = {
           arRPC = true;
